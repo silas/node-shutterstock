@@ -1,0 +1,4 @@
+*.log
+*swp
+.rock.yml
+node_modules

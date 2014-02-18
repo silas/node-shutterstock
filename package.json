@@ -1,0 +1,17 @@
+{
+  "name": "shutterstock",
+  "version": "0.0.0",
+  "description": "Shutterstock API (stub)",
+  "main": "lib/index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "keywords": [
+  ],
+  "repository": "https://github.com/silas/shutterstock.git",
+  "author": "Silas Sewell <silas@sewell.org>",
+  "license": "MIT"
+}
