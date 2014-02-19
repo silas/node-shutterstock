@@ -1,17 +1,26 @@
 {
   "name": "shutterstock",
-  "version": "0.0.0",
-  "description": "Shutterstock API (stub)",
+  "version": "0.1.0",
+  "description": "Shutterstock API",
   "main": "lib/index.js",
   "dependencies": {
+    "jjv": "~0.3.3",
+    "request": "~2.34.0"
   },
   "devDependencies": {
+    "jscs": "*",
+    "jshint": "*",
+    "mocha": "*",
+    "should": "*"
   },
   "scripts": {
+    "test": "./node_modules/.bin/jshint lib test && ./node_modules/.bin/jscs lib test && ./node_modules/.bin/mocha --recursive --require should"
   },
   "keywords": [
+    "api",
+    "shutterstock"
   ],
-  "repository": "https://github.com/silas/shutterstock.git",
+  "repository": "https://github.com/silas/node-shutterstock.git",
   "author": "Silas Sewell <silas@sewell.org>",
   "license": "MIT"
 }
