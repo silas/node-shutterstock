@@ -3,11 +3,12 @@
 var shutterstock = require('../lib');
 
 describe('v1', function() {
-  it('should require version', function(done) {
+  it('should require valid version', function(done) {
     (function() {
       shutterstock({
         key: 'api-key',
         user: 'api-user',
+        version: '-1',
       });
     }).should.throw(/^Invalid options/);
 
