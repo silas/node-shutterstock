@@ -1,20 +1,21 @@
-# Shutterstock API
+# Shutterstock.js
 
-This is a Shutterstock API client for Node.
+This is a Shutterstock API client for JavaScript.
 
 ## Usage
 
 ``` javascript
 var shutterstock = require('shutterstock');
 
-var api = shutterstock({
+var api = shutterstock.v1({
   user: 'api-user',
   key: 'api-key',
 });
 
-api.getCategories(function(err, res, body) {
+api.categories(function(err, res) {
   if (err) throw err;
-  console.log(body);
+
+  console.log(res.body);
 });
 ```
 

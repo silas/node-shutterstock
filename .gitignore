@@ -1,5 +1,6 @@
 *.log
 *swp
+.env
 .rock.yml
 example.js
 node_modules
