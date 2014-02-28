@@ -172,6 +172,22 @@ describe('v1', function() {
     });
   });
 
+  describe('/customers/<username>/subscriptions', function() {
+    describe('GET', function() {
+      it('should return a list of subscriptions', function(done) {
+        var params = { auth_user: this.config.auth_user };
+        if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
+
+        this.api.customerImageDownloads(params, function(err, res) {
+          should.not.exist(err);
+          res.statusCode.should.eql(200);
+          res.body.should.be.type('object');
+          done();
+        });
+      });
+    });
+  });
+
   describe('/images/<image_id>', function() {
     describe('GET', function() {
       it('should return image details', function(done) {
