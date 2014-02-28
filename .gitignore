@@ -2,5 +2,6 @@
 *swp
 .env
 .rock.yml
+config
 example.js
 node_modules
