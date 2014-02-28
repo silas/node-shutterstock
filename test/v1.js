@@ -10,10 +10,6 @@ var should = require('should');
 var v1 = require('../lib/v1');
 
 /**
- * Config
- */
-
-/**
  * Tests
  */
 
