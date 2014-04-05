@@ -14,8 +14,16 @@ var v1 = require('../lib/v1');
  */
 
 describe('v1', function() {
+  this.timeout(5 * 1000);
+
   before(function(done) {
-    var config = JSON.parse(fs.readFileSync(process.env.API_CONFIG));
+    var path = process.env.API_CONFIG;
+
+    if (!path) {
+      throw new Error('set API_CONFIG environment variable');
+    }
+
+    var config = JSON.parse(fs.readFileSync(path));
 
     this.api = v1(config);
     this.config = config;
@@ -23,8 +31,8 @@ describe('v1', function() {
     if (this.api.options.access_token) return done();
 
     var options = {
-      username: this.config.auth_user,
-      password: this.config.auth_password,
+      username: config.auth_user,
+      password: config.auth_password,
     };
 
     this.api.authCustomer(options, function(err, res) {
