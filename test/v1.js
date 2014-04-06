@@ -37,8 +37,7 @@ describe('v1', function() {
 
     this.api.authCustomer(options, function(err, res) {
       should.not.exist(err);
-      res.statusCode.should.eql(200);
-      config.auth_token = res.body.auth_token;
+      config.auth_token = res.auth_token;
       done();
     });
   });
@@ -48,9 +47,8 @@ describe('v1', function() {
       it('should return a list of resources', function(done) {
         this.api.resources(function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.be.an.instanceOf(Array);
-          res.body[0].resource.should.eql('/resources');
+          res.should.be.an.instanceOf(Array);
+          res[0].resource.should.eql('/resources');
           done();
         });
       });
@@ -64,8 +62,7 @@ describe('v1', function() {
 
         this.api.testEcho(data, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.example_param.should.eql(data);
+          res.example_param.should.eql(data);
           done();
         });
       });
@@ -84,10 +81,26 @@ describe('v1', function() {
 
         this.api.authCustomer(options, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.have.property('auth_token');
-          res.body.language.should.eql('en');
-          res.body.username.should.eql(options.username);
+          res.should.have.property('auth_token');
+          res.language.should.eql('en');
+          res.username.should.eql(options.username);
+          done();
+        });
+      });
+
+      it('should error on invalid credentials', function(done) {
+        if (this.api.options.access_token) return done();
+
+        var options = {
+          username: this.config.auth_user,
+          password: 'nope.' + this.config.auth_password,
+        };
+
+        this.api.authCustomer(options, function(err, res) {
+          should.exist(err);
+          err.message.should.eql('Invalid username and/or password');
+          err.res.statusCode.should.eql(403);
+          should.not.exist(res);
           done();
         });
       });
@@ -99,9 +112,8 @@ describe('v1', function() {
       it('should return a list of categories', function(done) {
         this.api.categories(function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.be.an.instanceOf(Array);
-          res.body[0].category_name.should.eql('Transportation');
+          res.should.be.an.instanceOf(Array);
+          res[0].category_name.should.eql('Transportation');
           done();
         });
       });
@@ -116,9 +128,8 @@ describe('v1', function() {
 
         this.api.customer(params, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.have.property('account_id');
-          res.body.should.have.property('sales_rep_info');
+          res.should.have.property('account_id');
+          res.should.have.property('sales_rep_info');
           done();
         });
       });
@@ -133,8 +144,7 @@ describe('v1', function() {
 
         this.api.customerImageDownloads(params, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.be.type('object');
+          res.should.be.type('object');
           done();
         });
       });
@@ -149,8 +159,7 @@ describe('v1', function() {
 
         this.api.customerLightboxes(params, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.be.an.instanceOf(Array);
+          res.should.be.an.instanceOf(Array);
           done();
         });
       });
@@ -168,8 +177,7 @@ describe('v1', function() {
 
         this.api.customerLightboxes(params, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.be.an.instanceOf(Array);
+          res.should.be.an.instanceOf(Array);
           done();
         });
       });
@@ -184,8 +192,7 @@ describe('v1', function() {
 
         this.api.customerImageDownloads(params, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
-          res.body.should.be.type('object');
+          res.should.be.type('object');
           done();
         });
       });
@@ -199,33 +206,43 @@ describe('v1', function() {
 
         this.api.image(image_id, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
 
-          var body = res.body;
-          body.should.have.property('illustration');
-          body.illustration.should.eql(0);
-          body.should.have.property('r_rated');
-          body.r_rated.should.eql(0);
-          body.should.have.property('photo_id');
-          body.photo_id.should.eql(image_id);
-          body.should.have.property('enhanced_license_available');
-          body.enhanced_license_available.should.eql(1);
-          body.should.have.property('resource_url');
-          body.should.have.property('categories');
-          body.should.have.property('model_release');
-          body.should.have.property('vector_type');
-          body.should.have.property('description');
-          body.description.should.eql('Donkey isolated on white');
-          body.should.have.property('sizes');
-          body.should.have.property('keywords');
-          body.should.have.property('is_vector');
-          body.is_vector.should.eql(0);
-          body.should.have.property('web_url');
-          body.should.have.property('submitter_id');
-          body.submitter_id.should.eql(371512);
-          body.should.have.property('submitter');
-          body.submitter.should.eql('Coprid');
+          res.should.have.property('illustration');
+          res.illustration.should.eql(0);
+          res.should.have.property('r_rated');
+          res.r_rated.should.eql(0);
+          res.should.have.property('photo_id');
+          res.photo_id.should.eql(image_id);
+          res.should.have.property('enhanced_license_available');
+          res.enhanced_license_available.should.eql(1);
+          res.should.have.property('resource_url');
+          res.should.have.property('categories');
+          res.should.have.property('model_release');
+          res.should.have.property('vector_type');
+          res.should.have.property('description');
+          res.description.should.eql('Donkey isolated on white');
+          res.should.have.property('sizes');
+          res.should.have.property('keywords');
+          res.should.have.property('is_vector');
+          res.is_vector.should.eql(0);
+          res.should.have.property('web_url');
+          res.should.have.property('submitter_id');
+          res.submitter_id.should.eql(371512);
+          res.should.have.property('submitter');
+          res.submitter.should.eql('Coprid');
 
+          done();
+        });
+      });
+
+      it('should return image not found', function(done) {
+        var image_id = 1;
+
+        this.api.image(image_id, function(err, res) {
+          should.exist(err);
+          err.message.should.eql('Not Found');
+          err.res.statusCode.should.eql(404);
+          should.not.exist(res);
           done();
         });
       });
@@ -239,21 +256,19 @@ describe('v1', function() {
 
         this.api.imageSimilar(image_id, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
 
-          var body = res.body;
-          body.should.have.property('count');
-          body.count.should.be.above(5);
-          body.should.have.property('page');
-          body.page.should.eql(0);
-          body.should.have.property('sort_method');
-          body.sort_method.should.eql('popular');
-          body.should.have.property('results');
-          body.results.should.be.an.instanceOf(Array);
-          body.results.length.should.be.above(5);
+          res.should.have.property('count');
+          res.count.should.be.above(5);
+          res.should.have.property('page');
+          res.page.should.eql(0);
+          res.should.have.property('sort_method');
+          res.sort_method.should.eql('popular');
+          res.should.have.property('results');
+          res.results.should.be.an.instanceOf(Array);
+          res.results.length.should.be.above(5);
 
           // result
-          var item = body.results[0];
+          var item = res.results[0];
           item.should.have.property('thumb_large_width');
           item.should.have.property('resource_url');
           item.should.have.property('web_url');
@@ -281,7 +296,6 @@ describe('v1', function() {
 
         this.api.imageRecommendationKeywords(image_ids, function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
 
           done();
         });
@@ -295,22 +309,19 @@ describe('v1', function() {
       it('should return image search results', function(done) {
         this.api.imageSearch('donkey', function(err, res) {
           should.not.exist(err);
-          res.statusCode.should.eql(200);
 
-          // body
-          var body = res.body;
-          body.should.have.property('count');
-          body.count.should.be.above(5);
-          body.should.have.property('page');
-          body.page.should.eql(0);
-          body.should.have.property('sort_method');
-          body.sort_method.should.eql('popular');
-          body.should.have.property('results');
-          body.results.should.be.an.instanceOf(Array);
-          body.results.length.should.be.above(5);
+          res.should.have.property('count');
+          res.count.should.be.above(5);
+          res.should.have.property('page');
+          res.page.should.eql(0);
+          res.should.have.property('sort_method');
+          res.sort_method.should.eql('popular');
+          res.should.have.property('results');
+          res.results.should.be.an.instanceOf(Array);
+          res.results.length.should.be.above(5);
 
           // result
-          var item = body.results[0];
+          var item = res.results[0];
           item.should.have.property('thumb_large_width');
           item.should.have.property('resource_url');
           item.should.have.property('web_url');

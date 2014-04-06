@@ -12,10 +12,10 @@ var api = shutterstock.v1({
   key: 'api-key',
 });
 
-api.categories(function(err, res) {
+api.categories(function(err, categories) {
   if (err) throw err;
 
-  console.log(res.body);
+  console.log(categories);
 });
 ```
 
