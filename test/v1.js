@@ -48,7 +48,12 @@ describe('v1', function() {
         this.api.resources(function(err, res) {
           should.not.exist(err);
           res.should.be.an.instanceOf(Array);
-          res[0].resource.should.eql('/resources');
+          var resources = {};
+          res.forEach(function(r) {
+            resources[r.resource] = true;
+          });
+          resources.should.have.property('/resources');
+          resources.should.have.property('/images/search');
           done();
         });
       });
