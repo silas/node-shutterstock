@@ -2,6 +2,12 @@
 
 This is a Shutterstock API client for JavaScript.
 
+## Install
+
+``` console
+$ npm install shutterstock --save
+```
+
 ## Usage
 
 ``` javascript
