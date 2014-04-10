@@ -1,6 +1,6 @@
 {
   "name": "shutterstock",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Shutterstock API client",
   "main": "lib/index.js",
   "dependencies": {
