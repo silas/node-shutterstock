@@ -37,7 +37,9 @@ describe('v1', function() {
 
     this.api.authCustomer(options, function(err, res) {
       should.not.exist(err);
+
       config.auth_token = res.auth_token;
+
       done();
     });
   });
@@ -47,13 +49,18 @@ describe('v1', function() {
       it('should return a list of resources', function(done) {
         this.api.resources(function(err, res) {
           should.not.exist(err);
+
           res.should.be.an.instanceOf(Array);
+
           var resources = {};
+
           res.forEach(function(r) {
             resources[r.resource] = true;
           });
+
           resources.should.have.property('/resources');
           resources.should.have.property('/images/search');
+
           done();
         });
       });
@@ -63,11 +70,13 @@ describe('v1', function() {
   describe('/test/echo', function() {
     describe('GET', function() {
       it('should return echo back param', function(done) {
-        var data = 'hello world';
+        var params = { hello: 'world' };
 
-        this.api.testEcho(data, function(err, res) {
+        this.api.testEcho(params, function(err, res) {
           should.not.exist(err);
-          res.example_param.should.eql(data);
+
+          res.hello.should.eql(params.hello);
+
           done();
         });
       });
@@ -86,9 +95,11 @@ describe('v1', function() {
 
         this.api.authCustomer(options, function(err, res) {
           should.not.exist(err);
+
           res.should.have.property('auth_token');
           res.language.should.eql('en');
           res.username.should.eql(options.username);
+
           done();
         });
       });
@@ -103,9 +114,12 @@ describe('v1', function() {
 
         this.api.authCustomer(options, function(err, res) {
           should.exist(err);
+
           err.message.should.eql('Invalid username and/or password');
           err.res.statusCode.should.eql(403);
+
           should.not.exist(res);
+
           done();
         });
       });
@@ -117,8 +131,11 @@ describe('v1', function() {
       it('should return a list of categories', function(done) {
         this.api.categories(function(err, res) {
           should.not.exist(err);
+
           res.should.be.an.instanceOf(Array);
+
           res[0].category_name.should.eql('Transportation');
+
           done();
         });
       });
@@ -129,12 +146,15 @@ describe('v1', function() {
     describe('GET', function() {
       it('should return customer info', function(done) {
         var params = { auth_user: this.config.auth_user };
+
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
         this.api.customer(params, function(err, res) {
           should.not.exist(err);
+
           res.should.have.property('account_id');
           res.should.have.property('sales_rep_info');
+
           done();
         });
       });
@@ -145,11 +165,14 @@ describe('v1', function() {
     describe('GET', function() {
       it('should return a list of customer downloads', function(done) {
         var params = { auth_user: this.config.auth_user };
+
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
         this.api.customerImageDownloads(params, function(err, res) {
           should.not.exist(err);
+
           res.should.be.type('object');
+
           done();
         });
       });
@@ -160,11 +183,14 @@ describe('v1', function() {
     describe('GET', function() {
       it('should return a list of lightboxes', function(done) {
         var params = { auth_user: this.config.auth_user };
+
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
         this.api.customerLightboxes(params, function(err, res) {
           should.not.exist(err);
+
           res.should.be.an.instanceOf(Array);
+
           done();
         });
       });
@@ -178,11 +204,14 @@ describe('v1', function() {
           extended: true,
           auth_user: this.config.auth_user,
         };
+
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
         this.api.customerLightboxes(params, function(err, res) {
           should.not.exist(err);
+
           res.should.be.an.instanceOf(Array);
+
           done();
         });
       });
@@ -193,11 +222,14 @@ describe('v1', function() {
     describe('GET', function() {
       it('should return a list of subscriptions', function(done) {
         var params = { auth_user: this.config.auth_user };
+
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
         this.api.customerImageDownloads(params, function(err, res) {
           should.not.exist(err);
+
           res.should.be.type('object');
+
           done();
         });
       });
@@ -245,9 +277,12 @@ describe('v1', function() {
 
         this.api.image(image_id, function(err, res) {
           should.exist(err);
+
           err.message.should.eql('Not Found');
           err.res.statusCode.should.eql(404);
+
           should.not.exist(res);
+
           done();
         });
       });
