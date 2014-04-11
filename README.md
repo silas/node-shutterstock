@@ -34,7 +34,6 @@ api.categories(function(err, categories) {
 ## Documentation
 
  * [shutterstock.v1](#class-shutterstockv1options)
-   * [v1.resources](#v1resourcescallback)
    * [v1.testEcho](#v1testechooptions-callback)
    * [v1.imageSearch](#v1imagesearchoptions-callback)
    * [v1.image](#v1imageoptions-callback)
