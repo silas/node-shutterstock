@@ -33,6 +33,20 @@ api.categories(function(err, categories) {
 
 ## Documentation
 
+ * [shutterstock.v1](#class-shutterstockv1options)
+   * [v1.resources](#v1resourcescallback)
+   * [v1.testEcho](#v1testechooptions-callback)
+   * [v1.authCustomer](#v1authcustomeroptions-callback)
+   * [v1.categories](#v1categoriescallback)
+   * [v1.customer](#v1customeroptions-callback)
+   * [v1.customerImageDownloads](#v1customerimagedownloadsoptions-callback)
+   * [v1.customerLightboxes](#v1customerlightboxesoptions-callback)
+   * [v1.customerSubscriptions](#v1customerlightboxesoptions-callback)
+   * [v1.image](#v1imageoptions-callback)
+   * [v1.imageSimilar](#v1imagesimilaroptions-callback)
+   * [v1.imageRecommendationKeywords](#v1imagerecommendationkeywordsoptions-callback)
+   * [v1.imageSearch](#v1imagesearchoptions-callback)
+
 ### Class: shutterstock.v1(options)
 
 #### v1.resources(callback)
