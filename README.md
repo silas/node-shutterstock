@@ -1,6 +1,6 @@
 # Shutterstock.js
 
-This is a Shutterstock API client for JavaScript.
+This is a Shutterstock API client for Node.js.
 
  * [Usage](#usage)
  * [Documentation](#documentation)
