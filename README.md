@@ -46,6 +46,7 @@ api.getCategories(function(err, categories) {
    * [v1.getCustomerSubscriptions](#v1.getCustomerSubscriptions)
    * [v1.getCustomerLightboxes](#v1.getCustomerLightboxes)
    * [v1.searchVideos](#v1.searchVideos)
+   * [v1.getVideo](#v1.getVideo)
 
 <a name="v1"/>
 ### Class: shutterstock.v1(options)
@@ -130,9 +131,15 @@ Search videos.
 
 http://api.shutterstock.com/#videossearch
 
+<a name="v1.getVideo"/>
+#### v1.getVideo(options, callback)
+
+Get details for a specified video.
+
+http://api.shutterstock.com/#videosvideo_id
+
 ## Todo
 
- * GET /videos/<video_id>
  * GET /lightboxes/<lightbox_id>
  * POST /lightboxes/<lightbox_id>
  * DELETE /lightboxes/<lightbox_id>

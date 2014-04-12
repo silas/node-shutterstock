@@ -414,4 +414,42 @@ describe('v1', function() {
       });
     });
   });
+
+  describe('/videos/<video_id>', function() {
+    describe('GET', function() {
+      it('should return video details', function(done) {
+        var video_id = 5869544;
+
+        this.api.getVideo(video_id, function(err, data) {
+          should.not.exist(err);
+
+          should(data).be.type('object');
+
+          data.should.have.property('video_id');
+          data.video_id.should.eql(video_id);
+          data.should.have.property('description');
+          data.should.have.property('categories');
+          data.should.have.property('keywords');
+          data.should.have.property('submitter_id');
+
+          done();
+        });
+      });
+
+      it('should return video not found', function(done) {
+        var video_id = 1;
+
+        this.api.getVideo(video_id, function(err, data) {
+          should.exist(err);
+
+          err.message.should.eql('Id not found');
+          err.res.statusCode.should.eql(404);
+
+          should.not.exist(data);
+
+          done();
+        });
+      });
+    });
+  });
 });
