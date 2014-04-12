@@ -138,6 +138,7 @@ describe('v1', function() {
           should.not.exist(err);
 
           data.should.be.an.instanceOf(Array);
+          data.length.should.be.above(0);
 
           data[0].category_name.should.eql('Transportation');
 
@@ -378,6 +379,35 @@ describe('v1', function() {
           item.should.have.property('preview');
           item.should.have.property('thumb_large');
           item.should.have.property('thumb_small_width');
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('/videos/search', function() {
+    describe('GET', function() {
+      it('should return video search results', function(done) {
+        this.api.searchVideos('donkey', function(err, data) {
+          should.not.exist(err);
+
+          data.should.have.property('count');
+          data.count.should.be.above(5);
+
+          data.should.have.property('page');
+          data.page.should.eql(0);
+
+          data.should.have.property('results');
+          data.results.should.be.an.instanceOf(Array);
+          data.results.length.should.be.above(0);
+
+          var result = data.results[0];
+          result.should.be.type('object');
+
+          result.should.have.property('video_id');
+          result.should.have.property('submitter_id');
+          result.should.have.property('description');
 
           done();
         });
