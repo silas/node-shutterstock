@@ -10,20 +10,25 @@ var should = require('should');
 var v1 = require('../lib/v1');
 
 /**
+ * Constants
+ */
+
+var API_CONFIG = process.env.API_CONFIG;
+var API_TIMEOUT = parseInt(process.env.API_TIMEOUT || 5, 10) * 1000;
+
+/**
  * Tests
  */
 
 describe('v1', function() {
-  this.timeout(5 * 1000);
+  this.timeout(API_TIMEOUT);
 
   before(function(done) {
-    var path = process.env.API_CONFIG;
-
-    if (!path) {
+    if (!API_CONFIG) {
       throw new Error('set API_CONFIG environment variable');
     }
 
-    var config = JSON.parse(fs.readFileSync(path));
+    var config = JSON.parse(fs.readFileSync(API_CONFIG));
 
     this.api = v1(config);
     this.config = config;
@@ -35,10 +40,10 @@ describe('v1', function() {
       password: config.auth_password,
     };
 
-    this.api.authCustomer(options, function(err, res) {
+    this.api.authCustomer(options, function(err, data) {
       should.not.exist(err);
 
-      config.auth_token = res.auth_token;
+      config.auth_token = data.auth_token;
 
       done();
     });
@@ -47,14 +52,14 @@ describe('v1', function() {
   describe('/resources', function() {
     describe('GET', function() {
       it('should return a list of resources', function(done) {
-        this.api.resources(function(err, res) {
+        this.api.getResources(function(err, data) {
           should.not.exist(err);
 
-          res.should.be.an.instanceOf(Array);
+          data.should.be.an.instanceOf(Array);
 
           var resources = {};
 
-          res.forEach(function(r) {
+          data.forEach(function(r) {
             resources[r.resource] = true;
           });
 
@@ -72,10 +77,10 @@ describe('v1', function() {
       it('should return echo back param', function(done) {
         var params = { hello: 'world' };
 
-        this.api.testEcho(params, function(err, res) {
+        this.api.echo(params, function(err, data) {
           should.not.exist(err);
 
-          res.hello.should.eql(params.hello);
+          data.should.eql(params);
 
           done();
         });
@@ -93,12 +98,12 @@ describe('v1', function() {
           password: this.config.auth_password,
         };
 
-        this.api.authCustomer(options, function(err, res) {
+        this.api.authCustomer(options, function(err, data) {
           should.not.exist(err);
 
-          res.should.have.property('auth_token');
-          res.language.should.eql('en');
-          res.username.should.eql(options.username);
+          data.should.have.property('auth_token');
+          data.language.should.eql('en');
+          data.username.should.eql(options.username);
 
           done();
         });
@@ -112,13 +117,13 @@ describe('v1', function() {
           password: 'nope.' + this.config.auth_password,
         };
 
-        this.api.authCustomer(options, function(err, res) {
+        this.api.authCustomer(options, function(err, data) {
           should.exist(err);
 
           err.message.should.eql('Invalid username and/or password');
           err.res.statusCode.should.eql(403);
 
-          should.not.exist(res);
+          should.not.exist(data);
 
           done();
         });
@@ -129,12 +134,12 @@ describe('v1', function() {
   describe('/categories', function() {
     describe('GET', function() {
       it('should return a list of categories', function(done) {
-        this.api.categories(function(err, res) {
+        this.api.getCategories(function(err, data) {
           should.not.exist(err);
 
-          res.should.be.an.instanceOf(Array);
+          data.should.be.an.instanceOf(Array);
 
-          res[0].category_name.should.eql('Transportation');
+          data[0].category_name.should.eql('Transportation');
 
           done();
         });
@@ -149,11 +154,11 @@ describe('v1', function() {
 
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
-        this.api.customer(params, function(err, res) {
+        this.api.getCustomer(params, function(err, data) {
           should.not.exist(err);
 
-          res.should.have.property('account_id');
-          res.should.have.property('sales_rep_info');
+          data.should.have.property('account_id');
+          data.should.have.property('sales_rep_info');
 
           done();
         });
@@ -168,10 +173,10 @@ describe('v1', function() {
 
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
-        this.api.customerImageDownloads(params, function(err, res) {
+        this.api.getCustomerImageDownloads(params, function(err, data) {
           should.not.exist(err);
 
-          res.should.be.type('object');
+          data.should.be.type('object');
 
           done();
         });
@@ -186,10 +191,10 @@ describe('v1', function() {
 
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
-        this.api.customerLightboxes(params, function(err, res) {
+        this.api.getCustomerLightboxes(params, function(err, data) {
           should.not.exist(err);
 
-          res.should.be.an.instanceOf(Array);
+          data.should.be.an.instanceOf(Array);
 
           done();
         });
@@ -207,10 +212,10 @@ describe('v1', function() {
 
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
-        this.api.customerLightboxes(params, function(err, res) {
+        this.api.getCustomerLightboxes(params, function(err, data) {
           should.not.exist(err);
 
-          res.should.be.an.instanceOf(Array);
+          data.should.be.an.instanceOf(Array);
 
           done();
         });
@@ -225,10 +230,10 @@ describe('v1', function() {
 
         if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
 
-        this.api.customerImageDownloads(params, function(err, res) {
+        this.api.getCustomerSubscriptions(params, function(err, data) {
           should.not.exist(err);
 
-          res.should.be.type('object');
+          data.should.be.type('object');
 
           done();
         });
@@ -241,32 +246,32 @@ describe('v1', function() {
       it('should return image details', function(done) {
         var image_id = 108559295;
 
-        this.api.image(image_id, function(err, res) {
+        this.api.getImage(image_id, function(err, data) {
           should.not.exist(err);
 
-          res.should.have.property('illustration');
-          res.illustration.should.eql(0);
-          res.should.have.property('r_rated');
-          res.r_rated.should.eql(0);
-          res.should.have.property('photo_id');
-          res.photo_id.should.eql(image_id);
-          res.should.have.property('enhanced_license_available');
-          res.enhanced_license_available.should.eql(1);
-          res.should.have.property('resource_url');
-          res.should.have.property('categories');
-          res.should.have.property('model_release');
-          res.should.have.property('vector_type');
-          res.should.have.property('description');
-          res.description.should.eql('Donkey isolated on white');
-          res.should.have.property('sizes');
-          res.should.have.property('keywords');
-          res.should.have.property('is_vector');
-          res.is_vector.should.eql(0);
-          res.should.have.property('web_url');
-          res.should.have.property('submitter_id');
-          res.submitter_id.should.eql(371512);
-          res.should.have.property('submitter');
-          res.submitter.should.eql('Coprid');
+          data.should.have.property('illustration');
+          data.illustration.should.eql(0);
+          data.should.have.property('r_rated');
+          data.r_rated.should.eql(0);
+          data.should.have.property('photo_id');
+          data.photo_id.should.eql(image_id);
+          data.should.have.property('enhanced_license_available');
+          data.enhanced_license_available.should.eql(1);
+          data.should.have.property('resource_url');
+          data.should.have.property('categories');
+          data.should.have.property('model_release');
+          data.should.have.property('vector_type');
+          data.should.have.property('description');
+          data.description.should.eql('Donkey isolated on white');
+          data.should.have.property('sizes');
+          data.should.have.property('keywords');
+          data.should.have.property('is_vector');
+          data.is_vector.should.eql(0);
+          data.should.have.property('web_url');
+          data.should.have.property('submitter_id');
+          data.submitter_id.should.eql(371512);
+          data.should.have.property('submitter');
+          data.submitter.should.eql('Coprid');
 
           done();
         });
@@ -275,13 +280,13 @@ describe('v1', function() {
       it('should return image not found', function(done) {
         var image_id = 1;
 
-        this.api.image(image_id, function(err, res) {
+        this.api.getImage(image_id, function(err, data) {
           should.exist(err);
 
           err.message.should.eql('Not Found');
           err.res.statusCode.should.eql(404);
 
-          should.not.exist(res);
+          should.not.exist(data);
 
           done();
         });
@@ -294,21 +299,21 @@ describe('v1', function() {
       it('should return similar images', function(done) {
         var image_id = 108559295;
 
-        this.api.imageSimilar(image_id, function(err, res) {
+        this.api.getSimilarImages(image_id, function(err, data) {
           should.not.exist(err);
 
-          res.should.have.property('count');
-          res.count.should.be.above(5);
-          res.should.have.property('page');
-          res.page.should.eql(0);
-          res.should.have.property('sort_method');
-          res.sort_method.should.eql('popular');
-          res.should.have.property('results');
-          res.results.should.be.an.instanceOf(Array);
-          res.results.length.should.be.above(5);
+          data.should.have.property('count');
+          data.count.should.be.above(5);
+          data.should.have.property('page');
+          data.page.should.eql(0);
+          data.should.have.property('sort_method');
+          data.sort_method.should.eql('popular');
+          data.should.have.property('results');
+          data.results.should.be.an.instanceOf(Array);
+          data.results.length.should.be.above(5);
 
           // result
-          var item = res.results[0];
+          var item = data.results[0];
           item.should.have.property('thumb_large_width');
           item.should.have.property('resource_url');
           item.should.have.property('web_url');
@@ -334,7 +339,7 @@ describe('v1', function() {
       it('should return recommended keywords', function(done) {
         var image_ids = [143051491, 108559295, 130763906];
 
-        this.api.imageRecommendationKeywords(image_ids, function(err, res) {
+        this.api.getImageKeywordRecommendations(image_ids, function(err, data) {
           should.not.exist(err);
 
           done();
@@ -347,21 +352,21 @@ describe('v1', function() {
   describe('/images/search', function() {
     describe('GET', function() {
       it('should return image search results', function(done) {
-        this.api.imageSearch('donkey', function(err, res) {
+        this.api.searchImages('donkey', function(err, data) {
           should.not.exist(err);
 
-          res.should.have.property('count');
-          res.count.should.be.above(5);
-          res.should.have.property('page');
-          res.page.should.eql(0);
-          res.should.have.property('sort_method');
-          res.sort_method.should.eql('popular');
-          res.should.have.property('results');
-          res.results.should.be.an.instanceOf(Array);
-          res.results.length.should.be.above(5);
+          data.should.have.property('count');
+          data.count.should.be.above(5);
+          data.should.have.property('page');
+          data.page.should.eql(0);
+          data.should.have.property('sort_method');
+          data.sort_method.should.eql('popular');
+          data.should.have.property('results');
+          data.results.should.be.an.instanceOf(Array);
+          data.results.length.should.be.above(5);
 
           // result
-          var item = res.results[0];
+          var item = data.results[0];
           item.should.have.property('thumb_large_width');
           item.should.have.property('resource_url');
           item.should.have.property('web_url');
