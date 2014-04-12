@@ -124,14 +124,18 @@ http://api.shutterstock.com/#customersusernamelightboxes
 
 ## Todo
 
- * Implement /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>
- * Implement /videos/search
- * Implement /videos/<video_id>
- * Implement /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>
- * Implement /lightboxes/<lightbox_id>
- * Implement /lightboxes/<lightbox_id>/extended
- * Implement /lightboxes/<lightbox_id>/images/<image_id>
- * Implement /lightboxes/<lightbox_id>/public_url
+ * GET /videos/search
+ * GET /videos/<video_id>
+ * GET /lightboxes/<lightbox_id>
+ * POST /lightboxes/<lightbox_id>
+ * DELETE /lightboxes/<lightbox_id>
+ * PUT /lightboxes/<lightbox_id>/images/<image_id>
+ * DELETE /lightboxes/<lightbox_id>/images/<image_id>
+ * GET /lightboxes/<lightbox_id>/public_url
+ * POST /customers/<username>/lightboxes
+ * POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>
+ * POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>
+ * PUT /customers/<username>
 
 ## License
 
