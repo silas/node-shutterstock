@@ -53,10 +53,26 @@ api.getCategories(function(err, categories) {
 
 This is a client for interacting with [api.shutterstock.com](http://api.shutterstock.com).
 
+`options` is an object with client settings.
+
+Options
+
+ * `user`: API username (not to be confused with customer username). Required.
+ * `key`: API token key. Required.
+ * `timeout`: An integer specifying the maximum number of seconds a request can take before timing out. Defaults to 30.
+
 <a name="v1.echo"/>
 #### v1.echo(options, callback)
 
 Echo back specified options, used to check API connection and credentials.
+
+`options` is an object of any key-value pairs.
+
+`callback(err, data)` is the result of the request.
+
+Data
+
+Echos request options.
 
 http://api.shutterstock.com/#testecho
 
@@ -65,12 +81,20 @@ http://api.shutterstock.com/#testecho
 
 Search images.
 
+`options` can be a string `searchterm` or an object containing search parameters.
+
+`callback(err, data)` is the result of the request.
+
 http://api.shutterstock.com/#imagessearch
 
 <a name="v1.getImage"/>
 #### v1.getImage(options, callback)
 
 Get details for a specified image.
+
+`options` can be an `image_id` or an object containing `image_id` and `language`.
+
+`callback(err, data)` is the result of the request.
 
 http://api.shutterstock.com/#imagesimage_id
 
