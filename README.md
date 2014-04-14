@@ -58,7 +58,7 @@ This is a client for interacting with [api.shutterstock.com](http://api.shutters
 Options
 
  * `user`: API username (not to be confused with customer username). Required.
- * `key`: API token key. Required.
+ * `password`: API password (key). Required.
  * `timeout`: An integer specifying the maximum number of seconds a request can take before timing out. Defaults to 30.
 
 <a name="v1.echo"/>
@@ -164,16 +164,16 @@ http://api.shutterstock.com/#videosvideo_id
 
 ## Todo
 
- * GET /lightboxes/<lightbox_id>
- * POST /lightboxes/<lightbox_id>
- * DELETE /lightboxes/<lightbox_id>
- * PUT /lightboxes/<lightbox_id>/images/<image_id>
- * DELETE /lightboxes/<lightbox_id>/images/<image_id>
- * GET /lightboxes/<lightbox_id>/public_url
- * POST /customers/<username>/lightboxes
- * POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>
- * POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>
- * PUT /customers/<username>
+ * `GET /lightboxes/<lightbox_id>`
+ * `POST /lightboxes/<lightbox_id>`
+ * `DELETE /lightboxes/<lightbox_id>`
+ * `PUT /lightboxes/<lightbox_id>/images/<image_id>`
+ * `DELETE /lightboxes/<lightbox_id>/images/<image_id>`
+ * `GET /lightboxes/<lightbox_id>/public_url`
+ * `POST /customers/<username>/lightboxes`
+ * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
+ * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
+ * `PUT /customers/<username>`
 
 ## License
 
