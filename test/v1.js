@@ -4,7 +4,6 @@
  * Module dependencies.
  */
 
-var fs = require('fs');
 var should = require('should');
 
 var v1 = require('../lib/v1');
@@ -13,25 +12,41 @@ var v1 = require('../lib/v1');
  * Constants
  */
 
-var API_CONFIG = process.env.API_CONFIG;
-var API_TIMEOUT = parseInt(process.env.API_TIMEOUT || 5, 10) * 1000;
+var config = {
+  timeout: 5,
+  api_user: '',
+  api_password: '',
+  auth_user: '',
+  auth_password: '',
+};
+
+Object.keys(config).forEach(function(key) {
+  var envName = 'SHUTTERSTOCK_' + key.toUpperCase();
+  var defaultValue = config[key];
+  var value = process.env[envName];
+
+  if (value) {
+    if (typeof defaultValue === 'number') {
+      value = parseInt(value, 10);
+    }
+    config[key] = value;
+  } else if (!defaultValue) {
+    throw new Error(envName + ' required');
+  }
+});
 
 /**
  * Tests
  */
 
 describe('v1', function() {
-  this.timeout(API_TIMEOUT);
+  this.timeout(config.timeout * 1000);
 
   before(function(done) {
-    if (!API_CONFIG) {
-      throw new Error('set API_CONFIG environment variable');
-    }
-
-    var config = JSON.parse(fs.readFileSync(API_CONFIG));
-
-    this.api = v1(config);
-    this.config = config;
+    this.api = v1({
+      user: config.api_user,
+      password: config.api_password,
+    });
 
     if (this.api.options.access_token) return done();
 
@@ -226,8 +241,8 @@ describe('v1', function() {
       if (this.api.options.access_token) return done();
 
       var options = {
-        username: this.config.auth_user,
-        password: this.config.auth_password,
+        username: config.auth_user,
+        password: config.auth_password,
       };
 
       this.api.authCustomer(options, function(err, data) {
@@ -245,8 +260,8 @@ describe('v1', function() {
       if (this.api.options.access_token) return done();
 
       var options = {
-        username: this.config.auth_user,
-        password: 'nope.' + this.config.auth_password,
+        username: config.auth_user,
+        password: 'nope.' + config.auth_password,
       };
 
       this.api.authCustomer(options, function(err, data) {
@@ -264,9 +279,9 @@ describe('v1', function() {
 
   describe('#getCustomer', function() {
     it('should return customer info', function(done) {
-      var params = { auth_user: this.config.auth_user };
+      var params = { auth_user: config.auth_user };
 
-      if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
+      if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
       this.api.getCustomer(params, function(err, data) {
         should.not.exist(err);
@@ -281,9 +296,9 @@ describe('v1', function() {
 
   describe('#getCustomerImageDownloads', function() {
     it('should return a list of customer downloads', function(done) {
-      var params = { auth_user: this.config.auth_user };
+      var params = { auth_user: config.auth_user };
 
-      if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
+      if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
       this.api.getCustomerImageDownloads(params, function(err, data) {
         should.not.exist(err);
@@ -297,9 +312,9 @@ describe('v1', function() {
 
   describe('#getCustomerSubscriptions', function() {
     it('should return a list of subscriptions', function(done) {
-      var params = { auth_user: this.config.auth_user };
+      var params = { auth_user: config.auth_user };
 
-      if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
+      if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
       this.api.getCustomerSubscriptions(params, function(err, data) {
         should.not.exist(err);
@@ -313,9 +328,9 @@ describe('v1', function() {
 
   describe('#getCustomerLightboxes', function() {
     it('should return a list of lightboxes', function(done) {
-      var params = { auth_user: this.config.auth_user };
+      var params = { auth_user: config.auth_user };
 
-      if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
+      if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
       this.api.getCustomerLightboxes(params, function(err, data) {
         should.not.exist(err);
@@ -329,10 +344,10 @@ describe('v1', function() {
     it('should return a list of lightboxes with extended data', function(done) {
       var params = {
         extended: true,
-        auth_user: this.config.auth_user,
+        auth_user: config.auth_user,
       };
 
-      if (!this.api.options.access_token) params.auth_token = this.config.auth_token;
+      if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
       this.api.getCustomerLightboxes(params, function(err, data) {
         should.not.exist(err);

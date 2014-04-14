@@ -22,7 +22,7 @@ var shutterstock = require('shutterstock');
 
 var api = shutterstock.v1({
   user: 'api-user',
-  key: 'api-key',
+  password: 'api-password',
 });
 
 api.getCategories(function(err, categories) {
