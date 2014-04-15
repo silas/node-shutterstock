@@ -4,7 +4,9 @@
  * Module dependencies.
  */
 
+var debug = require('debug')('v1');
 var should = require('should');
+var uuid = require('uuid');
 
 var v1 = require('../lib/v1');
 
@@ -34,6 +36,8 @@ Object.keys(config).forEach(function(key) {
     throw new Error(envName + ' required');
   }
 });
+
+debug('config', config);
 
 /**
  * Tests
@@ -294,6 +298,29 @@ describe('v1', function() {
     });
   });
 
+  describe.skip('#registerCustomer', function() {
+    it('should register a customer', function(done) {
+      var id = uuid.v4().replace(/-/g, '').slice(16);
+
+      var params = {
+        username: 'silas_test_' + id,
+        password: uuid.v4(),
+        email: 'silas+test_' + id + '@shutterstock.com',
+      };
+
+      debug('register', params);
+
+      this.api.registerCustomer(params, function(err, data) {
+        should.not.exist(err);
+
+        should(data).be.type('object');
+        data.should.have.property('account_id');
+
+        done();
+      });
+    });
+  });
+
   describe('#getCustomerImageDownloads', function() {
     it('should return a list of customer downloads', function(done) {
       var params = { auth_user: config.auth_user };
@@ -359,19 +386,19 @@ describe('v1', function() {
     });
   });
 
-  /*
-  describe('#getImageKeywordRecommendations', function() {
+  describe.skip('#getImageKeywordRecommendations', function() {
     it('should return recommended keywords', function(done) {
       var image_ids = [143051491, 108559295, 130763906];
 
       this.api.getImageKeywordRecommendations(image_ids, function(err, data) {
         should.not.exist(err);
 
+        should(data).be.type('object');
+
         done();
       });
     });
   });
-  */
 
   describe('#searchVideos', function() {
     it('should return video search results', function(done) {

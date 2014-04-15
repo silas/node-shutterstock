@@ -41,6 +41,7 @@ api.getCategories(function(err, categories) {
    * [v1.getSimilarImages](#v1.getSimilarImages)
    * [v1.getCategories](#v1.getCategories)
    * [v1.authCustomer](#v1.authCustomer)
+   * [v1.registerCustomer](#v1.registerCustomer)
    * [v1.getCustomer](#v1.getCustomer)
    * [v1.getCustomerImageDownloads](#v1.getCustomerImageDownloads)
    * [v1.getCustomerSubscriptions](#v1.getCustomerSubscriptions)
@@ -126,6 +127,13 @@ Get customer information.
 
 http://api.shutterstock.com/#customersusername
 
+<a name="v1.registerCustomer"/>
+#### v1.registerCustomer([options], callback)
+
+Creates a new customer account.
+
+http://api.shutterstock.com/#customersusername
+
 <a name="v1.getCustomerImageDownloads"/>
 #### v1.getCustomerImageDownloads([options], callback)
 
@@ -173,7 +181,6 @@ http://api.shutterstock.com/#videosvideo_id
  * `POST /customers/<username>/lightboxes`
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
- * `PUT /customers/<username>`
 
 ## License
 

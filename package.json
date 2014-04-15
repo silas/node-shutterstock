@@ -4,10 +4,12 @@
   "description": "Shutterstock API client",
   "main": "lib/index.js",
   "devDependencies": {
+    "debug": "*",
     "jscs": "*",
     "jshint": "*",
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "uuid": "*"
   },
   "scripts": {
     "test": "./node_modules/.bin/jshint lib test && ./node_modules/.bin/jscs lib test && ./node_modules/.bin/mocha --recursive --require should -R spec"
