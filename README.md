@@ -128,7 +128,7 @@ Get customer information.
 http://api.shutterstock.com/#customersusername
 
 <a name="v1.registerCustomer"/>
-#### v1.registerCustomer([options], callback)
+#### v1.registerCustomer(options, callback)
 
 Creates a new customer account.
 
