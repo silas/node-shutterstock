@@ -67,7 +67,7 @@ Options
 
 Echo back specified options, used to check API connection and credentials.
 
-`options` is an object of any key-value pairs.
+`options` is an object of test key-value pairs.
 
 `callback(err, data)` is the result of the request.
 
@@ -93,7 +93,7 @@ http://api.shutterstock.com/#imagessearch
 
 Get details for a specified image.
 
-`options` can be an `image_id` or an object containing `image_id` and `language`.
+`options` can be an `image_id` or an object.
 
 `callback(err, data)` is the result of the request.
 
@@ -116,7 +116,7 @@ http://api.shutterstock.com/#categories
 <a name="v1.authCustomer"/>
 #### v1.authCustomer(options, callback)
 
-Login as a customer.
+Authenticate as a customer.
 
 http://api.shutterstock.com/#authcustomer
 
@@ -130,7 +130,7 @@ http://api.shutterstock.com/#customersusername
 <a name="v1.registerCustomer"/>
 #### v1.registerCustomer(options, callback)
 
-Creates a new customer account.
+Create new customer account.
 
 http://api.shutterstock.com/#customersusername
 
