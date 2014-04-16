@@ -113,8 +113,8 @@ Get all image categories.
 
 http://api.shutterstock.com/#categories
 
-<a name="v1.authCustomer"/>
-#### v1.authCustomer(options, callback)
+<a name="v1.auth"/>
+#### v1.auth(options, callback)
 
 Authenticate as a customer.
 
@@ -127,30 +127,30 @@ Get customer information.
 
 http://api.shutterstock.com/#customersusername
 
-<a name="v1.registerCustomer"/>
-#### v1.registerCustomer(options, callback)
+<a name="v1.register"/>
+#### v1.register(options, callback)
 
 Create new customer account.
 
 http://api.shutterstock.com/#customersusername
 
-<a name="v1.getCustomerImageDownloads"/>
-#### v1.getCustomerImageDownloads([options], callback)
+<a name="v1.getImageDownloads"/>
+#### v1.getImageDownloads([options], callback)
 
 Get customer image downloads and the subscriptions under which they
 were downloaded.
 
 http://api.shutterstock.com/#customersusernameimagesdownloads
 
-<a name="v1.getCustomerSubscriptions"/>
-#### v1.getCustomerSubscriptions([options], callback)
+<a name="v1.getSubscriptions"/>
+#### v1.getSubscriptions([options], callback)
 
 Get customer subscriptions.
 
 http://api.shutterstock.com/#customersusernamesubscriptions
 
-<a name="v1.getCustomerLightboxes"/>
-#### v1.getCustomerLightboxes([options], callback)
+<a name="v1.getLightboxes"/>
+#### v1.getLightboxes([options], callback)
 
 Get customer lightboxes.
 

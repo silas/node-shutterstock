@@ -59,7 +59,7 @@ describe('v1', function() {
       password: config.auth_password,
     };
 
-    this.api.authCustomer(options, function(err, data) {
+    this.api.auth(options, function(err, data) {
       should.not.exist(err);
 
       config.auth_token = data.auth_token;
@@ -240,7 +240,7 @@ describe('v1', function() {
     });
   });
 
-  describe('#authCustomer', function() {
+  describe('#auth', function() {
     it('should authenticate valid credentials', function(done) {
       if (this.api.options.access_token) return done();
 
@@ -249,7 +249,7 @@ describe('v1', function() {
         password: config.auth_password,
       };
 
-      this.api.authCustomer(options, function(err, data) {
+      this.api.auth(options, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('auth_token');
@@ -268,7 +268,7 @@ describe('v1', function() {
         password: 'nope.' + config.auth_password,
       };
 
-      this.api.authCustomer(options, function(err, data) {
+      this.api.auth(options, function(err, data) {
         should.exist(err);
 
         err.message.should.eql('Invalid username and/or password');
@@ -298,7 +298,7 @@ describe('v1', function() {
     });
   });
 
-  describe.skip('#registerCustomer', function() {
+  describe.skip('#register', function() {
     it('should register a customer', function(done) {
       var id = uuid.v4().replace(/-/g, '').slice(16);
 
@@ -310,7 +310,7 @@ describe('v1', function() {
 
       debug('register', params);
 
-      this.api.registerCustomer(params, function(err, data) {
+      this.api.register(params, function(err, data) {
         should.not.exist(err);
 
         should(data).be.type('object');
@@ -321,13 +321,13 @@ describe('v1', function() {
     });
   });
 
-  describe('#getCustomerImageDownloads', function() {
+  describe('#getImageDownloads', function() {
     it('should return a list of customer downloads', function(done) {
       var params = { auth_user: config.auth_user };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
-      this.api.getCustomerImageDownloads(params, function(err, data) {
+      this.api.getImageDownloads(params, function(err, data) {
         should.not.exist(err);
 
         data.should.be.type('object');
@@ -337,13 +337,13 @@ describe('v1', function() {
     });
   });
 
-  describe('#getCustomerSubscriptions', function() {
+  describe('#getSubscriptions', function() {
     it('should return a list of subscriptions', function(done) {
       var params = { auth_user: config.auth_user };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
-      this.api.getCustomerSubscriptions(params, function(err, data) {
+      this.api.getSubscriptions(params, function(err, data) {
         should.not.exist(err);
 
         data.should.be.type('object');
@@ -353,13 +353,13 @@ describe('v1', function() {
     });
   });
 
-  describe('#getCustomerLightboxes', function() {
+  describe('#getLightboxes', function() {
     it('should return a list of lightboxes', function(done) {
       var params = { auth_user: config.auth_user };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
-      this.api.getCustomerLightboxes(params, function(err, data) {
+      this.api.getLightboxes(params, function(err, data) {
         should.not.exist(err);
 
         data.should.be.an.instanceOf(Array);
@@ -376,7 +376,7 @@ describe('v1', function() {
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
-      this.api.getCustomerLightboxes(params, function(err, data) {
+      this.api.getLightboxes(params, function(err, data) {
         should.not.exist(err);
 
         data.should.be.an.instanceOf(Array);
