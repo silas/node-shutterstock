@@ -386,6 +386,139 @@ describe('v1', function() {
     });
   });
 
+  describe('#getLightbox', function() {
+    it('should return lightbox', function(done) {
+      var self = this;
+
+      var lightboxName = 'test_' + uuid.v4().slice(0, 8);
+
+      var params = {
+        auth_user: config.auth_user,
+        lightbox_name: lightboxName,
+      };
+
+      if (!self.api.options.access_token) params.auth_token = config.auth_token;
+
+      self.api.createLightbox(params, function(err, data) {
+        should.not.exist(err);
+
+        var lightboxId = data.lightbox_id;
+
+        params.lightbox_id = lightboxId;
+
+        delete params.lightbox_name;
+
+        self.api.getLightbox(params, function(err, data) {
+          should.not.exist(err);
+
+          data.should.have.properties(
+            'lightbox_id',
+            'lightbox_name',
+            'confirmed',
+            'resource_url',
+            'image_count'
+          );
+          data.lightbox_id.should.eql(lightboxId);
+          data.lightbox_name.should.eql(lightboxName);
+          data.confirmed.should.eql(1);
+          data.image_count.should.eql(0);
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('#createLightbox', function() {
+    it('should create a lightbox', function(done) {
+      var params = {
+        auth_user: config.auth_user,
+        lightbox_name: 'test_' + uuid.v4().slice(0, 8),
+      };
+
+      if (!this.api.options.access_token) params.auth_token = config.auth_token;
+
+      this.api.createLightbox(params, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('lightbox_id');
+
+        done();
+      });
+    });
+  });
+
+  describe('#updateLightbox', function() {
+    it('should update lightbox name', function(done) {
+      var self = this;
+
+      var name1 = 'test_' + uuid.v4().slice(0, 8);
+      var name2 = 'test_' + uuid.v4().slice(0, 8);
+
+      var params = {
+        auth_user: config.auth_user,
+        lightbox_name: name1,
+      };
+
+      if (!self.api.options.access_token) params.auth_token = config.auth_token;
+
+      self.api.createLightbox(params, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('lightbox_id');
+
+        params.lightbox_id = data.lightbox_id;
+        params.lightbox_name = name2;
+
+        self.api.updateLightbox(params, function(err) {
+          should.not.exist(err);
+
+          delete params.lightbox_name;
+
+          self.api.getLightbox(params, function(err, data) {
+            should.not.exist(err);
+
+            data.should.have.property('lightbox_name');
+            data.lightbox_name.should.eql(name2);
+
+            done();
+          });
+        });
+      });
+    });
+  });
+
+  describe('#deleteLightbox', function() {
+    it('should delete the lightbox', function(done) {
+      var self = this;
+
+      var lightboxName = 'test_' + uuid.v4().slice(0, 8);
+
+      var params = {
+        auth_user: config.auth_user,
+        lightbox_name: lightboxName,
+      };
+
+      if (!self.api.options.access_token) params.auth_token = config.auth_token;
+
+      self.api.createLightbox(params, function(err, data) {
+        should.not.exist(err);
+
+        var lightboxId = data.lightbox_id;
+
+        params.lightbox_id = lightboxId;
+
+        delete params.lightbox_name;
+
+        self.api.deleteLightbox(params, function(err) {
+          should.not.exist(err);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe.skip('#getImageKeywordRecommendations', function() {
     it('should return recommended keywords', function(done) {
       var image_ids = [143051491, 108559295, 130763906];

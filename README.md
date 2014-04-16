@@ -40,12 +40,16 @@ api.getCategories(function(err, categories) {
    * [v1.getImage](#v1.getImage)
    * [v1.getSimilarImages](#v1.getSimilarImages)
    * [v1.getCategories](#v1.getCategories)
-   * [v1.authCustomer](#v1.authCustomer)
-   * [v1.registerCustomer](#v1.registerCustomer)
+   * [v1.auth](#v1.auth)
+   * [v1.register](#v1.register)
    * [v1.getCustomer](#v1.getCustomer)
-   * [v1.getCustomerImageDownloads](#v1.getCustomerImageDownloads)
-   * [v1.getCustomerSubscriptions](#v1.getCustomerSubscriptions)
-   * [v1.getCustomerLightboxes](#v1.getCustomerLightboxes)
+   * [v1.getImageDownloads](#v1.getImageDownloads)
+   * [v1.getSubscriptions](#v1.getSubscriptions)
+   * [v1.getLightboxes](#v1.getLightboxes)
+   * [v1.getLightbox](#v1.getLightbox)
+   * [v1.createLightbox](#v1.createLightbox)
+   * [v1.updateLightbox](#v1.updateLightbox)
+   * [v1.deleteLightbox](#v1.deleteLightbox)
    * [v1.searchVideos](#v1.searchVideos)
    * [v1.getVideo](#v1.getVideo)
 
@@ -156,6 +160,34 @@ Get customer lightboxes.
 
 http://api.shutterstock.com/#customersusernamelightboxes
 
+<a name="v1.getLightbox"/>
+#### v1.getLightbox(options, callback)
+
+Get contents of lightbox.
+
+http://api.shutterstock.com/#lightboxeslightbox_id
+
+<a name="v1.createLightbox"/>
+#### v1.createLightbox(options, callback)
+
+Create new lightbox.
+
+http://api.shutterstock.com/#customersusernamelightboxes
+
+<a name="v1.updateLightbox"/>
+#### v1.updateLightbox(options, callback)
+
+Update lightbox.
+
+http://api.shutterstock.com/#lightboxeslightbox_id
+
+<a name="v1.deleteLightbox"/>
+#### v1.deleteLightbox(options, callback)
+
+Delete lightbox.
+
+http://api.shutterstock.com/#lightboxeslightbox_id
+
 <a name="v1.searchVideos"/>
 #### v1.searchVideos(options, callback)
 
@@ -172,13 +204,9 @@ http://api.shutterstock.com/#videosvideo_id
 
 ## Todo
 
- * `GET /lightboxes/<lightbox_id>`
- * `POST /lightboxes/<lightbox_id>`
- * `DELETE /lightboxes/<lightbox_id>`
  * `PUT /lightboxes/<lightbox_id>/images/<image_id>`
  * `DELETE /lightboxes/<lightbox_id>/images/<image_id>`
  * `GET /lightboxes/<lightbox_id>/public_url`
- * `POST /customers/<username>/lightboxes`
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
 
