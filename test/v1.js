@@ -16,9 +16,9 @@ var v1 = require('../lib/v1');
 
 var config = {
   timeout: 5,
-  api_user: '',
+  api_username: '',
   api_password: '',
-  auth_user: '',
+  auth_username: '',
   auth_password: '',
 };
 
@@ -48,14 +48,14 @@ describe('v1', function() {
 
   before(function(done) {
     this.api = v1({
-      user: config.api_user,
+      username: config.api_username,
       password: config.api_password,
     });
 
     if (this.api.options.access_token) return done();
 
     var options = {
-      username: config.auth_user,
+      username: config.auth_username,
       password: config.auth_password,
     };
 
@@ -245,7 +245,7 @@ describe('v1', function() {
       if (this.api.options.access_token) return done();
 
       var options = {
-        username: config.auth_user,
+        username: config.auth_username,
         password: config.auth_password,
       };
 
@@ -264,7 +264,7 @@ describe('v1', function() {
       if (this.api.options.access_token) return done();
 
       var options = {
-        username: config.auth_user,
+        username: config.auth_username,
         password: 'nope.' + config.auth_password,
       };
 
@@ -283,7 +283,7 @@ describe('v1', function() {
 
   describe('#getCustomer', function() {
     it('should return customer info', function(done) {
-      var params = { auth_user: config.auth_user };
+      var params = { username: config.auth_username };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
@@ -323,7 +323,7 @@ describe('v1', function() {
 
   describe('#getImageDownloads', function() {
     it('should return a list of customer downloads', function(done) {
-      var params = { auth_user: config.auth_user };
+      var params = { username: config.auth_username };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
@@ -339,7 +339,7 @@ describe('v1', function() {
 
   describe('#getSubscriptions', function() {
     it('should return a list of subscriptions', function(done) {
-      var params = { auth_user: config.auth_user };
+      var params = { username: config.auth_username };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
@@ -355,7 +355,7 @@ describe('v1', function() {
 
   describe('#getLightboxes', function() {
     it('should return a list of lightboxes', function(done) {
-      var params = { auth_user: config.auth_user };
+      var params = { username: config.auth_username };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
@@ -371,7 +371,7 @@ describe('v1', function() {
     it('should return a list of lightboxes with extended data', function(done) {
       var params = {
         extended: true,
-        auth_user: config.auth_user,
+        username: config.auth_username,
       };
 
       if (!this.api.options.access_token) params.auth_token = config.auth_token;
@@ -393,7 +393,7 @@ describe('v1', function() {
       var lightboxName = 'test_' + uuid.v4().slice(0, 8);
 
       var params = {
-        auth_user: config.auth_user,
+        username: config.auth_username,
         lightbox_name: lightboxName,
       };
 
@@ -436,7 +436,7 @@ describe('v1', function() {
       var lightboxName = 'test_' + uuid.v4().slice(0, 8);
 
       var params = {
-        auth_user: config.auth_user,
+        username: config.auth_username,
         lightbox_name: lightboxName,
       };
 
@@ -468,7 +468,7 @@ describe('v1', function() {
   describe('#createLightbox', function() {
     it('should create a lightbox', function(done) {
       var params = {
-        auth_user: config.auth_user,
+        username: config.auth_username,
         lightbox_name: 'test_' + uuid.v4().slice(0, 8),
       };
 
@@ -492,7 +492,7 @@ describe('v1', function() {
       var name2 = 'test_' + uuid.v4().slice(0, 8);
 
       var params = {
-        auth_user: config.auth_user,
+        username: config.auth_username,
         lightbox_name: name1,
       };
 
@@ -531,7 +531,7 @@ describe('v1', function() {
       var lightboxName = 'test_' + uuid.v4().slice(0, 8);
 
       var params = {
-        auth_user: config.auth_user,
+        username: config.auth_username,
         lightbox_name: lightboxName,
       };
 

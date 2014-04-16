@@ -21,7 +21,7 @@ Example
 var shutterstock = require('shutterstock');
 
 var api = shutterstock.v1({
-  user: 'api-user',
+  username: 'api-username',
   password: 'api-password',
 });
 
@@ -63,7 +63,7 @@ This is a client for interacting with [api.shutterstock.com](http://api.shutters
 
 Options
 
- * `user`: API username (not to be confused with customer username). Required.
+ * `username`: API username (not to be confused with customer username). Required.
  * `password`: API password (key). Required.
  * `timeout`: An integer specifying the maximum number of seconds a request can take before timing out. Defaults to 30.
 
