@@ -214,7 +214,6 @@ http://api.shutterstock.com/#videosvideo_id
 
  * `PUT /lightboxes/<lightbox_id>/images/<image_id>`
  * `DELETE /lightboxes/<lightbox_id>/images/<image_id>`
- * `GET /lightboxes/<lightbox_id>/public_url`
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
 
