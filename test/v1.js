@@ -429,6 +429,42 @@ describe('v1', function() {
     });
   });
 
+  describe('#getLightboxPublicUrl', function() {
+    it('should return lightbox public url', function(done) {
+      var self = this;
+
+      var lightboxName = 'test_' + uuid.v4().slice(0, 8);
+
+      var params = {
+        auth_user: config.auth_user,
+        lightbox_name: lightboxName,
+      };
+
+      if (!self.api.options.access_token) params.auth_token = config.auth_token;
+
+      self.api.createLightbox(params, function(err, data) {
+        should.not.exist(err);
+
+        var lightboxId = data.lightbox_id;
+
+        params.lightbox_id = lightboxId;
+
+        delete params.lightbox_name;
+
+        self.api.getLightboxPublicUrl(params, function(err, data) {
+          should.not.exist(err);
+
+          data.should.have.properties(
+            'verification_code',
+            'public_url'
+          );
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('#createLightbox', function() {
     it('should create a lightbox', function(done) {
       var params = {

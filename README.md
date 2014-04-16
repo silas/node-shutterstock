@@ -47,6 +47,7 @@ api.getCategories(function(err, categories) {
    * [v1.getSubscriptions](#v1.getSubscriptions)
    * [v1.getLightboxes](#v1.getLightboxes)
    * [v1.getLightbox](#v1.getLightbox)
+   * [v1.getLightboxPublicUrl](#v1.getLightboxPublicUrl)
    * [v1.createLightbox](#v1.createLightbox)
    * [v1.updateLightbox](#v1.updateLightbox)
    * [v1.deleteLightbox](#v1.deleteLightbox)
@@ -166,6 +167,13 @@ http://api.shutterstock.com/#customersusernamelightboxes
 Get contents of lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_id
+
+<a name="v1.getLightboxPublicUrl"/>
+#### v1.getLightboxPublicUrl(options, callback)
+
+Return public URL for lightbox.
+
+http://api.shutterstock.com/#lightboxeslightbox_idpublic_url
 
 <a name="v1.createLightbox"/>
 #### v1.createLightbox(options, callback)
