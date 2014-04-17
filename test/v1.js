@@ -8,36 +8,8 @@ var debug = require('debug')('v1');
 var should = require('should');
 var uuid = require('uuid');
 
-var v1 = require('../lib/v1');
-
-/**
- * Config
- */
-
-var config = {
-  timeout: 5,
-  api_username: '',
-  api_password: '',
-  auth_username: '',
-  auth_password: '',
-};
-
-Object.keys(config).forEach(function(key) {
-  var envName = 'SHUTTERSTOCK_' + key.toUpperCase();
-  var defaultValue = config[key];
-  var value = process.env[envName];
-
-  if (value) {
-    if (typeof defaultValue === 'number') {
-      value = parseInt(value, 10);
-    }
-    config[key] = value;
-  } else if (!defaultValue) {
-    throw new Error(envName + ' required');
-  }
-});
-
-debug('config', config);
+var helper = require('./helper');
+var config = helper.config;
 
 /**
  * Tests
@@ -46,27 +18,8 @@ debug('config', config);
 describe('v1', function() {
   this.timeout(config.timeout * 1000);
 
-  before(function(done) {
-    this.api = v1({
-      username: config.api_username,
-      password: config.api_password,
-    });
-
-    if (this.api.options.access_token) return done();
-
-    var options = {
-      username: config.auth_username,
-      password: config.auth_password,
-    };
-
-    this.api.auth(options, function(err, data) {
-      should.not.exist(err);
-
-      config.auth_token = data.auth_token;
-
-      done();
-    });
-  });
+  before(helper.before);
+  beforeEach(helper.beforeEach);
 
   describe('#getResources', function() {
     it('should return a list of resources', function(done) {
@@ -285,8 +238,6 @@ describe('v1', function() {
     it('should return customer info', function(done) {
       var params = { username: config.auth_username };
 
-      if (!this.api.options.access_token) params.auth_token = config.auth_token;
-
       this.api.getCustomer(params, function(err, data) {
         should.not.exist(err);
 
@@ -325,8 +276,6 @@ describe('v1', function() {
     it('should return a list of customer downloads', function(done) {
       var params = { username: config.auth_username };
 
-      if (!this.api.options.access_token) params.auth_token = config.auth_token;
-
       this.api.getImageDownloads(params, function(err, data) {
         should.not.exist(err);
 
@@ -341,8 +290,6 @@ describe('v1', function() {
     it('should return a list of subscriptions', function(done) {
       var params = { username: config.auth_username };
 
-      if (!this.api.options.access_token) params.auth_token = config.auth_token;
-
       this.api.getSubscriptions(params, function(err, data) {
         should.not.exist(err);
 
@@ -354,10 +301,11 @@ describe('v1', function() {
   });
 
   describe('#getLightboxes', function() {
+    before(helper.beforeLightbox);
+    after(helper.afterLightbox);
+
     it('should return a list of lightboxes', function(done) {
       var params = { username: config.auth_username };
-
-      if (!this.api.options.access_token) params.auth_token = config.auth_token;
 
       this.api.getLightboxes(params, function(err, data) {
         should.not.exist(err);
@@ -374,8 +322,6 @@ describe('v1', function() {
         username: config.auth_username,
       };
 
-      if (!this.api.options.access_token) params.auth_token = config.auth_token;
-
       this.api.getLightboxes(params, function(err, data) {
         should.not.exist(err);
 
@@ -387,97 +333,75 @@ describe('v1', function() {
   });
 
   describe('#getLightbox', function() {
+    before(helper.beforeLightbox);
+    after(helper.afterLightbox);
+
     it('should return lightbox', function(done) {
       var self = this;
 
-      var lightboxName = 'test_' + uuid.v4().slice(0, 8);
-
       var params = {
         username: config.auth_username,
-        lightbox_name: lightboxName,
+        lightbox_id: self.lightboxId,
       };
 
-      if (!self.api.options.access_token) params.auth_token = config.auth_token;
-
-      self.api.createLightbox(params, function(err, data) {
+      self.api.getLightbox(params, function(err, data) {
         should.not.exist(err);
 
-        var lightboxId = data.lightbox_id;
+        data.should.have.properties(
+          'lightbox_id',
+          'lightbox_name',
+          'confirmed',
+          'resource_url',
+          'image_count'
+        );
+        data.lightbox_id.should.eql(self.lightboxId);
+        data.lightbox_name.should.eql(self.lightboxName);
+        data.confirmed.should.eql(1);
+        data.image_count.should.eql(0);
 
-        params.lightbox_id = lightboxId;
-
-        delete params.lightbox_name;
-
-        self.api.getLightbox(params, function(err, data) {
-          should.not.exist(err);
-
-          data.should.have.properties(
-            'lightbox_id',
-            'lightbox_name',
-            'confirmed',
-            'resource_url',
-            'image_count'
-          );
-          data.lightbox_id.should.eql(lightboxId);
-          data.lightbox_name.should.eql(lightboxName);
-          data.confirmed.should.eql(1);
-          data.image_count.should.eql(0);
-
-          done();
-        });
+        done();
       });
     });
   });
 
   describe('#getLightboxPublicUrl', function() {
+    before(helper.beforeLightbox);
+    after(helper.afterLightbox);
+
     it('should return lightbox public url', function(done) {
-      var self = this;
+      var params = { lightbox_id: this.lightboxId };
 
-      var lightboxName = 'test_' + uuid.v4().slice(0, 8);
-
-      var params = {
-        username: config.auth_username,
-        lightbox_name: lightboxName,
-      };
-
-      if (!self.api.options.access_token) params.auth_token = config.auth_token;
-
-      self.api.createLightbox(params, function(err, data) {
+      this.api.getLightboxPublicUrl(params, function(err, data) {
         should.not.exist(err);
 
-        var lightboxId = data.lightbox_id;
+        data.should.have.properties(
+          'verification_code',
+          'public_url'
+        );
 
-        params.lightbox_id = lightboxId;
-
-        delete params.lightbox_name;
-
-        self.api.getLightboxPublicUrl(params, function(err, data) {
-          should.not.exist(err);
-
-          data.should.have.properties(
-            'verification_code',
-            'public_url'
-          );
-
-          done();
-        });
+        done();
       });
     });
   });
 
   describe('#createLightbox', function() {
+    after(helper.afterLightbox);
+
     it('should create a lightbox', function(done) {
+      var self = this;
+
       var params = {
         username: config.auth_username,
         lightbox_name: 'test_' + uuid.v4().slice(0, 8),
       };
 
-      if (!this.api.options.access_token) params.auth_token = config.auth_token;
-
-      this.api.createLightbox(params, function(err, data) {
+      self.api.createLightbox(params, function(err, data) {
         should.not.exist(err);
 
+        should(data).be.type('object');
         data.should.have.property('lightbox_id');
+
+        self.lightboxId = data.lightbox_id;
 
         done();
       });
@@ -485,69 +409,53 @@ describe('v1', function() {
   });
 
   describe('#updateLightbox', function() {
+    before(helper.beforeLightbox);
+    after(helper.afterLightbox);
+
     it('should update lightbox name', function(done) {
       var self = this;
 
-      var name1 = 'test_' + uuid.v4().slice(0, 8);
-      var name2 = 'test_' + uuid.v4().slice(0, 8);
+      var name = 'test_' + uuid.v4().slice(0, 8);
 
       var params = {
-        username: config.auth_username,
-        lightbox_name: name1,
+        lightbox_id: self.lightboxId,
+        lightbox_name: name,
       };
 
-      if (!self.api.options.access_token) params.auth_token = config.auth_token;
-
-      self.api.createLightbox(params, function(err, data) {
+      self.api.updateLightbox(params, function(err) {
         should.not.exist(err);
 
-        data.should.have.property('lightbox_id');
+        delete params.lightbox_name;
 
-        params.lightbox_id = data.lightbox_id;
-        params.lightbox_name = name2;
-
-        self.api.updateLightbox(params, function(err) {
+        self.api.getLightbox(params, function(err, data) {
           should.not.exist(err);
 
-          delete params.lightbox_name;
+          data.should.have.property('lightbox_name');
+          data.lightbox_name.should.eql(name);
 
-          self.api.getLightbox(params, function(err, data) {
-            should.not.exist(err);
-
-            data.should.have.property('lightbox_name');
-            data.lightbox_name.should.eql(name2);
-
-            done();
-          });
+          done();
         });
       });
     });
   });
 
   describe('#deleteLightbox', function() {
+    before(helper.beforeLightbox);
+
     it('should delete the lightbox', function(done) {
       var self = this;
 
-      var lightboxName = 'test_' + uuid.v4().slice(0, 8);
-
-      var params = {
-        username: config.auth_username,
-        lightbox_name: lightboxName,
-      };
-
-      if (!self.api.options.access_token) params.auth_token = config.auth_token;
-
-      self.api.createLightbox(params, function(err, data) {
+      self.api.deleteLightbox({ lightbox_id: self.lightboxId }, function(err) {
         should.not.exist(err);
 
-        var lightboxId = data.lightbox_id;
-
-        params.lightbox_id = lightboxId;
-
-        delete params.lightbox_name;
-
-        self.api.deleteLightbox(params, function(err) {
+        self.api.getLightboxes(function(err, data) {
           should.not.exist(err);
+
+          data.forEach(function(lightbox) {
+            should(lightbox).be.type('object');
+            lightbox.should.have.property('lightbox_id');
+            lightbox.lightbox_id.not.eql(self.lightboxId);
+          });
 
           done();
         });

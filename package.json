@@ -4,6 +4,7 @@
   "description": "Shutterstock API client",
   "main": "lib/index.js",
   "devDependencies": {
+    "async": "*",
     "debug": "*",
     "jscs": "*",
     "jshint": "*",
