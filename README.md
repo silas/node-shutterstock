@@ -51,6 +51,8 @@ api.getCategories(function(err, categories) {
    * [v1.createLightbox](#v1.createLightbox)
    * [v1.updateLightbox](#v1.updateLightbox)
    * [v1.deleteLightbox](#v1.deleteLightbox)
+   * [v1.addToLightbox](#v1.addToLightbox)
+   * [v1.removeFromLightbox](#v1.removeFromLightbox)
    * [v1.searchVideos](#v1.searchVideos)
    * [v1.getVideo](#v1.getVideo)
 
@@ -196,6 +198,20 @@ Delete lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_id
 
+<a name="v1.addToLightbox"/>
+#### v1.addToLightbox(options, callback)
+
+Add image to lightbox.
+
+http://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id
+
+<a name="v1.removeFromLightbox"/>
+#### v1.removeFromLightbox(options, callback)
+
+Remove image from lightbox.
+
+http://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id
+
 <a name="v1.searchVideos"/>
 #### v1.searchVideos(options, callback)
 
@@ -212,8 +228,6 @@ http://api.shutterstock.com/#videosvideo_id
 
 ## Todo
 
- * `PUT /lightboxes/<lightbox_id>/images/<image_id>`
- * `DELETE /lightboxes/<lightbox_id>/images/<image_id>`
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
 

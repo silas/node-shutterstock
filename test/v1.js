@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 
+var async = require('async');
 var debug = require('debug')('v1');
 var should = require('should');
 var uuid = require('uuid');
@@ -92,9 +93,9 @@ describe('v1', function() {
 
   describe('#getImage', function() {
     it('should return image details', function(done) {
-      var image_id = 108559295;
+      var imageId = 108559295;
 
-      this.api.getImage(image_id, function(err, data) {
+      this.api.getImage(imageId, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('illustration');
@@ -102,7 +103,7 @@ describe('v1', function() {
         data.should.have.property('r_rated');
         data.r_rated.should.eql(0);
         data.should.have.property('photo_id');
-        data.photo_id.should.eql(image_id);
+        data.photo_id.should.eql(imageId);
         data.should.have.property('enhanced_license_available');
         data.enhanced_license_available.should.eql(1);
         data.should.have.property('resource_url');
@@ -126,9 +127,9 @@ describe('v1', function() {
     });
 
     it('should return image not found', function(done) {
-      var image_id = 1;
+      var imageId = 1;
 
-      this.api.getImage(image_id, function(err, data) {
+      this.api.getImage(imageId, function(err, data) {
         should.exist(err);
 
         err.message.should.eql('Not Found');
@@ -143,9 +144,9 @@ describe('v1', function() {
 
   describe('#getSimilarImages', function() {
     it('should return similar images', function(done) {
-      var image_id = 108559295;
+      var imageId = 108559295;
 
-      this.api.getSimilarImages(image_id, function(err, data) {
+      this.api.getSimilarImages(imageId, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('count');
@@ -352,7 +353,8 @@ describe('v1', function() {
           'lightbox_name',
           'confirmed',
           'resource_url',
-          'image_count'
+          'image_count',
+          'images'
         );
         data.lightbox_id.should.eql(self.lightboxId);
         data.lightbox_name.should.eql(self.lightboxName);
@@ -463,11 +465,105 @@ describe('v1', function() {
     });
   });
 
+  describe.skip('#addToLightbox', function() {
+    before(helper.beforeLightbox);
+    after(helper.afterLightbox);
+
+    it('should add image to lightbox', function(done) {
+      var self = this;
+
+      var params = {
+        lightbox_id: self.lightboxId,
+        image_id: 108559295,
+      };
+
+      self.api.addToLightbox(params, function(err) {
+        should.not.exist(err);
+
+        self.api.getLightbox({ lightbox_id: self.lightboxId }, function(err, data) {
+          should.not.exist(err);
+
+          should(data).be.type('object');
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe.skip('#removeFromLightbox', function() {
+    before(helper.beforeLightbox);
+    after(helper.afterLightbox);
+
+    it('should remove image from lightbox', function(done) {
+      var self = this;
+
+      var imageId = 108559295;
+
+      var params = {
+        lightbox_id: self.lightboxId,
+        image_id: imageId,
+      };
+
+      var jobs = [];
+
+      jobs.push(function(cb) {
+        self.api.addToLightbox(params, function(err) {
+          if (err) return cb(err);
+
+          cb();
+        });
+      });
+
+      jobs.push(function(cb) {
+        self.api.getLightbox({ lightbox_id: self.lightboxId }, function(err, data) {
+          if (err) return cb(err);
+
+          should(data).be.type('object');
+
+          data.should.have.property('images');
+          data.images.should.be.an.instanceOf(Array);
+          data.images.should.contain(imageId);
+
+          cb();
+        });
+      });
+
+      jobs.push(function(cb) {
+        self.api.removeFromLightbox(params, function(err) {
+          if (err) return cb(err);
+
+          cb();
+        });
+      });
+
+      jobs.push(function(cb) {
+        self.api.getLightbox({ lightbox_id: self.lightboxId }, function(err, data) {
+          if (err) return cb(err);
+
+          should(data).be.type('object');
+
+          data.should.have.property('images');
+          data.images.should.be.an.instanceOf(Array);
+          data.images.should.not.contain(imageId);
+
+          cb();
+        });
+      });
+
+      async.series(jobs, function(err) {
+        should.not.exist(err);
+
+        done();
+      });
+    });
+  });
+
   describe.skip('#getImageKeywordRecommendations', function() {
     it('should return recommended keywords', function(done) {
-      var image_ids = [143051491, 108559295, 130763906];
+      var imageIds = [143051491, 108559295, 130763906];
 
-      this.api.getImageKeywordRecommendations(image_ids, function(err, data) {
+      this.api.getImageKeywordRecommendations(imageIds, function(err, data) {
         should.not.exist(err);
 
         should(data).be.type('object');
