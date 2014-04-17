@@ -85,13 +85,17 @@ exports.before = function(done) {
     self.api.getLightboxes(function(err, data) {
       if (err) return cb(err);
 
-      var deleteJobs = data.map(function(lightbox) {
+      data = data.filter(function(lb) {
+        return lb.lightbox_name.indexOf('test_') === 0;
+      });
+
+      data = data.map(function(lb) {
         return function(cb) {
-          self.api.deleteLightbox({ lightbox_id: lightbox.lightbox_id }, cb);
+          self.api.deleteLightbox({ lightbox_id: lb.lightbox_id }, cb);
         };
       });
 
-      async.parallel(deleteJobs, cb);
+      async.parallel(data, cb);
     });
   }];
 
