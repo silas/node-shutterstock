@@ -43,7 +43,7 @@ api.image.categories(function(err, categories) {
    * [v1.customer.auth](#v1.customer.auth)
    * [v1.customer.register](#v1.customer.register)
    * [v1.customer.get](#v1.customer.get)
-   * [v1.customer.imageDownloads](#v1.customer.imageDownloads)
+   * [v1.customer.images](#v1.customer.images)
    * [v1.customer.subscriptions](#v1.customer.subscriptions)
    * [v1.lightbox.list](#v1.lightbox.list)
    * [v1.lightbox.get](#v1.lightbox.get)
@@ -141,8 +141,8 @@ Create new customer account.
 
 http://api.shutterstock.com/#customersusername
 
-<a name="v1.customer.imageDownloads"/>
-#### v1.customer.imageDownloads([options], callback)
+<a name="v1.customer.images"/>
+#### v1.customer.images([options], callback)
 
 Get customer image downloads and the subscriptions under which they
 were downloaded.

@@ -267,11 +267,11 @@ describe('v1', function() {
     });
   });
 
-  describe('customer.imageDownloads', function() {
+  describe('customer.images', function() {
     it('should return a list of customer downloads', function(done) {
       var params = { username: config.auth_username };
 
-      this.api.customer.imageDownloads(params, function(err, data) {
+      this.api.customer.images(params, function(err, data) {
         should.not.exist(err);
 
         data.should.be.type('object');
