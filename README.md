@@ -61,13 +61,11 @@ api.image.categories(function(err, categories) {
 
 This is a client for interacting with [api.shutterstock.com](http://api.shutterstock.com).
 
-`options` is an object with client settings.
-
 Options
 
- * `username`: API username (not to be confused with customer username). Required.
- * `password`: API password (key). Required.
- * `timeout`: An integer specifying the maximum number of seconds a request can take before timing out. Defaults to 30.
+ * username (String): API username (not to be confused with customer username)
+ * password (String): API password (key)
+ * timeout (Number, default: 30000ms): number of milliseconds before request is aborted
 
 <a name="v1.echo"/>
 #### v1.echo(options, callback)
