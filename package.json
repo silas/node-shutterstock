@@ -2,7 +2,7 @@
   "name": "shutterstock",
   "version": "0.9.0",
   "description": "Shutterstock API client",
-  "main": "lib/index.js",
+  "main": "./lib",
   "dependencies": {
     "rapi": "^0.12.0"
   },

@@ -17,8 +17,6 @@ var config = helper.config;
  */
 
 describe('v1', function() {
-  this.timeout(config.timeout * 1000);
-
   before(helper.before);
   beforeEach(helper.beforeEach);
 

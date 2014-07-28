@@ -15,7 +15,6 @@ var shutterstock = require('../lib');
  */
 
 var config = exports.config = {
-  timeout: 5,
   api_username: '',
   api_password: '',
   auth_username: '',
