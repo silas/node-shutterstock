@@ -25,7 +25,7 @@ var api = shutterstock.v1({
   password: 'api-password',
 });
 
-api.getCategories(function(err, categories) {
+api.image.categories(function(err, categories) {
   if (err) throw err;
 
   console.log(categories);
@@ -36,25 +36,25 @@ api.getCategories(function(err, categories) {
 
  * [shutterstock.v1](#v1)
    * [v1.echo](#v1.echo)
-   * [v1.searchImages](#v1.searchImages)
-   * [v1.getImage](#v1.getImage)
-   * [v1.getSimilarImages](#v1.getSimilarImages)
-   * [v1.getCategories](#v1.getCategories)
-   * [v1.auth](#v1.auth)
-   * [v1.register](#v1.register)
-   * [v1.getCustomer](#v1.getCustomer)
-   * [v1.getImageDownloads](#v1.getImageDownloads)
-   * [v1.getSubscriptions](#v1.getSubscriptions)
-   * [v1.getLightboxes](#v1.getLightboxes)
-   * [v1.getLightbox](#v1.getLightbox)
-   * [v1.getLightboxPublicUrl](#v1.getLightboxPublicUrl)
-   * [v1.createLightbox](#v1.createLightbox)
-   * [v1.updateLightbox](#v1.updateLightbox)
-   * [v1.deleteLightbox](#v1.deleteLightbox)
-   * [v1.addToLightbox](#v1.addToLightbox)
-   * [v1.removeFromLightbox](#v1.removeFromLightbox)
-   * [v1.searchVideos](#v1.searchVideos)
-   * [v1.getVideo](#v1.getVideo)
+   * [v1.image.search](#v1.image.search)
+   * [v1.image.get](#v1.image.get)
+   * [v1.image.similar](#v1.image.similar)
+   * [v1.image.categories](#v1.image.categories)
+   * [v1.customer.auth](#v1.customer.auth)
+   * [v1.customer.register](#v1.customer.register)
+   * [v1.customer.get](#v1.customer.get)
+   * [v1.customer.imageDownloads](#v1.customer.imageDownloads)
+   * [v1.customer.subscriptions](#v1.customer.subscriptions)
+   * [v1.lightbox.list](#v1.lightbox.list)
+   * [v1.lightbox.get](#v1.lightbox.get)
+   * [v1.lightbox.publicUrl](#v1.lightbox.publicUrl)
+   * [v1.lightbox.create](#v1.lightbox.create)
+   * [v1.lightbox.update](#v1.lightbox.update)
+   * [v1.lightbox.destroy](#v1.lightbox.destroy)
+   * [v1.lightbox.add](#v1.lightbox.add)
+   * [v1.lightbox.remove](#v1.lightbox.remove)
+   * [v1.video.search](#v1.video.search)
+   * [v1.video.get](#v1.video.get)
 
 <a name="v1"/>
 ### Class: shutterstock.v1(options)
@@ -84,8 +84,8 @@ Echos request options.
 
 http://api.shutterstock.com/#testecho
 
-<a name="v1.searchImages"/>
-#### v1.searchImages(options, callback)
+<a name="v1.image.search"/>
+#### v1.image.search(options, callback)
 
 Search images.
 
@@ -95,8 +95,8 @@ Search images.
 
 http://api.shutterstock.com/#imagessearch
 
-<a name="v1.getImage"/>
-#### v1.getImage(options, callback)
+<a name="v1.image.get"/>
+#### v1.image.get(options, callback)
 
 Get details for a specified image.
 
@@ -106,121 +106,121 @@ Get details for a specified image.
 
 http://api.shutterstock.com/#imagesimage_id
 
-<a name="v1.getSimilarImages"/>
-#### v1.getSimilarImages(options, callback)
+<a name="v1.image.similar"/>
+#### v1.image.similar(options, callback)
 
 Get images similar to a specified image.
 
 http://api.shutterstock.com/#imagesimage_idsimilar
 
-<a name="v1.getCategories"/>
-#### v1.getCategories(callback)
+<a name="v1.image.categories"/>
+#### v1.image.categories(callback)
 
 Get all image categories.
 
 http://api.shutterstock.com/#categories
 
-<a name="v1.auth"/>
-#### v1.auth(options, callback)
+<a name="v1.customer.auth"/>
+#### v1.customer.auth(options, callback)
 
 Authenticate as a customer.
 
 http://api.shutterstock.com/#authcustomer
 
-<a name="v1.getCustomer"/>
-#### v1.getCustomer([options], callback)
+<a name="v1.customer.get"/>
+#### v1.customer.get([options], callback)
 
 Get customer information.
 
 http://api.shutterstock.com/#customersusername
 
-<a name="v1.register"/>
-#### v1.register(options, callback)
+<a name="v1.customer.register"/>
+#### v1.customer.register(options, callback)
 
 Create new customer account.
 
 http://api.shutterstock.com/#customersusername
 
-<a name="v1.getImageDownloads"/>
-#### v1.getImageDownloads([options], callback)
+<a name="v1.customer.imageDownloads"/>
+#### v1.customer.imageDownloads([options], callback)
 
 Get customer image downloads and the subscriptions under which they
 were downloaded.
 
 http://api.shutterstock.com/#customersusernameimagesdownloads
 
-<a name="v1.getSubscriptions"/>
-#### v1.getSubscriptions([options], callback)
+<a name="v1.customer.subscriptions"/>
+#### v1.customer.subscriptions([options], callback)
 
 Get customer subscriptions.
 
 http://api.shutterstock.com/#customersusernamesubscriptions
 
-<a name="v1.getLightboxes"/>
-#### v1.getLightboxes([options], callback)
+<a name="v1.lightbox.list"/>
+#### v1.lightbox.list([options], callback)
 
 Get customer lightboxes.
 
 http://api.shutterstock.com/#customersusernamelightboxes
 
-<a name="v1.getLightbox"/>
-#### v1.getLightbox(options, callback)
+<a name="v1.lightbox.get"/>
+#### v1.lightbox.get(options, callback)
 
 Get contents of lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_id
 
-<a name="v1.getLightboxPublicUrl"/>
-#### v1.getLightboxPublicUrl(options, callback)
+<a name="v1.lightbox.publicUrl"/>
+#### v1.lightbox.publicUrl(options, callback)
 
 Return public URL for lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_idpublic_url
 
-<a name="v1.createLightbox"/>
-#### v1.createLightbox(options, callback)
+<a name="v1.lightbox.create"/>
+#### v1.lightbox.create(options, callback)
 
 Create new lightbox.
 
 http://api.shutterstock.com/#customersusernamelightboxes
 
-<a name="v1.updateLightbox"/>
-#### v1.updateLightbox(options, callback)
+<a name="v1.lightbox.update"/>
+#### v1.lightbox.update(options, callback)
 
 Update lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_id
 
-<a name="v1.deleteLightbox"/>
-#### v1.deleteLightbox(options, callback)
+<a name="v1.lightbox.destroy"/>
+#### v1.lightbox.destroy(options, callback)
 
 Delete lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_id
 
-<a name="v1.addToLightbox"/>
-#### v1.addToLightbox(options, callback)
+<a name="v1.lightbox.add"/>
+#### v1.lightbox.add(options, callback)
 
 Add image to lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id
 
-<a name="v1.removeFromLightbox"/>
-#### v1.removeFromLightbox(options, callback)
+<a name="v1.lightbox.remove"/>
+#### v1.lightbox.remove(options, callback)
 
 Remove image from lightbox.
 
 http://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id
 
-<a name="v1.searchVideos"/>
-#### v1.searchVideos(options, callback)
+<a name="v1.video.search"/>
+#### v1.video.search(options, callback)
 
 Search videos.
 
 http://api.shutterstock.com/#videossearch
 
-<a name="v1.getVideo"/>
-#### v1.getVideo(options, callback)
+<a name="v1.video.get"/>
+#### v1.video.get(options, callback)
 
 Get details for a specified video.
 

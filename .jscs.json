@@ -23,40 +23,8 @@
   "disallowQuotedKeysInObjects": "allButReserved",
   "disallowSpaceAfterObjectKeys": true,
   "requireCommaBeforeLineBreak": true,
-  "requireOperatorBeforeLineBreak": [
-    "?",
-    "+",
-    "-",
-    "/",
-    "*",
-    "=",
-    "==",
-    "===",
-    "!=",
-    "!==",
-    ">",
-    ">=",
-    "<",
-    "<="
-  ],
-  "disallowLeftStickedOperators": [
-    "?",
-    "+",
-    "-",
-    "/",
-    "*",
-    "=",
-    "==",
-    "===",
-    "!=",
-    "!==",
-    ">",
-    ">=",
-    "<",
-    "<="
-  ],
-  "requireRightStickedOperators": ["!"],
-  "disallowRightStickedOperators": [
+  "requireOperatorBeforeLineBreak": true,
+  "requireSpaceAfterBinaryOperators": [
     "?",
     "+",
     "/",
@@ -72,7 +40,7 @@
     "<",
     "<="
   ],
-  "requireLeftStickedOperators": [","],
+  "requireSpacesInConditionalExpression": true,
   "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
   "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
   "requireSpaceBeforeBinaryOperators": [
@@ -107,5 +75,5 @@
   "requireCapitalizedConstructors": true,
   "safeContextKeyword": "self",
   "requireDotNotation": true,
-  "excludeFiles": ["node_modules/**"]
+  "excludeFiles": ["node_modules/**", "test/tmp/**"]
 }

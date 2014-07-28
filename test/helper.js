@@ -6,9 +6,9 @@
 
 var async = require('async');
 var debug = require('debug')('v1');
-var uuid = require('uuid');
+var uuid = require('node-uuid');
 
-var v1 = require('../lib/v1');
+var shutterstock = require('../lib');
 
 /**
  * Config
@@ -46,56 +46,50 @@ debug('config', config);
 exports.before = function(done) {
   var self = this;
 
-  self.api = v1({
+  self.api = shutterstock.v1({
     username: config.api_username,
     password: config.api_password,
   });
+  self.api.on('log', debug);
 
   self.config = config;
 
   var jobs = {};
 
-  // authenticate as user (noop for oauth)
-  if (self.api.options.access_token) {
-    jobs.auth = function(cb) {
-      cb();
+  jobs.auth = function(next) {
+    var options = {
+      username: config.auth_username,
+      password: config.auth_password,
     };
-  } else {
-    jobs.auth = function(cb) {
-      var options = {
-        username: config.auth_username,
-        password: config.auth_password,
-      };
 
-      self.api.auth(options, function(err, data) {
-        if (err) return cb(err);
+    self.api.customer.auth(options, function(err, data) {
+      if (err) return next(err);
 
-        config.auth_token = data.auth_token;
+      config.auth_token = data.auth_token;
 
-        self.api.options.auth_username = config.auth_username;
-        self.api.options.auth_token = config.auth_token;
+      self.api.defaults.username = config.auth_username;
+      self.api.defaults.auth_token = config.auth_token;
 
-        cb();
-      });
-    };
-  }
+      next();
+    });
+  };
 
   // remove all lightboxes for user
-  jobs.removeLightboxes = ['auth', function(cb) {
-    self.api.getLightboxes(function(err, data) {
-      if (err) return cb(err);
+  jobs.lightboxes = ['auth', function(next) {
+    self.api.lightbox.list(function(err, data) {
+      if (err) return next(err);
 
-      data = data.filter(function(lb) {
-        return lb.lightbox_name.indexOf('test_') === 0;
+      data = data.filter(function(data) {
+        return data.lightbox_name.indexOf('test_') === 0;
       });
 
-      data = data.map(function(lb) {
-        return function(cb) {
-          self.api.deleteLightbox({ lightbox_id: lb.lightbox_id }, cb);
+      data = data.map(function(lightbox) {
+        return function(next) {
+          self.api.lightbox.destroy({ lightbox_id: lightbox.lightbox_id }, next);
         };
       });
 
-      async.parallel(data, cb);
+      async.parallel(data, next);
     });
   }];
 
@@ -103,10 +97,6 @@ exports.before = function(done) {
 };
 
 exports.beforeEach = function() {
-  if (this.api.options.access_token) return;
-
-  this.api.options.auth_username = config.auth_username;
-  this.api.options.auth_token = config.auth_token;
 };
 
 /**
@@ -123,7 +113,7 @@ exports.beforeLightbox = function(done) {
     lightbox_name: lightboxName,
   };
 
-  self.api.createLightbox(params, function(err, data) {
+  self.api.lightbox.create(params, function(err, data) {
     if (err) return done(err);
 
     self.lightboxName = lightboxName;
@@ -140,7 +130,7 @@ exports.afterLightbox = function(done) {
     lightbox_id: this.lightboxId,
   };
 
-  self.api.deleteLightbox(params, function(err) {
+  self.api.lightbox.destroy(params, function(err) {
     if (err) return done(err);
 
     done();

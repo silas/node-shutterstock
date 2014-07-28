@@ -7,7 +7,7 @@
 var async = require('async');
 var debug = require('debug')('v1');
 var should = require('should');
-var uuid = require('uuid');
+var uuid = require('node-uuid');
 
 var helper = require('./helper');
 var config = helper.config;
@@ -22,9 +22,9 @@ describe('v1', function() {
   before(helper.before);
   beforeEach(helper.beforeEach);
 
-  describe('#getResources', function() {
+  describe('resources', function() {
     it('should return a list of resources', function(done) {
-      this.api.getResources(function(err, data) {
+      this.api.resources(function(err, data) {
         should.not.exist(err);
 
         data.should.be.an.instanceOf(Array);
@@ -43,7 +43,7 @@ describe('v1', function() {
     });
   });
 
-  describe('#echo', function() {
+  describe('echo', function() {
     it('should return requested parameters', function(done) {
       var params = { hello: 'world' };
 
@@ -57,9 +57,9 @@ describe('v1', function() {
     });
   });
 
-  describe('#searchImages', function() {
+  describe('image.search', function() {
     it('should return image search results', function(done) {
-      this.api.searchImages('donkey', function(err, data) {
+      this.api.image.search('donkey', function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('count');
@@ -91,11 +91,11 @@ describe('v1', function() {
     });
   });
 
-  describe('#getImage', function() {
+  describe('image.get', function() {
     it('should return image details', function(done) {
       var imageId = 108559295;
 
-      this.api.getImage(imageId, function(err, data) {
+      this.api.image.get(imageId, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('illustration');
@@ -129,11 +129,11 @@ describe('v1', function() {
     it('should return image not found', function(done) {
       var imageId = 1;
 
-      this.api.getImage(imageId, function(err, data) {
+      this.api.image.get(imageId, function(err, data, res) {
         should.exist(err);
 
-        err.message.should.eql('Not Found');
-        err.res.statusCode.should.eql(404);
+        err.message.should.eql('not found');
+        res.statusCode.should.eql(404);
 
         should.not.exist(data);
 
@@ -142,11 +142,11 @@ describe('v1', function() {
     });
   });
 
-  describe('#getSimilarImages', function() {
+  describe('image.similar', function() {
     it('should return similar images', function(done) {
       var imageId = 108559295;
 
-      this.api.getSimilarImages(imageId, function(err, data) {
+      this.api.image.similar(imageId, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('count');
@@ -179,9 +179,9 @@ describe('v1', function() {
     });
   });
 
-  describe('#getCategories', function() {
+  describe('image.categories', function() {
     it('should return a list of categories', function(done) {
-      this.api.getCategories(function(err, data) {
+      this.api.image.categories(function(err, data) {
         should.not.exist(err);
 
         data.should.be.an.instanceOf(Array);
@@ -194,16 +194,14 @@ describe('v1', function() {
     });
   });
 
-  describe('#auth', function() {
+  describe('customer.auth', function() {
     it('should authenticate valid credentials', function(done) {
-      if (this.api.options.access_token) return done();
-
       var options = {
         username: config.auth_username,
         password: config.auth_password,
       };
 
-      this.api.auth(options, function(err, data) {
+      this.api.customer.auth(options, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('auth_token');
@@ -215,18 +213,16 @@ describe('v1', function() {
     });
 
     it('should error on invalid credentials', function(done) {
-      if (this.api.options.access_token) return done();
-
       var options = {
         username: config.auth_username,
         password: 'nope.' + config.auth_password,
       };
 
-      this.api.auth(options, function(err, data) {
+      this.api.customer.auth(options, function(err, data, res) {
         should.exist(err);
 
         err.message.should.eql('Invalid username and/or password');
-        err.res.statusCode.should.eql(403);
+        res.statusCode.should.eql(403);
 
         should.not.exist(data);
 
@@ -235,11 +231,11 @@ describe('v1', function() {
     });
   });
 
-  describe('#getCustomer', function() {
+  describe('customer.get', function() {
     it('should return customer info', function(done) {
       var params = { username: config.auth_username };
 
-      this.api.getCustomer(params, function(err, data) {
+      this.api.customer.get(params, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('account_id');
@@ -250,7 +246,7 @@ describe('v1', function() {
     });
   });
 
-  describe.skip('#register', function() {
+  describe.skip('customer.register', function() {
     it('should register a customer', function(done) {
       var id = uuid.v4().replace(/-/g, '').slice(16);
 
@@ -262,7 +258,7 @@ describe('v1', function() {
 
       debug('register', params);
 
-      this.api.register(params, function(err, data) {
+      this.api.customer.register(params, function(err, data) {
         should.not.exist(err);
 
         should(data).be.type('object');
@@ -273,11 +269,11 @@ describe('v1', function() {
     });
   });
 
-  describe('#getImageDownloads', function() {
+  describe('customer.imageDownloads', function() {
     it('should return a list of customer downloads', function(done) {
       var params = { username: config.auth_username };
 
-      this.api.getImageDownloads(params, function(err, data) {
+      this.api.customer.imageDownloads(params, function(err, data) {
         should.not.exist(err);
 
         data.should.be.type('object');
@@ -287,11 +283,11 @@ describe('v1', function() {
     });
   });
 
-  describe('#getSubscriptions', function() {
+  describe('customer.subscriptions', function() {
     it('should return a list of subscriptions', function(done) {
       var params = { username: config.auth_username };
 
-      this.api.getSubscriptions(params, function(err, data) {
+      this.api.customer.subscriptions(params, function(err, data) {
         should.not.exist(err);
 
         data.should.be.type('object');
@@ -301,29 +297,12 @@ describe('v1', function() {
     });
   });
 
-  describe('#getLightboxes', function() {
+  describe('lightbox.list', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
     it('should return a list of lightboxes', function(done) {
-      var params = { username: config.auth_username };
-
-      this.api.getLightboxes(params, function(err, data) {
-        should.not.exist(err);
-
-        data.should.be.an.instanceOf(Array);
-
-        done();
-      });
-    });
-
-    it('should return a list of lightboxes with extended data', function(done) {
-      var params = {
-        extended: true,
-        username: config.auth_username,
-      };
-
-      this.api.getLightboxes(params, function(err, data) {
+      this.api.lightbox.list(function(err, data) {
         should.not.exist(err);
 
         data.should.be.an.instanceOf(Array);
@@ -333,7 +312,7 @@ describe('v1', function() {
     });
   });
 
-  describe('#getLightbox', function() {
+  describe('lightbox.get', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
@@ -345,7 +324,7 @@ describe('v1', function() {
         lightbox_id: self.lightboxId,
       };
 
-      self.api.getLightbox(params, function(err, data) {
+      self.api.lightbox.get(params, function(err, data) {
         should.not.exist(err);
 
         data.should.have.properties(
@@ -366,14 +345,14 @@ describe('v1', function() {
     });
   });
 
-  describe('#getLightboxPublicUrl', function() {
+  describe('lightbox.publicUrl', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
     it('should return lightbox public url', function(done) {
       var params = { lightbox_id: this.lightboxId };
 
-      this.api.getLightboxPublicUrl(params, function(err, data) {
+      this.api.lightbox.publicUrl(params, function(err, data) {
         should.not.exist(err);
 
         data.should.have.properties(
@@ -386,7 +365,7 @@ describe('v1', function() {
     });
   });
 
-  describe('#createLightbox', function() {
+  describe('lightbox.create', function() {
     after(helper.afterLightbox);
 
     it('should create a lightbox', function(done) {
@@ -397,7 +376,7 @@ describe('v1', function() {
         lightbox_name: 'test_' + uuid.v4().slice(0, 8),
       };
 
-      self.api.createLightbox(params, function(err, data) {
+      self.api.lightbox.create(params, function(err, data) {
         should.not.exist(err);
 
         should(data).be.type('object');
@@ -410,7 +389,7 @@ describe('v1', function() {
     });
   });
 
-  describe('#updateLightbox', function() {
+  describe('lightbox.update', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
@@ -424,12 +403,12 @@ describe('v1', function() {
         lightbox_name: name,
       };
 
-      self.api.updateLightbox(params, function(err) {
+      self.api.lightbox.update(params, function(err) {
         should.not.exist(err);
 
         delete params.lightbox_name;
 
-        self.api.getLightbox(params, function(err, data) {
+        self.api.lightbox.get(params, function(err, data) {
           should.not.exist(err);
 
           data.should.have.property('lightbox_name');
@@ -441,22 +420,22 @@ describe('v1', function() {
     });
   });
 
-  describe('#deleteLightbox', function() {
+  describe('lightbox.destroy', function() {
     before(helper.beforeLightbox);
 
     it('should delete the lightbox', function(done) {
       var self = this;
 
-      self.api.deleteLightbox({ lightbox_id: self.lightboxId }, function(err) {
+      self.api.lightbox.destroy(self.lightboxId, function(err) {
         should.not.exist(err);
 
-        self.api.getLightboxes(function(err, data) {
+        self.api.lightbox.list(function(err, data) {
           should.not.exist(err);
 
           data.forEach(function(lightbox) {
             should(lightbox).be.type('object');
             lightbox.should.have.property('lightbox_id');
-            lightbox.lightbox_id.not.eql(self.lightboxId);
+            lightbox.lightbox_id.should.not.eql(self.lightboxId);
           });
 
           done();
@@ -465,7 +444,7 @@ describe('v1', function() {
     });
   });
 
-  describe.skip('#addToLightbox', function() {
+  describe.skip('lightbox.add', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
@@ -477,10 +456,10 @@ describe('v1', function() {
         image_id: 108559295,
       };
 
-      self.api.addToLightbox(params, function(err) {
+      self.api.lightbox.add(params, function(err) {
         should.not.exist(err);
 
-        self.api.getLightbox({ lightbox_id: self.lightboxId }, function(err, data) {
+        self.api.lightbox.get(self.lightboxId, function(err, data) {
           should.not.exist(err);
 
           should(data).be.type('object');
@@ -491,7 +470,7 @@ describe('v1', function() {
     });
   });
 
-  describe.skip('#removeFromLightbox', function() {
+  describe.skip('lightbox.remove', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
@@ -508,7 +487,7 @@ describe('v1', function() {
       var jobs = [];
 
       jobs.push(function(cb) {
-        self.api.addToLightbox(params, function(err) {
+        self.api.lightbox.add(params, function(err) {
           if (err) return cb(err);
 
           cb();
@@ -516,7 +495,7 @@ describe('v1', function() {
       });
 
       jobs.push(function(cb) {
-        self.api.getLightbox({ lightbox_id: self.lightboxId }, function(err, data) {
+        self.api.lightbox.get({ lightbox_id: self.lightboxId }, function(err, data) {
           if (err) return cb(err);
 
           should(data).be.type('object');
@@ -530,7 +509,7 @@ describe('v1', function() {
       });
 
       jobs.push(function(cb) {
-        self.api.removeFromLightbox(params, function(err) {
+        self.api.lightbox.remove(params, function(err) {
           if (err) return cb(err);
 
           cb();
@@ -538,7 +517,7 @@ describe('v1', function() {
       });
 
       jobs.push(function(cb) {
-        self.api.getLightbox({ lightbox_id: self.lightboxId }, function(err, data) {
+        self.api.lightbox.get({ lightbox_id: self.lightboxId }, function(err, data) {
           if (err) return cb(err);
 
           should(data).be.type('object');
@@ -559,23 +538,9 @@ describe('v1', function() {
     });
   });
 
-  describe.skip('#getImageKeywordRecommendations', function() {
-    it('should return recommended keywords', function(done) {
-      var imageIds = [143051491, 108559295, 130763906];
-
-      this.api.getImageKeywordRecommendations(imageIds, function(err, data) {
-        should.not.exist(err);
-
-        should(data).be.type('object');
-
-        done();
-      });
-    });
-  });
-
-  describe('#searchVideos', function() {
+  describe('video.search', function() {
     it('should return video search results', function(done) {
-      this.api.searchVideos('donkey', function(err, data) {
+      this.api.video.search('donkey', function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('count');
@@ -600,11 +565,11 @@ describe('v1', function() {
     });
   });
 
-  describe('#getVideo', function() {
+  describe('video.get', function() {
     it('should return video details', function(done) {
       var video_id = 5869544;
 
-      this.api.getVideo(video_id, function(err, data) {
+      this.api.video.get(video_id, function(err, data) {
         should.not.exist(err);
 
         should(data).be.type('object');
@@ -623,11 +588,11 @@ describe('v1', function() {
     it('should return video not found', function(done) {
       var video_id = 1;
 
-      this.api.getVideo(video_id, function(err, data) {
+      this.api.video.get(video_id, function(err, data, res) {
         should.exist(err);
 
         err.message.should.eql('Id not found');
-        err.res.statusCode.should.eql(404);
+        res.statusCode.should.eql(404);
 
         should.not.exist(data);
 

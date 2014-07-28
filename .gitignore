@@ -1,7 +1,9 @@
 *.log
+*.pid
 *swp
 .env
 .rock.yml
 config
-example.js
+coverage
 node_modules
+tmp

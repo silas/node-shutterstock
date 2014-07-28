@@ -1,19 +1,24 @@
 {
   "name": "shutterstock",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Shutterstock API client",
   "main": "lib/index.js",
+  "dependencies": {
+    "rapi": "^0.12.0"
+  },
   "devDependencies": {
-    "async": "*",
-    "debug": "*",
-    "jscs": "*",
-    "jshint": "*",
-    "mocha": "*",
-    "should": "*",
-    "uuid": "*"
+    "async": "^0.9.0",
+    "debug": "^1.0.4",
+    "istanbul": "^0.3.0",
+    "jscs": "^1.5.8",
+    "jshint": "^2.5.2",
+    "mocha": "^1.21.2",
+    "node-uuid": "^1.4.1",
+    "should": "^4.0.4"
   },
   "scripts": {
-    "test": "./node_modules/.bin/jshint lib test && ./node_modules/.bin/jscs lib test && ./node_modules/.bin/mocha --recursive --require should -R spec"
+    "cover": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --check-leaks --timeout 15000 && open coverage/lcov-report/index.html",
+    "test": "./node_modules/.bin/jshint lib test && ./node_modules/.bin/jscs lib test && ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive --check-leaks --timeout 15000"
   },
   "keywords": [
     "api",
