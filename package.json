@@ -24,7 +24,7 @@
     "api",
     "shutterstock"
   ],
-  "repository": "https://github.com/silas/shutterstock.js.git",
+  "repository": "https://github.com/silas/node-shutterstock.git",
   "author": "Silas Sewell <silas@sewell.org>",
   "license": "MIT"
 }
