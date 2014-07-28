@@ -228,6 +228,8 @@ https://api.shutterstock.com/#videosvideo_id
 
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
+ * [Nock](https://www.npmjs.org/package/nock) tests
+ * Document all options
 
 ## License
 
