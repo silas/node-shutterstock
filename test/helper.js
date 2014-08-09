@@ -6,6 +6,7 @@
 
 var async = require('async');
 var debug = require('debug')('v1');
+var nock = require('nock');
 var uuid = require('node-uuid');
 
 var shutterstock = require('../lib');
@@ -38,6 +39,9 @@ Object.keys(config).forEach(function(key) {
 
 debug('config', config);
 
+var NOCK_REC = process.env.NOCK_REC === 'true';
+var NOCK_OFF = process.env.NOCK_OFF === 'true' || NOCK_REC;
+
 /**
  * Before
  */
@@ -50,6 +54,15 @@ exports.before = function(done) {
     password: config.api_password,
   });
   self.api.on('log', debug);
+
+  if (!NOCK_OFF) {
+    nock.disableNetConnect();
+
+    self.api.defaults.username = config.auth_username;
+    self.api.defaults.auth_token = config.auth_token = '123';
+
+    return done();
+  }
 
   self.config = config;
 
@@ -96,6 +109,11 @@ exports.before = function(done) {
 };
 
 exports.beforeEach = function() {
+  if (NOCK_REC) nock.recorder.rec();
+};
+
+exports.afterEach = function() {
+  if (NOCK_REC) nock.restore();
 };
 
 /**
@@ -107,8 +125,15 @@ exports.beforeLightbox = function(done) {
 
   var lightboxName = 'test_' + uuid.v4().slice(0, 8);
 
+  if (!NOCK_OFF) {
+    self.lightboxName = lightboxName;
+    self.lightboxId = '1020';
+
+    return done();
+  }
+
   var params = {
-    username: this.config.auth_username,
+    username: self.config.auth_username,
     lightbox_name: lightboxName,
   };
 
@@ -124,6 +149,8 @@ exports.beforeLightbox = function(done) {
 
 exports.afterLightbox = function(done) {
   var self = this;
+
+  if (!NOCK_OFF) return done();
 
   var params = {
     lightbox_id: this.lightboxId,

@@ -1,10 +1,10 @@
 {
   "name": "shutterstock",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Shutterstock API client",
   "main": "./lib",
   "dependencies": {
-    "rapi": "^0.12.0"
+    "papi": "^0.13.0"
   },
   "devDependencies": {
     "async": "^0.9.0",
@@ -13,6 +13,7 @@
     "jscs": "^1.5.8",
     "jshint": "^2.5.2",
     "mocha": "^1.21.2",
+    "nock": "^0.42.2",
     "node-uuid": "^1.4.1",
     "should": "^4.0.4"
   },
