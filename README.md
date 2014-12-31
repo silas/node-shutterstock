@@ -74,11 +74,10 @@ Options
 
 Get details for a specified image.
 
-`options` can be an image `id` or an object.
+[Options](https://developers.shutterstock.com/api/v2/image/get#get-parameters)
 
-`callback(err, data)` is the result of the request.
-
-https://developers.shutterstock.com/api/v2/image/get
+ * id (String): image ID
+ * view (String, optional): render view
 
 <a name="v1"/>
 ### Class: shutterstock.v1(options)
