@@ -5,16 +5,16 @@
   "main": "./lib",
   "dependencies": {
     "lodash": "^2.4.1",
-    "papi": "^0.13.0"
+    "papi": "^0.15.0"
   },
   "devDependencies": {
     "async": "^0.9.0",
-    "debug": "^1.0.4",
+    "debug": "^2.1.1",
     "istanbul": "^0.3.0",
     "jscs": "^1.5.8",
     "jshint": "^2.5.2",
-    "mocha": "^1.21.2",
-    "nock": "^0.42.2",
+    "mocha": "^2.1.0",
+    "nock": "^0.52.4",
     "node-uuid": "^1.4.1",
     "should": "^4.0.4"
   },
