@@ -20,15 +20,15 @@ Example
 ``` javascript
 var shutterstock = require('shutterstock');
 
-var api = shutterstock.v1({
-  username: 'api-username',
-  password: 'api-password',
+var api = shutterstock.v2({
+  clientId: 'a134a44b2220a831d511',
+  clientSecret: '0498a3442cf2ad2d11efbda32a32fa26a20d229c,
 });
 
-api.image.categories(function(err, categories) {
+api.image.get('108559295', function(err, image) {
   if (err) throw err;
 
-  console.log(categories);
+  console.log(image);
 });
 ```
 
