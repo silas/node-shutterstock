@@ -5,7 +5,7 @@
  */
 
 var async = require('async');
-var debug = require('debug')('v1');
+var debug = require('debug')('api');
 var nock = require('nock');
 var uuid = require('node-uuid');
 
@@ -20,6 +20,8 @@ var config = exports.config = {
   api_password: '',
   auth_username: '',
   auth_password: '',
+  client_id: '',
+  client_secret: '',
 };
 
 Object.keys(config).forEach(function(key) {
@@ -46,7 +48,7 @@ var NOCK_OFF = process.env.NOCK_OFF === 'true' || NOCK_REC;
  * Before
  */
 
-exports.before = function(done) {
+exports.beforeV1 = function(done) {
   var self = this;
 
   self.api = shutterstock.v1({
@@ -106,6 +108,26 @@ exports.before = function(done) {
   }];
 
   async.auto(jobs, done);
+};
+
+exports.beforeV2 = function(done) {
+  var self = this;
+
+  self.api = shutterstock.v2({
+    clientId: config.client_id,
+    clientSecret: config.client_secret,
+  });
+  self.api.on('log', debug);
+
+  if (!NOCK_OFF) {
+    nock.disableNetConnect();
+
+    return done();
+  }
+
+  self.config = config;
+
+  done();
 };
 
 exports.beforeEach = function() {

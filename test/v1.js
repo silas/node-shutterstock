@@ -5,7 +5,7 @@
  */
 
 var async = require('async');
-var debug = require('debug')('v1');
+var debug = require('debug')('api');
 var should = require('should');
 var uuid = require('node-uuid');
 
@@ -17,7 +17,7 @@ var config = helper.config;
  */
 
 describe('v1', function() {
-  before(helper.before);
+  before(helper.beforeV1);
   beforeEach(helper.beforeEach);
 
   describe('resources', function() {
