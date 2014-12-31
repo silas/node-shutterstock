@@ -4,6 +4,7 @@
   "description": "Shutterstock API client",
   "main": "./lib",
   "dependencies": {
+    "lodash": "^2.4.1",
     "papi": "^0.13.0"
   },
   "devDependencies": {

@@ -63,9 +63,9 @@ describe('v1', function() {
         data.should.have.property('count');
         data.count.should.be.above(5);
         data.should.have.property('page');
-        data.page.should.eql(0);
+        data.page.should.equal(0);
         data.should.have.property('sort_method');
-        data.sort_method.should.eql('popular');
+        data.sort_method.should.equal('popular');
         data.should.have.property('results');
         data.results.should.be.an.instanceOf(Array);
         data.results.length.should.be.above(5);
@@ -97,28 +97,28 @@ describe('v1', function() {
         should.not.exist(err);
 
         data.should.have.property('illustration');
-        data.illustration.should.eql(0);
+        data.illustration.should.equal(0);
         data.should.have.property('r_rated');
-        data.r_rated.should.eql(0);
+        data.r_rated.should.equal(0);
         data.should.have.property('photo_id');
-        data.photo_id.should.eql(imageId);
+        data.photo_id.should.equal(imageId);
         data.should.have.property('enhanced_license_available');
-        data.enhanced_license_available.should.eql(1);
+        data.enhanced_license_available.should.equal(1);
         data.should.have.property('resource_url');
         data.should.have.property('categories');
         data.should.have.property('model_release');
         data.should.have.property('vector_type');
         data.should.have.property('description');
-        data.description.should.eql('Donkey isolated on white');
+        data.description.should.equal('Donkey isolated on white');
         data.should.have.property('sizes');
         data.should.have.property('keywords');
         data.should.have.property('is_vector');
-        data.is_vector.should.eql(0);
+        data.is_vector.should.equal(0);
         data.should.have.property('web_url');
         data.should.have.property('submitter_id');
-        data.submitter_id.should.eql(371512);
+        data.submitter_id.should.equal(371512);
         data.should.have.property('submitter');
-        data.submitter.should.eql('Coprid');
+        data.submitter.should.equal('Coprid');
 
         done();
       });
@@ -130,8 +130,8 @@ describe('v1', function() {
       this.api.image.get(imageId, function(err, data, res) {
         should.exist(err);
 
-        err.message.should.eql('not found');
-        res.statusCode.should.eql(404);
+        err.message.should.equal('not found');
+        res.statusCode.should.equal(404);
 
         should.not.exist(data);
 
@@ -150,9 +150,9 @@ describe('v1', function() {
         data.should.have.property('count');
         data.count.should.be.above(5);
         data.should.have.property('page');
-        data.page.should.eql(0);
+        data.page.should.equal(0);
         data.should.have.property('sort_method');
-        data.sort_method.should.eql('popular');
+        data.sort_method.should.equal('popular');
         data.should.have.property('results');
         data.results.should.be.an.instanceOf(Array);
         data.results.length.should.be.above(5);
@@ -185,7 +185,7 @@ describe('v1', function() {
         data.should.be.an.instanceOf(Array);
         data.length.should.be.above(0);
 
-        data[0].category_name.should.eql('Transportation');
+        data[0].category_name.should.equal('Transportation');
 
         done();
       });
@@ -203,8 +203,8 @@ describe('v1', function() {
         should.not.exist(err);
 
         data.should.have.property('auth_token');
-        data.language.should.eql('en');
-        data.username.should.eql(options.username);
+        data.language.should.equal('en');
+        data.username.should.equal(options.username);
 
         done();
       });
@@ -219,8 +219,8 @@ describe('v1', function() {
       this.api.customer.auth(options, function(err, data, res) {
         should.exist(err);
 
-        err.message.should.eql('Invalid username and/or password');
-        res.statusCode.should.eql(403);
+        err.message.should.equal('Invalid username and/or password');
+        res.statusCode.should.equal(403);
 
         should.not.exist(data);
 
@@ -333,10 +333,10 @@ describe('v1', function() {
           'image_count',
           'images'
         );
-        data.lightbox_id.should.eql(self.lightboxId);
-        data.lightbox_name.should.eql(self.lightboxName);
-        data.confirmed.should.eql(1);
-        data.image_count.should.eql(0);
+        data.lightbox_id.should.equal(self.lightboxId);
+        data.lightbox_name.should.equal(self.lightboxName);
+        data.confirmed.should.equal(1);
+        data.image_count.should.equal(0);
 
         done();
       });
@@ -410,7 +410,7 @@ describe('v1', function() {
           should.not.exist(err);
 
           data.should.have.property('lightbox_name');
-          data.lightbox_name.should.eql(name);
+          data.lightbox_name.should.equal(name);
 
           done();
         });
@@ -433,7 +433,7 @@ describe('v1', function() {
           data.forEach(function(lightbox) {
             should(lightbox).be.type('object');
             lightbox.should.have.property('lightbox_id');
-            lightbox.lightbox_id.should.not.eql(self.lightboxId);
+            lightbox.lightbox_id.should.not.equal(self.lightboxId);
           });
 
           done();
@@ -545,7 +545,7 @@ describe('v1', function() {
         data.count.should.be.above(5);
 
         data.should.have.property('page');
-        data.page.should.eql(0);
+        data.page.should.equal(0);
 
         data.should.have.property('results');
         data.results.should.be.an.instanceOf(Array);
@@ -573,7 +573,7 @@ describe('v1', function() {
         should(data).be.type('object');
 
         data.should.have.property('video_id');
-        data.video_id.should.eql(video_id);
+        data.video_id.should.equal(video_id);
         data.should.have.property('description');
         data.should.have.property('categories');
         data.should.have.property('keywords');
@@ -589,8 +589,8 @@ describe('v1', function() {
       this.api.video.get(video_id, function(err, data, res) {
         should.exist(err);
 
-        err.message.should.eql('Id not found');
-        res.statusCode.should.eql(404);
+        err.message.should.equal('Id not found');
+        res.statusCode.should.equal(404);
 
         should.not.exist(data);
 
