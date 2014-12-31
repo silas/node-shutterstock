@@ -34,6 +34,8 @@ api.image.categories(function(err, categories) {
 
 ## Documentation
 
+ * [shutterstock.v2](#v2)
+   * [v2.image.get](#v2.image.get)
  * [shutterstock.v1](#v1)
    * [v1.echo](#v1.echo)
    * [v1.image.search](#v1.image.search)
@@ -56,10 +58,32 @@ api.image.categories(function(err, categories) {
    * [v1.video.search](#v1.video.search)
    * [v1.video.get](#v1.video.get)
 
+<a name="v2"/>
+### Class: shutterstock.v2(options)
+
+This is a client for interacting with [API v2][v2].
+
+Options
+
+ * clientId (String): OAuth2 client ID
+ * clientSecret (String): OAuth2 client secret
+ * timeout (Number, default: 30000ms): number of milliseconds before request is aborted
+
+<a name="v2.image.get"/>
+#### v2.image.get(options, callback)
+
+Get details for a specified image.
+
+`options` can be an image `id` or an object.
+
+`callback(err, data)` is the result of the request.
+
+https://developers.shutterstock.com/api/v2/image/get
+
 <a name="v1"/>
 ### Class: shutterstock.v1(options)
 
-This is a client for interacting with [api.shutterstock.com][api].
+This is a client for interacting with [API v1][v1].
 
 Options
 
@@ -226,6 +250,7 @@ https://api.shutterstock.com/#videosvideo_id
 
 ## Todo
 
+ * All of v2
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
  * [Nock](https://www.npmjs.org/package/nock) tests
@@ -235,4 +260,5 @@ https://api.shutterstock.com/#videosvideo_id
 
 This work is licensed under the MIT License (see the LICENSE file).
 
-[api]: https://api.shutterstock.com/
+[v2]: https://developers.shutterstock.com/
+[v1]: https://api.shutterstock.com/
