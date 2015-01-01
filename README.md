@@ -92,15 +92,16 @@ Get details for a specified image.
 <a name="v2.image.search"/>
 #### v2.image.search(options, callback)
 
-Search all images.
+Search images.
 
 [Options](https://developers.shutterstock.com/api/v2/image/search)
 
- * page (Number, default: 1): result page to return
- * per_page (Number, default: 20): number of results to return per page
  * query (String, optional): query string
+ * page (Number, default: 1): page to return
+ * per_page (Number, default: 20): number of results to return per page
  * sort (String, default: popular): sort results
- * view (String, optional): render view
+
+And many more, see options for more details.
 
 <a name="v1"/>
 ### Class: shutterstock.v1(options)
@@ -118,149 +119,215 @@ Options
 
 Echo back specified options, used to check API connection and credentials.
 
-https://api.shutterstock.com/#testecho
+[Options](https://api.shutterstock.com/#testecho)
+
+ * key (String): value
 
 <a name="v1.image.search"/>
 #### v1.image.search(options, callback)
 
 Search images.
 
-`options` can be a string `searchterm` or an object containing search parameters.
+[Options](https://api.shutterstock.com/#imagessearch)
 
-`callback(err, data)` is the result of the request.
+ * searchterm (String): search query
+ * sort_method (String, default: popular): sort results
+ * page_number (Number, default: 0): page to return
+ * results_per_page (Number, default: 150): number of results to return per page
+ * submitter_id (Number, optional): filter results by contributor ID
 
-https://api.shutterstock.com/#imagessearch
+And many more, see options for more details.
 
 <a name="v1.image.get"/>
 #### v1.image.get(options, callback)
 
 Get details for a specified image.
 
-`options` can be an `image_id` or an object.
+[Options](https://api.shutterstock.com/#imagesimage_id)
 
-`callback(err, data)` is the result of the request.
-
-https://api.shutterstock.com/#imagesimage_id
+ * image_id (Number): image ID
 
 <a name="v1.image.similar"/>
 #### v1.image.similar(options, callback)
 
 Get images similar to a specified image.
 
-https://api.shutterstock.com/#imagesimage_idsimilar
+[Options](https://api.shutterstock.com/#imagesimage_idsimilar)
+
+ * image_id (Number): image ID
 
 <a name="v1.image.categories"/>
 #### v1.image.categories(callback)
 
 Get all image categories.
 
-https://api.shutterstock.com/#categories
-
 <a name="v1.customer.auth"/>
 #### v1.customer.auth(options, callback)
 
-Authenticate as a customer.
+Authenticate as a user.
 
-https://api.shutterstock.com/#authcustomer
+[Options](https://api.shutterstock.com/#authcustomer)
+
+ * email (String): user's email, required if username not specified
+ * username (String): user's username, required if email not specified
+ * password (String): user's password
 
 <a name="v1.customer.get"/>
 #### v1.customer.get([options], callback)
 
-Get customer information.
+Get user information.
 
-https://api.shutterstock.com/#customersusername
+[Options](https://api.shutterstock.com/#customersusername)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * username (String): user's username
 
 <a name="v1.customer.register"/>
 #### v1.customer.register(options, callback)
 
 Create new customer account.
 
-https://api.shutterstock.com/#customersusername
+[Options](https://api.shutterstock.com/#customersusername)
+
+ * email (String): new user's email address
+ * username (String): new user's username
+ * password (String): new user's password
 
 <a name="v1.customer.images"/>
 #### v1.customer.images([options], callback)
 
-Get customer image downloads and the subscriptions under which they
+Get user's image downloads and the subscriptions under which they
 were downloaded.
 
-https://api.shutterstock.com/#customersusernameimagesdownloads
+[Options](https://api.shutterstock.com/#customersusernameimagesdownloads)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * username (String): user's username
+ * image_id (Number, optional): get downloads for specific image
+ * license (String, optional): filter results by license
+ * page_number (Number, default: 0): page to return
+ * page_size (Number, default: 40): number of results to return per page
+ * sort_by (String, optional): sort results
+ * sort_order (String, default: desc): sort order
 
 <a name="v1.customer.subscriptions"/>
 #### v1.customer.subscriptions([options], callback)
 
 Get customer subscriptions.
 
-https://api.shutterstock.com/#customersusernamesubscriptions
+[Options](https://api.shutterstock.com/#customersusernamesubscriptions)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * username (String): user's username
 
 <a name="v1.lightbox.list"/>
 #### v1.lightbox.list([options], callback)
 
 Get customer lightboxes.
 
-https://api.shutterstock.com/#customersusernamelightboxes
+[Options](https://api.shutterstock.com/#customersusernamelightboxes)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * username (String): user's username
+ * exclude_empty (Boolean, default: false): filter empty lightboxes
+ * exclude_images (Boolean, default: false): only return lightbox metadata
 
 <a name="v1.lightbox.get"/>
 #### v1.lightbox.get(options, callback)
 
 Get contents of lightbox.
 
-https://api.shutterstock.com/#lightboxeslightbox_id
+[Options](https://api.shutterstock.com/#lightboxeslightbox_id)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * lightbox_id (Number): lightbox ID
+ * verification_code (String, optional): access lightbox without auth_token, get from [lightbox.publicUrl](#v1.lightbox.publicUrl)
 
 <a name="v1.lightbox.publicUrl"/>
 #### v1.lightbox.publicUrl(options, callback)
 
 Return public URL for lightbox.
 
-https://api.shutterstock.com/#lightboxeslightbox_idpublic_url
+[Optional](https://api.shutterstock.com/#lightboxeslightbox_idpublic_url)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * username (String): user's username
+ * lightbox_id (Number): lightbox ID
 
 <a name="v1.lightbox.create"/>
 #### v1.lightbox.create(options, callback)
 
 Create new lightbox.
 
-https://api.shutterstock.com/#customersusernamelightboxes
+[Options](https://api.shutterstock.com/#customersusernamelightboxes)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * lightbox_name (String): new lightbox name
 
 <a name="v1.lightbox.update"/>
 #### v1.lightbox.update(options, callback)
 
 Update lightbox.
 
-https://api.shutterstock.com/#lightboxeslightbox_id
+[Options](https://api.shutterstock.com/#lightboxeslightbox_id)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * lightbox_id (Number): lightbox ID
+ * lightbox_name (String): updated lightbox name
 
 <a name="v1.lightbox.destroy"/>
 #### v1.lightbox.destroy(options, callback)
 
 Delete lightbox.
 
-https://api.shutterstock.com/#lightboxeslightbox_id
+[Options](https://api.shutterstock.com/#lightboxeslightbox_id)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * lightbox_id (Number): lightbox ID
 
 <a name="v1.lightbox.add"/>
 #### v1.lightbox.add(options, callback)
 
 Add image to lightbox.
 
-https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id
+[Options](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * lightbox_id (Number): lightbox ID
+ * image_id (Number): image ID to add to lightbox
 
 <a name="v1.lightbox.remove"/>
 #### v1.lightbox.remove(options, callback)
 
 Remove image from lightbox.
 
-https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id
+[Options](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * lightbox_id (Number): lightbox ID
+ * image_id (Number): image ID to remove from lightbox
 
 <a name="v1.video.search"/>
 #### v1.video.search(options, callback)
 
 Search videos.
 
-https://api.shutterstock.com/#videossearch
+[Options](https://api.shutterstock.com/#videossearch)
+
+ * searchterm (String): search query
+ * sort_method (String, default: popular): sort results
+ * page_number (Number, default: 0): page to return
+ * results_per_page (Number, default: 150): number of results to return per page
+ * submitter_id (Number, optional): filter results by contributor ID
 
 <a name="v1.video.get"/>
 #### v1.video.get(options, callback)
 
 Get details for a specified video.
 
-https://api.shutterstock.com/#videosvideo_id
+[Options](https://api.shutterstock.com/#videosvideo_id)
+
+ * video_id (Number): video ID
 
 ## Todo
 
@@ -268,7 +335,6 @@ https://api.shutterstock.com/#videosvideo_id
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
  * [Nock](https://www.npmjs.org/package/nock) tests
- * Document all options
 
 ## License
 
