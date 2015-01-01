@@ -84,7 +84,7 @@ Options
 
 Get details for a specified image.
 
-[Options](https://developers.shutterstock.com/api/v2/image/get#get-parameters)
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/get)
 
  * id (String): image ID
  * view (String, optional): render view
@@ -94,7 +94,7 @@ Get details for a specified image.
 
 Search images.
 
-[Options](https://developers.shutterstock.com/api/v2/image/search)
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/search)
 
  * query (String, optional): query string
  * page (Number, default: 1): page to return
@@ -119,7 +119,7 @@ Options
 
 Echo back specified options, used to check API connection and credentials.
 
-[Options](https://api.shutterstock.com/#testecho)
+Options - [Official Documentation](https://api.shutterstock.com/#testecho)
 
  * key (String): value
 
@@ -128,7 +128,7 @@ Echo back specified options, used to check API connection and credentials.
 
 Search images.
 
-[Options](https://api.shutterstock.com/#imagessearch)
+Options - [Official Documentation](https://api.shutterstock.com/#imagessearch)
 
  * searchterm (String): search query
  * sort_method (String, default: popular): sort results
@@ -143,7 +143,7 @@ And many more, see options for more details.
 
 Get details for a specified image.
 
-[Options](https://api.shutterstock.com/#imagesimage_id)
+Options - [Official Documentation](https://api.shutterstock.com/#imagesimage_id)
 
  * image_id (Number): image ID
 
@@ -152,7 +152,7 @@ Get details for a specified image.
 
 Get images similar to a specified image.
 
-[Options](https://api.shutterstock.com/#imagesimage_idsimilar)
+Options - [Official Documentation](https://api.shutterstock.com/#imagesimage_idsimilar)
 
  * image_id (Number): image ID
 
@@ -161,12 +161,14 @@ Get images similar to a specified image.
 
 Get all image categories.
 
+[Official Documentation](https://api.shutterstock.com/#categories)
+
 <a name="v1.customer.auth"/>
 #### v1.customer.auth(options, callback)
 
 Authenticate as a user.
 
-[Options](https://api.shutterstock.com/#authcustomer)
+Options - [Official Documentation](https://api.shutterstock.com/#authcustomer)
 
  * email (String): user's email, required if username not specified
  * username (String): user's username, required if email not specified
@@ -177,7 +179,7 @@ Authenticate as a user.
 
 Get user information.
 
-[Options](https://api.shutterstock.com/#customersusername)
+Options - [Official Documentation](https://api.shutterstock.com/#customersusername)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -187,7 +189,7 @@ Get user information.
 
 Create new customer account.
 
-[Options](https://api.shutterstock.com/#customersusername)
+Options - [Official Documentation](https://api.shutterstock.com/#customersusername)
 
  * email (String): new user's email address
  * username (String): new user's username
@@ -199,7 +201,7 @@ Create new customer account.
 Get user's image downloads and the subscriptions under which they
 were downloaded.
 
-[Options](https://api.shutterstock.com/#customersusernameimagesdownloads)
+Options - [Official Documentation](https://api.shutterstock.com/#customersusernameimagesdownloads)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -215,7 +217,7 @@ were downloaded.
 
 Get customer subscriptions.
 
-[Options](https://api.shutterstock.com/#customersusernamesubscriptions)
+Options - [Official Documentation](https://api.shutterstock.com/#customersusernamesubscriptions)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -225,7 +227,7 @@ Get customer subscriptions.
 
 Get customer lightboxes.
 
-[Options](https://api.shutterstock.com/#customersusernamelightboxes)
+Options - [Official Documentation](https://api.shutterstock.com/#customersusernamelightboxes)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -237,7 +239,7 @@ Get customer lightboxes.
 
 Get contents of lightbox.
 
-[Options](https://api.shutterstock.com/#lightboxeslightbox_id)
+Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -248,7 +250,7 @@ Get contents of lightbox.
 
 Return public URL for lightbox.
 
-[Optional](https://api.shutterstock.com/#lightboxeslightbox_idpublic_url)
+Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_idpublic_url)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -259,7 +261,7 @@ Return public URL for lightbox.
 
 Create new lightbox.
 
-[Options](https://api.shutterstock.com/#customersusernamelightboxes)
+Options - [Official Documentation](https://api.shutterstock.com/#customersusernamelightboxes)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_name (String): new lightbox name
@@ -269,7 +271,7 @@ Create new lightbox.
 
 Update lightbox.
 
-[Options](https://api.shutterstock.com/#lightboxeslightbox_id)
+Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -280,7 +282,7 @@ Update lightbox.
 
 Delete lightbox.
 
-[Options](https://api.shutterstock.com/#lightboxeslightbox_id)
+Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -290,7 +292,7 @@ Delete lightbox.
 
 Add image to lightbox.
 
-[Options](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
+Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -301,7 +303,7 @@ Add image to lightbox.
 
 Remove image from lightbox.
 
-[Options](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
+Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -312,7 +314,7 @@ Remove image from lightbox.
 
 Search videos.
 
-[Options](https://api.shutterstock.com/#videossearch)
+Options - [Official Documentation](https://api.shutterstock.com/#videossearch)
 
  * searchterm (String): search query
  * sort_method (String, default: popular): sort results
@@ -325,7 +327,7 @@ Search videos.
 
 Get details for a specified video.
 
-[Options](https://api.shutterstock.com/#videosvideo_id)
+Options - [Official Documentation](https://api.shutterstock.com/#videosvideo_id)
 
  * video_id (Number): video ID
 
