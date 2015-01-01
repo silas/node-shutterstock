@@ -79,7 +79,7 @@ Options
  * clientSecret (String): OAuth2 client secret
  * timeout (Number, default: 30000ms): number of milliseconds before request is aborted
 
-Example
+Usage
 
 ``` javascript
 var shutterstock = require('shutterstock');
@@ -100,7 +100,7 @@ Options - [Official Documentation](https://developers.shutterstock.com/api/v2/im
  * id (String): image ID
  * view (String, optional): render view
 
-Example
+Usage
 
 ``` javascript
 v2.image.get('108559295', function(err, data) {
@@ -124,7 +124,7 @@ Options - [Official Documentation](https://developers.shutterstock.com/api/v2/im
 
 And many more, see options for more details.
 
-Example
+Usage
 
 ``` javascript
 v2.image.search('donkey', function(err, data) {
@@ -145,7 +145,7 @@ Options
  * password (String): API password (key)
  * timeout (Number, default: 30000ms): number of milliseconds before request is aborted
 
-Example
+Usage
 
 ``` javascript
 var shutterstock = require('shutterstock');
@@ -165,7 +165,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#testecho)
 
  * key (String): value
 
-Example
+Usage
 
 ``` javascript
 v1.image.echo({ hello: 'world' }, function(err, data) {
@@ -190,7 +190,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#imagessearch)
 
 And many more, see options for more details.
 
-Example
+Usage
 
 ``` javascript
 v1.image.search('donkey', function(err, data) {
@@ -209,10 +209,10 @@ Options - [Official Documentation](https://api.shutterstock.com/#imagesimage_id)
 
  * image_id (Number): image ID
 
-Example
+Usage
 
 ``` javascript
-v1.image.search(108559295, function(err, data) {
+v1.image.get(108559295, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -228,7 +228,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#imagesimage_ids
 
  * image_id (Number): image ID
 
-Example
+Usage
 
 ``` javascript
 v1.image.similar(108559295, function(err, data) {
@@ -245,7 +245,7 @@ Get all image categories.
 
 [Official Documentation](https://api.shutterstock.com/#categories)
 
-Example
+Usage
 
 ``` javascript
 v1.image.categories(function(err, data) {
@@ -266,7 +266,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#authcustomer)
  * username (String): user's username, required if email not specified
  * password (String): user's password
 
-Example
+Usage
 
 ``` javascript
 v1.customer.auth({ username: 'john', password: 'secret' }, function(err, data) {
@@ -286,7 +286,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
 
-Example
+Usage
 
 ``` javascript
 v1.customer.get({ auth_token: token, username: 'john' }, function(err, data) {
@@ -307,7 +307,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
  * username (String): new user's username
  * password (String): new user's password
 
-Example
+Usage
 
 ``` javascript
 v1.customer.register({ email: 'john@example.org', username: 'john', password: 'secret' }, function(err, data) {
@@ -334,7 +334,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
  * sort_by (String, optional): sort results
  * sort_order (String, default: desc): sort order
 
-Example
+Usage
 
 ``` javascript
 v1.customer.images({ auth_token: token, username: 'john' }, function(err, data) {
@@ -354,7 +354,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
 
-Example
+Usage
 
 ``` javascript
 v1.customer.subscriptions({ auth_token: token, username: 'john' }, function(err, data) {
@@ -376,7 +376,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
  * exclude_empty (Boolean, default: false): filter empty lightboxes
  * exclude_images (Boolean, default: false): only return lightbox metadata
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.list({ auth_token: token, username: 'john' }, function(err, data) {
@@ -397,7 +397,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
  * lightbox_id (Number): lightbox ID
  * verification_code (String, optional): access lightbox without auth_token, get from [lightbox.publicUrl](#v1.lightbox.publicUrl)
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.get({ auth_token: token, lightbox_id: 123 }, function(err, data) {
@@ -417,7 +417,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.publicUrl({ auth_token: token, lightbox_id: 123 }, function(err, data) {
@@ -438,7 +438,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
  * username (String): user's username
  * lightbox_name (String): new lightbox name
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.create({ auth_token: token, username: 'john', lightbox_name: 'Animals' }, function(err, data) {
@@ -459,7 +459,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
  * lightbox_id (Number): lightbox ID
  * lightbox_name (String): updated lightbox name
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.update({ auth_token: token, lightbox_id: 123, lightbox_name: 'Animals' }, function(err, data) {
@@ -479,7 +479,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.destroy({ auth_token: token, lightbox_id: 123 }, function(err, data) {
@@ -500,7 +500,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
  * lightbox_id (Number): lightbox ID
  * image_id (Number): image ID to add to lightbox
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.add({ auth_token: token, lightbox_id: 123, image_id: 108559295 }, function(err, data) {
@@ -521,7 +521,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
  * lightbox_id (Number): lightbox ID
  * image_id (Number): image ID to remove from lightbox
 
-Example
+Usage
 
 ``` javascript
 v1.lightbox.remove({ auth_token: token, lightbox_id: 123, image_id: 108559295 }, function(err, data) {
@@ -544,7 +544,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#videossearch)
  * results_per_page (Number, default: 150): number of results to return per page
  * submitter_id (Number, optional): filter results by contributor ID
 
-Example
+Usage
 
 ``` javascript
 v1.video.search('donkey', function(err, data) {
@@ -563,7 +563,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#videosvideo_id)
 
  * video_id (Number): video ID
 
-Example
+Usage
 
 ``` javascript
 v1.video.get(6061547, function(err, data) {
