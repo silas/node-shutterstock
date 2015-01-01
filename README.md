@@ -36,6 +36,7 @@ api.image.get('108559295', function(err, image) {
 
  * [shutterstock.v2](#v2)
    * [v2.image.get](#v2.image.get)
+   * [v2.image.search](#v2.image.search)
  * [shutterstock.v1](#v1)
    * [v1.echo](#v1.echo)
    * [v1.image.search](#v1.image.search)
@@ -58,6 +59,15 @@ api.image.get('108559295', function(err, image) {
    * [v1.video.search](#v1.video.search)
    * [v1.video.get](#v1.video.get)
 
+<a name="callback"/>
+### Callback
+
+All callbacks have the following signature `function(err, data, res)`.
+
+ * err (Error, optional): set if there was an error, otherwise falsy
+ * data (Object, optional): response data if any, otherwise `undefined`
+ * res (http.IncomingMessage, optional): HTTP response object with additional `body` property. This might not exist when `err` is set. The `body` property can be a decoded object, string, or Buffer.
+
 <a name="v2"/>
 ### Class: shutterstock.v2(options)
 
@@ -79,6 +89,19 @@ Get details for a specified image.
  * id (String): image ID
  * view (String, optional): render view
 
+<a name="v2.image.search"/>
+#### v2.image.search(options, callback)
+
+Search all images.
+
+[Options](https://developers.shutterstock.com/api/v2/image/search)
+
+ * page (Number, default: 1): result page to return
+ * per_page (Number, default: 20): number of results to return per page
+ * query (String, optional): query string
+ * sort (String, default: popular): sort results
+ * view (String, optional): render view
+
 <a name="v1"/>
 ### Class: shutterstock.v1(options)
 
@@ -94,14 +117,6 @@ Options
 #### v1.echo(options, callback)
 
 Echo back specified options, used to check API connection and credentials.
-
-`options` is an object of test key-value pairs.
-
-`callback(err, data)` is the result of the request.
-
-Data
-
-Echos request options.
 
 https://api.shutterstock.com/#testecho
 

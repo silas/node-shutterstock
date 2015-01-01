@@ -53,4 +53,32 @@ describe('v2', function() {
       });
     });
   });
+
+  describe('image.search', function() {
+    it('should return all images', function(done) {
+      this.api.image.search(function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('page', 1);
+        data.should.have.property('per_page', 20);
+        data.should.have.property('total_count');
+        data.total_count.should.be.above(20);
+
+        done();
+      });
+    });
+
+    it('should return image details', function(done) {
+      this.api.image.search('donkey', function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('page', 1);
+        data.should.have.property('per_page', 20);
+        data.should.have.property('total_count');
+        data.total_count.should.be.above(20);
+
+        done();
+      });
+    });
+  });
 });
