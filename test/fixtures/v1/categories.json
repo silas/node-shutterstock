@@ -1,0 +1,106 @@
+[
+  {
+    "category_id": "0",
+    "category_name": "Transportation"
+  },
+  {
+    "category_id": "1",
+    "category_name": "Animals/Wildlife"
+  },
+  {
+    "category_id": "2",
+    "category_name": "Buildings/Landmarks"
+  },
+  {
+    "category_id": "3",
+    "category_name": "Backgrounds/Textures"
+  },
+  {
+    "category_id": "4",
+    "category_name": "Business/Finance"
+  },
+  {
+    "category_id": "5",
+    "category_name": "Education"
+  },
+  {
+    "category_id": "6",
+    "category_name": "Food and Drink"
+  },
+  {
+    "category_id": "7",
+    "category_name": "Healthcare/Medical"
+  },
+  {
+    "category_id": "8",
+    "category_name": "Holidays"
+  },
+  {
+    "category_id": "9",
+    "category_name": "Objects"
+  },
+  {
+    "category_id": "10",
+    "category_name": "Industrial"
+  },
+  {
+    "category_id": "11",
+    "category_name": "The Arts"
+  },
+  {
+    "category_id": "12",
+    "category_name": "Nature"
+  },
+  {
+    "category_id": "13",
+    "category_name": "People"
+  },
+  {
+    "category_id": "14",
+    "category_name": "Religion"
+  },
+  {
+    "category_id": "15",
+    "category_name": "Science"
+  },
+  {
+    "category_id": "16",
+    "category_name": "Technology"
+  },
+  {
+    "category_id": "17",
+    "category_name": "Signs/Symbols"
+  },
+  {
+    "category_id": "18",
+    "category_name": "Sports/Recreation"
+  },
+  {
+    "category_id": "21",
+    "category_name": "Interiors"
+  },
+  {
+    "category_id": "22",
+    "category_name": "Miscellaneous"
+  },
+  {
+    "category_id": "24",
+    "category_name": "Vintage"
+  },
+  {
+    "category_id": "25",
+    "category_name": "Parks/Outdoor"
+  },
+  {
+    "category_id": "26",
+    "category_name": "Abstract"
+  },
+  {
+    "category_id": "27",
+    "category_name": "Beauty/Fashion"
+  },
+  {
+    "category_id": "31",
+    "category_name": "Celebrities"
+  }
+]

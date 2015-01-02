@@ -1,0 +1,88 @@
+[
+  {
+    "price_per_download": {
+      "local_price": "0.00",
+      "local_currency": "USD"
+    },
+    "current_allotment": {
+      "downloads_left": "1000",
+      "start_datetime": "2014-03-14 11:50:21",
+      "downloads_limit": "1000",
+      "unix_start_datetime": "1394812221",
+      "unix_end_datetime": "1426348221",
+      "end_datetime": "2015-03-14 11:50:21"
+    },
+    "unix_expiration_time": "1426348221",
+    "sizes": {
+      "huge_jpg": {
+        "is_purchaseable": "1",
+        "short_name": "Huge",
+        "name": "huge",
+        "display_name": "Large",
+        "dpi": "300",
+        "text_id": "huge_jpg",
+        "format": "jpg",
+        "media_type": "photo",
+        "id": "7",
+        "min_resolution": "4000000"
+      },
+      "medium_jpg": {
+        "is_purchaseable": "1",
+        "short_name": "Med",
+        "name": "medium",
+        "display_name": "Med",
+        "dpi": "300",
+        "text_id": "medium_jpg",
+        "format": "jpg",
+        "media_type": "photo",
+        "id": "4",
+        "min_resolution": "1000"
+      },
+      "huge_tiff": {
+        "is_purchaseable": "1",
+        "short_name": "Huge",
+        "name": "huge",
+        "display_name": "Large",
+        "dpi": "300",
+        "text_id": "huge_tiff",
+        "format": "tiff",
+        "media_type": "photo",
+        "id": "13",
+        "min_resolution": "4000000"
+      },
+      "small_jpg": {
+        "is_purchaseable": "1",
+        "short_name": "Small",
+        "name": "small",
+        "display_name": "Small",
+        "dpi": "72",
+        "text_id": "small_jpg",
+        "format": "jpg",
+        "media_type": "photo",
+        "id": "1",
+        "min_resolution": "500"
+      },
+      "vector_eps": {
+        "is_purchaseable": "1",
+        "short_name": "Vector",
+        "name": "vector",
+        "display_name": "Vector",
+        "dpi": null,
+        "text_id": "vector_eps",
+        "format": "eps",
+        "media_type": "photo",
+        "id": "19",
+        "min_resolution": null
+      }
+    },
+    "license": "enterprise_comp",
+    "display_name": "Enterprise Comp Subscription",
+    "description": "Enterprise Comp Product",
+    "text_id": "non_cumulative_enterprise_comp_365_day",
+    "license_display_name": "ENTERPRISE_COMP",
+    "site": "photo_subscription",
+    "subscription_id": "123",
+    "non_cumulative_expiration": "1",
+    "expiration_time": "2015-03-14 11:50:21"
+  }
+]

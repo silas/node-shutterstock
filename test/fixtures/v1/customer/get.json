@@ -1,0 +1,34 @@
+{
+  "sales_rep_info": {},
+  "metadata_field_definitions": [
+    {
+      "display_order": "1",
+      "is_required": "1",
+      "name": "Purchase Order",
+      "name_api": "purchase_order",
+      "name_short": "PO"
+    },
+    {
+      "display_order": "2",
+      "is_required": "0",
+      "name": "Job",
+      "name_api": "job",
+      "name_short": "Job"
+    },
+    {
+      "display_order": "3",
+      "is_required": "0",
+      "name": "Client/Licensee",
+      "name_api": "client",
+      "name_short": "Client"
+    },
+    {
+      "display_order": "4",
+      "is_required": "0",
+      "name": "Other",
+      "name_api": "other",
+      "name_short": "Other"
+    }
+  ],
+  "account_id": "123"
+}

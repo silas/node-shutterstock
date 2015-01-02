@@ -1,4 +1,4 @@
-# Shutterstock
+# Shutterstock [![Build Status](https://secure.travis-ci.org/silas/node-shutterstock.png?branch=master)](http://travis-ci.org/silas/node-shutterstock)
 
 This is a Node.js [Shutterstock API][api] client.
 
@@ -578,7 +578,6 @@ v1.video.get(6061547, function(err, data) {
  * All of v2
  * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
  * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
- * [Nock](https://www.npmjs.org/package/nock) tests
 
 ## License
 

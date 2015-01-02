@@ -41,8 +41,36 @@ Object.keys(config).forEach(function(key) {
 
 debug('config', config);
 
-var NOCK_REC = process.env.NOCK_REC === 'true';
-var NOCK_OFF = process.env.NOCK_OFF === 'true' || NOCK_REC;
+exports.nock = { off: process.env.NOCK_OFF === 'true' };
+exports.nock.on = !exports.nock.off;
+exports.nock.rec = !!process.env.NOCK_REC;
+
+exports.nock.describe = exports.nock.on ? describe : describe.skip;
+exports.nock.it = exports.nock.on ? it : it.skip;
+
+/**
+ * Nock
+ */
+
+function Nock() {
+  var self = this;
+
+  [
+    'get',
+    'head',
+    'post',
+    'delete',
+    'put',
+    'patch',
+    'intercept',
+    'filteringRequestBody',
+    'reply',
+  ].forEach(function(name) {
+    self[name] = function() {
+      return new Nock();
+    };
+  });
+}
 
 /**
  * Before
@@ -51,13 +79,21 @@ var NOCK_OFF = process.env.NOCK_OFF === 'true' || NOCK_REC;
 exports.beforeV1 = function(done) {
   var self = this;
 
+  Object.defineProperty(self, 'nock', {
+    configurable: true,
+    enumerable: true,
+    get: function() {
+      return exports.nock.off ? new Nock() : nock('https://api.shutterstock.com');
+    },
+  });
+
   self.api = shutterstock.v1({
     username: config.api_username,
     password: config.api_password,
   });
   self.api.on('log', debug);
 
-  if (!NOCK_OFF) {
+  if (exports.nock.on) {
     nock.disableNetConnect();
 
     self.api.defaults.username = config.auth_username;
@@ -113,13 +149,21 @@ exports.beforeV1 = function(done) {
 exports.beforeV2 = function(done) {
   var self = this;
 
+  Object.defineProperty(self, 'nock', {
+    configurable: true,
+    enumerable: true,
+    get: function() {
+      return exports.nock.off ? new Nock() : nock('https://api.shutterstock.com');
+    },
+  });
+
   self.api = shutterstock.v2({
     clientId: config.client_id,
     clientSecret: config.client_secret,
   });
   self.api.on('log', debug);
 
-  if (!NOCK_OFF) {
+  if (exports.nock.on) {
     nock.disableNetConnect();
 
     return done();
@@ -131,11 +175,11 @@ exports.beforeV2 = function(done) {
 };
 
 exports.beforeEach = function() {
-  if (NOCK_REC) nock.recorder.rec();
+  if (exports.nock.rec) nock.recorder.rec();
 };
 
 exports.afterEach = function() {
-  if (NOCK_REC) nock.restore();
+  if (exports.nock.rec) nock.restore();
 };
 
 /**
@@ -145,14 +189,14 @@ exports.afterEach = function() {
 exports.beforeLightbox = function(done) {
   var self = this;
 
-  var lightboxName = 'test_' + uuid.v4().slice(0, 8);
-
-  if (!NOCK_OFF) {
-    self.lightboxName = lightboxName;
-    self.lightboxId = '1020';
+  if (exports.nock.on) {
+    self.lightboxName = 'Animals';
+    self.lightboxId = 123;
 
     return done();
   }
+
+  var lightboxName = 'test_' + uuid.v4().slice(0, 8);
 
   var params = {
     username: self.config.auth_username,
@@ -172,7 +216,7 @@ exports.beforeLightbox = function(done) {
 exports.afterLightbox = function(done) {
   var self = this;
 
-  if (!NOCK_OFF) return done();
+  if (exports.nock.on) return done();
 
   var params = {
     lightbox_id: this.lightboxId,

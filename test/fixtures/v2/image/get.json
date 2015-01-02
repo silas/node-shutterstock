@@ -1,0 +1,136 @@
+{
+  "keywords": [
+    "adorable",
+    "animal",
+    "ass",
+    "background",
+    "brown",
+    "cattle",
+    "creature",
+    "cut",
+    "cute",
+    "domestic",
+    "donkey",
+    "dun",
+    "ears",
+    "farm",
+    "foal",
+    "full",
+    "grey",
+    "head",
+    "headstrong",
+    "herbivorous",
+    "horizontal",
+    "isolated",
+    "life",
+    "livestock",
+    "mammal",
+    "mane",
+    "mule",
+    "mulish",
+    "nature",
+    "one",
+    "portrait",
+    "profile",
+    "shot",
+    "side",
+    "standing",
+    "stubborn",
+    "vertebrate",
+    "view",
+    "white",
+    "wild",
+    "young"
+  ],
+  "media_type": "image",
+  "id": "108559295",
+  "aspect": 1.3589,
+  "categories": [
+    {
+      "id": "1",
+      "name": "Animals/Wildlife"
+    },
+    {
+      "id": "22",
+      "name": "Miscellaneous"
+    }
+  ],
+  "description": "Donkey isolated on white",
+  "contributor": {
+    "id": "371512"
+  },
+  "is_adult": false,
+  "image_type": "photo",
+  "added_date": "2012-07-25",
+  "assets": {
+    "huge_jpg": {
+      "width": 3449,
+      "height": 2538,
+      "display_name": "Huge",
+      "dpi": 300,
+      "format": "jpg",
+      "file_size": 1872896,
+      "is_licensable": true
+    },
+    "medium_jpg": {
+      "width": 1000,
+      "height": 736,
+      "display_name": "Med",
+      "dpi": 300,
+      "format": "jpg",
+      "file_size": 266240,
+      "is_licensable": true
+    },
+    "huge_tiff": {
+      "width": 3449,
+      "height": 2538,
+      "display_name": "Huge",
+      "dpi": 300,
+      "format": "tiff",
+      "file_size": 26260686,
+      "is_licensable": true
+    },
+    "supersize_jpg": {
+      "width": 6898,
+      "height": 5076,
+      "display_name": "Super",
+      "dpi": 300,
+      "format": "jpg",
+      "file_size": 6843977,
+      "is_licensable": true
+    },
+    "supersize_tiff": {
+      "width": 6898,
+      "height": 5076,
+      "display_name": "Super",
+      "dpi": 300,
+      "format": "tiff",
+      "file_size": 105042744,
+      "is_licensable": true
+    },
+    "small_jpg": {
+      "width": 500,
+      "height": 368,
+      "display_name": "Small",
+      "dpi": 72,
+      "format": "jpg",
+      "file_size": 75776,
+      "is_licensable": true
+    },
+    "preview": {
+      "width": 450,
+      "url": "http://image.shutterstock.com/display_pic_with_logo/371512/108559295/stock-photo-donkey-isolated-on-white-108559295.jpg",
+      "height": 331
+    },
+    "small_thumb": {
+      "width": 100,
+      "url": "http://thumb7.shutterstock.com/thumb_small/371512/108559295/stock-photo-donkey-isolated-on-white-108559295.jpg",
+      "height": 74
+    },
+    "large_thumb": {
+      "width": 150,
+      "url": "http://thumb7.shutterstock.com/thumb_large/371512/108559295/stock-photo-donkey-isolated-on-white-108559295.jpg",
+      "height": 110
+    }
+  }
+}

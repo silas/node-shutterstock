@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-var async = require('async');
-var debug = require('debug')('api');
+var fixtures = require('fixturefiles');
 var should = require('should');
+var querystring = require('querystring');
 var uuid = require('node-uuid');
 
 var helper = require('./helper');
@@ -22,6 +22,10 @@ describe('v1', function() {
 
   describe('resources', function() {
     it('should return a list of resources', function(done) {
+      this.nock
+        .get('/resources.json')
+        .reply(200, fixtures.v1.resources);
+
       this.api.resources(function(err, data) {
         should.not.exist(err);
 
@@ -43,6 +47,10 @@ describe('v1', function() {
 
   describe('echo', function() {
     it('should return requested parameters', function(done) {
+      this.nock
+        .get('/test/echo.json?hello=world')
+        .reply(200, fixtures.v1.echo);
+
       var params = { hello: 'world' };
 
       this.api.echo(params, function(err, data) {
@@ -57,6 +65,10 @@ describe('v1', function() {
 
   describe('image.search', function() {
     it('should return image search results', function(done) {
+      this.nock
+        .get('/images/search.json?searchterm=donkey')
+        .reply(200, fixtures.v1.image.search);
+
       this.api.image.search('donkey', function(err, data) {
         should.not.exist(err);
 
@@ -93,6 +105,10 @@ describe('v1', function() {
     it('should return image details', function(done) {
       var imageId = 108559295;
 
+      this.nock
+        .get('/images/108559295.json')
+        .reply(200, fixtures.v1.image.get);
+
       this.api.image.get(imageId, function(err, data) {
         should.not.exist(err);
 
@@ -127,6 +143,10 @@ describe('v1', function() {
     it('should return image not found', function(done) {
       var imageId = 1;
 
+      this.nock
+        .get('/images/1.json')
+        .reply(404);
+
       this.api.image.get(imageId, function(err, data, res) {
         should.exist(err);
 
@@ -143,6 +163,10 @@ describe('v1', function() {
   describe('image.similar', function() {
     it('should return similar images', function(done) {
       var imageId = 108559295;
+
+      this.nock
+        .get('/images/108559295/similar.json')
+        .reply(200, fixtures.v1.image.similar);
 
       this.api.image.similar(imageId, function(err, data) {
         should.not.exist(err);
@@ -179,6 +203,10 @@ describe('v1', function() {
 
   describe('image.categories', function() {
     it('should return a list of categories', function(done) {
+      this.nock
+        .get('/categories.json')
+        .reply(200, fixtures.v1.categories);
+
       this.api.image.categories(function(err, data) {
         should.not.exist(err);
 
@@ -199,12 +227,14 @@ describe('v1', function() {
         password: config.auth_password,
       };
 
+      this.nock
+        .post('/auth/customer.json', options)
+        .reply(200, fixtures.v1.customer.auth);
+
       this.api.customer.auth(options, function(err, data) {
         should.not.exist(err);
 
-        data.should.have.property('auth_token');
-        data.language.should.equal('en');
-        data.username.should.equal(options.username);
+        data.should.have.properties('auth_token', 'language', 'username');
 
         done();
       });
@@ -215,6 +245,12 @@ describe('v1', function() {
         username: config.auth_username,
         password: 'nope.' + config.auth_password,
       };
+
+      this.nock
+        .post('/auth/customer.json', options)
+        .reply(403, 'Invalid username and/or password', {
+          'Content-Type': 'text/plain; charset=utf-8',
+        });
 
       this.api.customer.auth(options, function(err, data, res) {
         should.exist(err);
@@ -233,6 +269,11 @@ describe('v1', function() {
     it('should return customer info', function(done) {
       var params = { username: config.auth_username };
 
+      this.nock
+        .get('/customers/' + config.auth_username + '.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200, fixtures.v1.customer.get);
+
       this.api.customer.get(params, function(err, data) {
         should.not.exist(err);
 
@@ -244,7 +285,7 @@ describe('v1', function() {
     });
   });
 
-  describe.skip('customer.register', function() {
+  helper.nock.describe('customer.register', function() {
     it('should register a customer', function(done) {
       var id = uuid.v4().replace(/-/g, '').slice(16);
 
@@ -254,7 +295,12 @@ describe('v1', function() {
         email: 'silas+test_' + id + '@shutterstock.com',
       };
 
-      debug('register', params);
+      this.nock
+        .put('/customers/' + params.username + '.json?' + querystring.stringify({
+          email: params.email,
+          password: params.password,
+        }))
+        .reply(200, fixtures.v1.customer.register);
 
       this.api.customer.register(params, function(err, data) {
         should.not.exist(err);
@@ -271,6 +317,11 @@ describe('v1', function() {
     it('should return a list of customer downloads', function(done) {
       var params = { username: config.auth_username };
 
+      this.nock
+        .get('/customers/' + params.username + '/images/downloads.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200, fixtures.v1.customer.images);
+
       this.api.customer.images(params, function(err, data) {
         should.not.exist(err);
 
@@ -284,6 +335,11 @@ describe('v1', function() {
   describe('customer.subscriptions', function() {
     it('should return a list of subscriptions', function(done) {
       var params = { username: config.auth_username };
+
+      this.nock
+        .get('/customers/' + params.username + '/subscriptions.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200, fixtures.v1.customer.subscriptions);
 
       this.api.customer.subscriptions(params, function(err, data) {
         should.not.exist(err);
@@ -300,6 +356,11 @@ describe('v1', function() {
     after(helper.afterLightbox);
 
     it('should return a list of lightboxes', function(done) {
+      this.nock
+        .get('/customers/' + this.api.defaults.username + '/lightboxes.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200, fixtures.v1.lightboxes.list);
+
       this.api.lightbox.list(function(err, data) {
         should.not.exist(err);
 
@@ -321,6 +382,10 @@ describe('v1', function() {
         username: config.auth_username,
         lightbox_id: self.lightboxId,
       };
+
+      this.nock
+        .get('/lightboxes/' + self.lightboxId + '.json?auth_token=' + this.api.defaults.auth_token)
+        .reply(200, fixtures.v1.lightboxes.get);
 
       self.api.lightbox.get(params, function(err, data) {
         should.not.exist(err);
@@ -350,6 +415,11 @@ describe('v1', function() {
     it('should return lightbox public url', function(done) {
       var params = { lightbox_id: this.lightboxId };
 
+      this.nock
+        .get('/lightboxes/' + this.lightboxId + '/public_url.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200, fixtures.v1.lightboxes.publicUrl);
+
       this.api.lightbox.publicUrl(params, function(err, data) {
         should.not.exist(err);
 
@@ -373,6 +443,12 @@ describe('v1', function() {
         username: config.auth_username,
         lightbox_name: 'test_' + uuid.v4().slice(0, 8),
       };
+
+      this.nock
+        .post('/customers/' + this.api.defaults.username + '/lightboxes.json?auth_token=' +
+             this.api.defaults.auth_token,
+             { lightbox_name: params.lightbox_name })
+        .reply(200, fixtures.v1.lightboxes.create);
 
       self.api.lightbox.create(params, function(err, data) {
         should.not.exist(err);
@@ -401,6 +477,17 @@ describe('v1', function() {
         lightbox_name: name,
       };
 
+      this.nock
+        .post('/lightboxes/' + self.lightboxId + '.json?auth_token=' +
+             this.api.defaults.auth_token,
+             { lightbox_name: params.lightbox_name })
+        .reply(200, fixtures.v1.lightboxes.update);
+
+      this.nock
+        .get('/lightboxes/' + self.lightboxId + '.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200, { lightbox_name: params.lightbox_name });
+
       self.api.lightbox.update(params, function(err) {
         should.not.exist(err);
 
@@ -424,6 +511,16 @@ describe('v1', function() {
     it('should delete the lightbox', function(done) {
       var self = this;
 
+      this.nock
+        .delete('/lightboxes/' + self.lightboxId + '.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200);
+
+      this.nock
+        .get('/customers/' + this.api.defaults.username + '/lightboxes.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200, []);
+
       self.api.lightbox.destroy(self.lightboxId, function(err) {
         should.not.exist(err);
 
@@ -442,7 +539,7 @@ describe('v1', function() {
     });
   });
 
-  describe.skip('lightbox.add', function() {
+  helper.nock.describe('lightbox.add', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
@@ -454,21 +551,20 @@ describe('v1', function() {
         image_id: 108559295,
       };
 
+      this.nock
+        .put('/lightboxes/' + self.lightboxId + '/images/108559295.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200);
+
       self.api.lightbox.add(params, function(err) {
         should.not.exist(err);
 
-        self.api.lightbox.get(self.lightboxId, function(err, data) {
-          should.not.exist(err);
-
-          should(data).be.type('object');
-
-          done();
-        });
+        done();
       });
     });
   });
 
-  describe.skip('lightbox.remove', function() {
+  helper.nock.describe('lightbox.remove', function() {
     before(helper.beforeLightbox);
     after(helper.afterLightbox);
 
@@ -482,53 +578,12 @@ describe('v1', function() {
         image_id: imageId,
       };
 
-      var jobs = [];
+      this.nock
+        .delete('/lightboxes/' + self.lightboxId + '/images/108559295.json?auth_token=' +
+             this.api.defaults.auth_token)
+        .reply(200);
 
-      jobs.push(function(cb) {
-        self.api.lightbox.add(params, function(err) {
-          if (err) return cb(err);
-
-          cb();
-        });
-      });
-
-      jobs.push(function(cb) {
-        self.api.lightbox.get({ lightbox_id: self.lightboxId }, function(err, data) {
-          if (err) return cb(err);
-
-          should(data).be.type('object');
-
-          data.should.have.property('images');
-          data.images.should.be.an.instanceOf(Array);
-          data.images.should.contain(imageId);
-
-          cb();
-        });
-      });
-
-      jobs.push(function(cb) {
-        self.api.lightbox.remove(params, function(err) {
-          if (err) return cb(err);
-
-          cb();
-        });
-      });
-
-      jobs.push(function(cb) {
-        self.api.lightbox.get({ lightbox_id: self.lightboxId }, function(err, data) {
-          if (err) return cb(err);
-
-          should(data).be.type('object');
-
-          data.should.have.property('images');
-          data.images.should.be.an.instanceOf(Array);
-          data.images.should.not.contain(imageId);
-
-          cb();
-        });
-      });
-
-      async.series(jobs, function(err) {
+      self.api.lightbox.remove(params, function(err) {
         should.not.exist(err);
 
         done();
@@ -538,6 +593,10 @@ describe('v1', function() {
 
   describe('video.search', function() {
     it('should return video search results', function(done) {
+      this.nock
+        .get('/videos/search.json?searchterm=donkey')
+        .reply(200, fixtures.v1.video.search);
+
       this.api.video.search('donkey', function(err, data) {
         should.not.exist(err);
 
@@ -567,6 +626,10 @@ describe('v1', function() {
     it('should return video details', function(done) {
       var video_id = 5869544;
 
+      this.nock
+        .get('/videos/5869544.json')
+        .reply(200, fixtures.v1.video.get);
+
       this.api.video.get(video_id, function(err, data) {
         should.not.exist(err);
 
@@ -585,6 +648,12 @@ describe('v1', function() {
 
     it('should return video not found', function(done) {
       var video_id = 1;
+
+      this.nock
+        .get('/videos/1.json')
+        .reply(404, 'Id not found', {
+          'Content-Type': 'text/plain; charset=utf-8',
+        });
 
       this.api.video.get(video_id, function(err, data, res) {
         should.exist(err);

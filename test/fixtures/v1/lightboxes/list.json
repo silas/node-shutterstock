@@ -1,0 +1,17 @@
+[
+  {
+    "images": [
+      {
+        "added_datetime": "2015-01-01 20:49:10",
+        "image_id": "108559295",
+        "resource_url": "http://api.shutterstock.com/images/108559295"
+      }
+    ],
+    "confirmed": "1",
+    "last_modified": "1420163350",
+    "resource_url": "http://api.shutterstock.com/lightboxes/31921318",
+    "image_count": 1,
+    "lightbox_id": "31921318",
+    "lightbox_name": "Animals"
+  }
+]

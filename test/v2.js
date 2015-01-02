@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 
+var fixtures = require('fixturefiles');
 var should = require('should');
 
 var helper = require('./helper');
@@ -19,6 +20,10 @@ describe('v2', function() {
   describe('image.get', function() {
     it('should return image details', function(done) {
       var imageId = '108559295';
+
+      this.nock
+        .get('/v2/images/108559295')
+        .reply(200, fixtures.v2.image.get);
 
       this.api.image.get(imageId, function(err, data) {
         should.not.exist(err);
@@ -41,6 +46,10 @@ describe('v2', function() {
     it('should return image not found', function(done) {
       var imageId = 1;
 
+      this.nock
+        .get('/v2/images/1')
+        .reply(404);
+
       this.api.image.get(imageId, function(err, data, res) {
         should.exist(err);
 
@@ -56,6 +65,10 @@ describe('v2', function() {
 
   describe('image.search', function() {
     it('should return all images', function(done) {
+      this.nock
+        .get('/v2/images/search')
+        .reply(200, fixtures.v2.image.search);
+
       this.api.image.search(function(err, data) {
         should.not.exist(err);
 
@@ -69,6 +82,10 @@ describe('v2', function() {
     });
 
     it('should return image details', function(done) {
+      this.nock
+        .get('/v2/images/search?query=donkey')
+        .reply(200, fixtures.v2.image.search);
+
       this.api.image.search('donkey', function(err, data) {
         should.not.exist(err);
 

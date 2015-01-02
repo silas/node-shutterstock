@@ -1,0 +1,863 @@
+[
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "people_number": {
+          "documentation": "Restrict results to photos that contain a specified number of people. Accepted values are: 'none', '1', '2', '3', '4', 'any'.",
+          "type": "enum",
+          "default": "any"
+        },
+        "orientation": {
+          "documentation": "Whether a photograph is wider than it is tall, or taller than it is wide. Accepted values are: 'all', 'horizontal', 'vertical'.",
+          "type": "enum",
+          "default": "all"
+        },
+        "searchterm": {
+          "documentation": "A string of space-separated keywords to search for. Required when category_id, photographer_name, submitter_id, and color are not provided. Example: 'cat'.",
+          "type": "str"
+        },
+        "people_ethnicity": {
+          "documentation": "Restrict results to photos whose subject(s) are of a specified ethnicity. Accepted values are: 'african', 'african_american', 'black', 'brazilian', 'chinese', 'caucasian', 'east_asian', 'hispanic', 'japanese', 'middle_eastern', 'native_american', 'pacific_islander', 'south_asian', 'southeast_asian', 'other', 'any'.",
+          "type": "enum",
+          "default": "any"
+        },
+        "all": {
+          "documentation": "A flag indicating that all search results should be returned. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean"
+        },
+        "category_id": {
+          "documentation": "An integer category id to search within. Valid values and their meanings can be seen by accessing the <a href=\"#categories\">/categories</a> endpoint.  Required when searchterm, photographer_name, submitter_id, and color are not provided.",
+          "type": "int"
+        },
+        "color": {
+          "documentation": "A color to search for. Required when searchterm, category_id, photographer_name, and submitter_id are not provided. Accepted values are 6-character HTML hex colors from '000000' to 'FFFFFF', with or without number sign.",
+          "type": "html color"
+        },
+        "editorial_only": {
+          "documentation": "A flag indicating that only images available for editorial use should be returned; no images for commercial use only.  This option is mutually exclusive with the commercial_only option. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean"
+        },
+        "results_per_page": {
+          "documentation": "How many results to show per page. Accepted values are integers from 1 to 150.",
+          "type": "integer range",
+          "default": 150
+        },
+        "safesearch": {
+          "documentation": "A flag indicating that only images suitable for all ages should be returned. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean",
+          "default": 1
+        },
+        "photographer_name": {
+          "documentation": "The username of a specific artist whose work you want to search within. Required when searchterm, category_id, submitter_id, and color are not provided.",
+          "type": "str"
+        },
+        "enhanced_only": {
+          "documentation": "A flag indicating that only images with enhanced licenses available should be returned. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean"
+        },
+        "language": {
+          "documentation": "The 2-letter language code that the query and desired results should be in.  If not specified, use an eligible language from the Accept-Language header.  Otherwise, defaults to \"en\". Accepted values are: 'cs' (Czech), 'da' (Danish), 'de' (German), 'en' (English), 'es' (Spanish), 'fi' (Finnish), 'fr' (French), 'hu' (Hungarian), 'it' (Italian), 'ja' (Japanese), 'ko' (Korean), 'nb' (Norwegian), 'nl' (Dutch), 'pl' (Polish), 'pt' (Portuguese), 'ru' (Russian), 'sv' (Swedish), 'th' (Thai), 'tr' (Turkish), 'zh' (Chinese).",
+          "type": "language",
+          "default": "en"
+        },
+        "sort_method": {
+          "documentation": "How the results should be sorted. Accepted values are: 'newest', 'oldest', 'popular', 'random', 'relevance'.",
+          "type": "enum",
+          "default": "popular"
+        },
+        "exclude_keywords": {
+          "documentation": "A string of space-separated keywords to exclude from your search.",
+          "type": "str"
+        },
+        "search_group": {
+          "documentation": "Media type to search within. Accepted values are: 'photos', 'illustrations', 'vectors', 'all'.",
+          "type": "enum",
+          "default": "all"
+        },
+        "page_number": {
+          "documentation": "Which page of results is wanted Accepted values are nonnegative integers.",
+          "type": "nonnegative integer"
+        },
+        "people_gender": {
+          "documentation": "Restrict results to photos whose subject(s) are of a specified gender. Accepted values are: 'male', 'female', 'both', 'any'.",
+          "type": "enum",
+          "default": "any"
+        },
+        "submitter_id": {
+          "documentation": "The integer id of a specific submitter whose work you want to search within. Required when searchterm, category_id, photographer_name, and color are not provided.",
+          "type": "int"
+        },
+        "model_released": {
+          "documentation": "A flag indicating that only images with people should be returned (all model-released). Accepted values are 1 for true and 0 for false.",
+          "type": "boolean"
+        },
+        "commercial_only": {
+          "documentation": "A flag indicating that only images available for commercial use should be returned; no images for editorial use only.  This option is mutually exclusive with the editorial_only option. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean"
+        },
+        "people_age": {
+          "documentation": "Restrict results to photos that feature people of a specified age range. Accepted values are: 'infants', 'children', 'teenagers', '20s', '30s', '40s', '50s', '60s', 'older', 'any'.",
+          "type": "enum",
+          "default": "any"
+        }
+      },
+      "example_url": "http://api.shutterstock.com/images/search?searchterm=cat",
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Searches for images that meet provided criteria.",
+        "get": "Gets search results for provided criteria. At least one of the following is required: searchterm, category_id, photographer_name, submmiter_id, color."
+      }
+    },
+    "resource": "/images/search",
+    "order": 1,
+    "resource_url": "http://api.shutterstock.com/images/search"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "verification_code": {
+          "documentation": "The code returned by the <a href=\"#lightboxeslightbox_idpublic_url\">/lightboxes/&lt;lightbox_id&gt;/public_url</a> endpoint.  This may be provided instead of an auth_token to allow un-authenticated users of the API to see details of the specified lightbox.",
+          "type": "str"
+        },
+        "lightbox_id": {
+          "documentation": "An integer id of a lightbox to view.",
+          "type": "int"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user.  If a public URL has been generated for this lightbox, you can specify a verification_code parameter instead.",
+          "type": "str"
+        },
+        "lightbox_name": {
+          "documentation": "The name of the lightbox (for updating this resource)",
+          "type": "str"
+        },
+        "exclude_images": {
+          "documentation": "If set this will return just lightboxes with no image data.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        },
+        {
+          "requires_permission": 1,
+          "method": "post"
+        },
+        {
+          "requires_permission": 1,
+          "method": "delete"
+        }
+      ],
+      "description": {
+        "general": "Displays and deletes collections of images created by the user.",
+        "delete": "Deletes a lightbox specified by lightbox_id.",
+        "post": "Updates a lightbox (only the lightbox_name field may be updated)",
+        "get": "Retrieves contents of a lightbox specified by lightbox_id."
+      }
+    },
+    "resource": "/lightboxes/<lightbox_id>",
+    "order": 1,
+    "resource_url": "http://api.shutterstock.com/lightboxes/%3Clightbox_id%3E"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "verification_code": {
+          "documentation": "The code returned by the <a href=\"#lightboxeslightbox_idpublic_url\">/lightboxes/&lt;lightbox_id&gt;/public_url</a> endpoint.  This may be provided instead of an auth_token to allow un-authenticated users of the API to see details of the specified lightbox.",
+          "type": "str"
+        },
+        "lightbox_id": {
+          "documentation": "An integer id of a lightbox to view.",
+          "type": "int"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user.  If a public URL has been generated for this lightbox, you can specify a verification_code parameter instead.",
+          "type": "str"
+        },
+        "lightbox_name": {
+          "documentation": "The name of the lightbox (for updating this resource)",
+          "type": "str"
+        },
+        "exclude_images": {
+          "documentation": "If set this will return just lightboxes with no image data.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        },
+        {
+          "requires_permission": 1,
+          "method": "post"
+        },
+        {
+          "requires_permission": 1,
+          "method": "delete"
+        }
+      ],
+      "description": {
+        "general": "Additional information about lightbox contents",
+        "get": "Returns extended information about the contents of a lightbox"
+      }
+    },
+    "resource": "/lightboxes/<lightbox_id>/extended",
+    "order": 1,
+    "resource_url": "http://api.shutterstock.com/lightboxes/%3Clightbox_id%3E/extended"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "example_url": "http://api.shutterstock.com/resources",
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "A meta-resource that provides information about all available resources.",
+        "get": "Returns documentation for all available resources."
+      }
+    },
+    "resource": "/resources",
+    "order": 1,
+    "resource_url": "http://api.shutterstock.com/resources"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "example_param": {
+          "documentation": "An example of how to incorporate a named parameter into the path of a URI. Example: 'example_value'.",
+          "type": "str"
+        }
+      },
+      "example_url": "http://api.shutterstock.com/test/echo?example_param=example_value",
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Allows developers to test code by verifying that inputs are received by the API and outputs are received by the client.",
+        "get": "Echoes whatever parameters are sent in, displayed in the representation format of your choice."
+      }
+    },
+    "resource": "/test/echo",
+    "order": 1,
+    "resource_url": "http://api.shutterstock.com/test/echo"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "sort_method": {
+          "documentation": "How the results should be sorted. Accepted values are: 'newest', 'oldest', 'popular', 'random', 'relevance'.",
+          "type": "enum",
+          "default": "popular"
+        },
+        "submitter_id": {
+          "documentation": "The integer id of a specific submitter whose work you want to search within. Required when searchterm is not provided.",
+          "type": "int"
+        },
+        "searchterm": {
+          "documentation": "A string of space-separated keywords to search for. Required. Example: 'cat'.",
+          "type": "str"
+        },
+        "results_per_page": {
+          "documentation": "How many results to show per page. Accepted values are integers from 1 to 150.",
+          "type": "integer range",
+          "default": 150
+        },
+        "page_number": {
+          "documentation": "Which page of results is wanted Accepted values are nonnegative integers.",
+          "type": "nonnegative integer"
+        }
+      },
+      "example_url": "http://api.shutterstock.com/videos/search?searchterm=cat",
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Searches for videos that meet provided criteria.",
+        "get": "Gets search results for provided criteria. At least one of the following is required: searchterm, category_id."
+      }
+    },
+    "resource": "/videos/search",
+    "order": 1,
+    "resource_url": "http://api.shutterstock.com/videos/search"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "image_id": {
+          "documentation": "The integer id of the image to display details for.",
+          "type": "int"
+        },
+        "lightbox_id": {
+          "documentation": "The integer id of a lightbox.",
+          "type": "int"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user.",
+          "type": "str"
+        },
+        "username": {
+          "documentation": "The username whose lightbox is to be modified. Required for lightboxes owned by registered downloading customers. Not required for guest lightboxes.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "put"
+        },
+        {
+          "requires_permission": 1,
+          "method": "delete"
+        }
+      ],
+      "description": {
+        "general": "Adds or removes images from a collection of images created by the user.",
+        "delete": "Deletes a provided image id from a lightbox with a provided lightbox id.",
+        "put": "Puts a provided image id into the lightbox with a provided lightbox id."
+      }
+    },
+    "resource": "/lightboxes/<lightbox_id>/images/<image_id>",
+    "order": 3,
+    "resource_url": "http://api.shutterstock.com/lightboxes/%3Clightbox_id%3E/images/%3Cimage_id%3E"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "lightbox_id": {
+          "documentation": "An integer id of a lightbox for which the public URL should be retrieved.",
+          "type": "int"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Returns public URLs for lightboxes",
+        "get": "Retrieves a public, sharable URL for a lightbox.  This resource also provides a verification code for retrieving this lightbox over the API."
+      }
+    },
+    "resource": "/lightboxes/<lightbox_id>/public_url",
+    "order": 4,
+    "resource_url": "http://api.shutterstock.com/lightboxes/%3Clightbox_id%3E/public_url"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "language": {
+          "documentation": "The language that the video details should be in. Accepted values are: 'cs' (Czech), 'da' (Danish), 'de' (German), 'en' (English), 'es' (Spanish), 'fi' (Finnish), 'fr' (French), 'hu' (Hungarian), 'it' (Italian), 'ja' (Japanese), 'ko' (Korean), 'nb' (Norwegian), 'nl' (Dutch), 'pl' (Polish), 'pt' (Portuguese), 'ru' (Russian), 'sv' (Swedish), 'th' (Thai), 'tr' (Turkish), 'zh' (Chinese).",
+          "type": "language",
+          "default": "en"
+        },
+        "video_id": {
+          "documentation": "The integer id of the video to display details for. Example: '12345'. Required.",
+          "type": "int"
+        }
+      },
+      "example_url": "http://api.shutterstock.com/videos/12345",
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Displays details for a specific video.",
+        "get": "Gets data about the video with the provided video id."
+      }
+    },
+    "resource": "/videos/<video_id>",
+    "order": 5,
+    "resource_url": "http://api.shutterstock.com/videos/%3Cvideo_id%3E"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "email": {
+          "documentation": "The email address of the registered downloading customer. Username or email is required. Email addresses can only be used to login as non-subaccounts."
+        },
+        "password": {
+          "documentation": "The password of the registered downloading customer. Required."
+        },
+        "username": {
+          "documentation": "The username of the registered downloading customer. Username or email is required. If both username and email are supplied, username is used to login."
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "post"
+        }
+      ],
+      "description": {
+        "general": "Allows the client to login as a registered downloading customer.",
+        "post": "Performs the login operation on behalf of an existing customer account. The client must be trusted with the customer's username/email address and password to perform the login operation.  If both username and email are supplied, username is used to login."
+      }
+    },
+    "resource": "/auth/customer",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/auth/customer"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "email": {
+          "documentation": "The contact email of the registering customer. Accepted values are a valid email address.",
+          "type": "email"
+        },
+        "password": {
+          "documentation": "The desired password of the registering customer.",
+          "type": "str"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user.",
+          "type": "str"
+        },
+        "username": {
+          "documentation": "The username of the registering customer.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        },
+        {
+          "requires_permission": 1,
+          "method": "put"
+        }
+      ],
+      "description": {
+        "general": "Creates a registered user, and displays or modifies registered user information.",
+        "get": "Returns the account_id for the given username (requires auth_token).  If you have a Shutterstock Premier account, this endpoint will also return the custom metadata fields configured for your account that are necessary to POST when <a href=\"#subscriptionssubscription_idimagesimage_idsizessize\">licensing an image</a>.",
+        "put": "Creates a registered user."
+      }
+    },
+    "resource": "/customers/<username>",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/customers/%3Cusername%3E"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "page_size": {
+          "documentation": "A number which specifies how many results to return in each page.  Defaults to 40 with a max of 200.  Does not apply when image_id/field is specified. Accepted values are nonnegative integers.",
+          "type": "nonnegative integer"
+        },
+        "sort_by": {
+          "documentation": "The 'sort by' name. Accepted Values: Date. Optional.",
+          "type": "str"
+        },
+        "sort_order": {
+          "documentation": "The sort order, either asc or desc. Defaults to desc",
+          "type": "str"
+        },
+        "image_id": {
+          "documentation": "Specifies a single image_id.  Optional.  Used with field=redownloadable_state, not applicable without field=redownloadable_state.",
+          "type": "num"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user. Required.",
+          "type": "str"
+        },
+        "license": {
+          "documentation": "Filters results for download history only under the specified license. Optional.",
+          "type": "str"
+        },
+        "page_number": {
+          "documentation": "A number specifying which page of results is wanted.  Optional.  Starts at 0.  If no page number is specified, all results will be returned.  Does not apply when image_id/field is specified. Accepted values are nonnegative integers.",
+          "type": "nonnegative integer"
+        },
+        "username": {
+          "documentation": "The username of the registered downloading customer. Required.",
+          "type": "str"
+        },
+        "field": {
+          "documentation": "When present and an image_id is specified, the output will include only records for the specified image that are redownloadable.  Each record will include a \"redownloadable_state\" field.  Optional. Accepted values are: 'redownloadable_state'.",
+          "type": "enum"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Displays customer image downloads and the subscriptions under which they were downloaded.",
+        "get": "Displays all downloads for an authenticated customer."
+      }
+    },
+    "resource": "/customers/<username>/images/downloads",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/customers/%3Cusername%3E/images/downloads"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "hero_image_only": {
+          "documentation": "If set this will return just lightboxes with associated hero image.",
+          "type": "str"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user.",
+          "type": "str"
+        },
+        "exclude_empty": {
+          "documentation": "If set this will return only lightboxes that have images.",
+          "type": "str"
+        },
+        "lightbox_name": {
+          "documentation": "The desired name of a newly created lightbox.",
+          "type": "str"
+        },
+        "exclude_images": {
+          "documentation": "If set this will return just lightboxes with no image data.",
+          "type": "str"
+        },
+        "username": {
+          "documentation": "The username of the registered downloading customer.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        },
+        {
+          "requires_permission": 1,
+          "method": "post"
+        }
+      ],
+      "description": {
+        "general": "Displays and creates customer lightboxes.",
+        "post": "Creates a lightbox for an authenticated downloading customer. Lightbox name must be provided. If lightbox creation is successful, the location header in the response will contain the URL for the new lightbox. A lightbox id will be also be returned in the response body.",
+        "get": "Displays all lightboxes for an authenticated downloading customer."
+      }
+    },
+    "resource": "/customers/<username>/lightboxes",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/customers/%3Cusername%3E/lightboxes"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "hero_image_only": {
+          "documentation": "If set this will return just lightboxes with associated hero image.",
+          "type": "str"
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user.",
+          "type": "str"
+        },
+        "exclude_empty": {
+          "documentation": "If set this will return only lightboxes that have images.",
+          "type": "str"
+        },
+        "lightbox_name": {
+          "documentation": "The desired name of a newly created lightbox.",
+          "type": "str"
+        },
+        "exclude_images": {
+          "documentation": "If set this will return just lightboxes with no image data.",
+          "type": "str"
+        },
+        "username": {
+          "documentation": "The username of the registered downloading customer.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        },
+        {
+          "requires_permission": 1,
+          "method": "post"
+        }
+      ],
+      "description": {
+        "general": "Additional information about the contents of customer lightboxes",
+        "get": "Returns extended information about the contents of a contributor's lightboxes"
+      }
+    },
+    "resource": "/customers/<username>/lightboxes/extended",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/customers/%3Cusername%3E/lightboxes/extended"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user. Required.",
+          "type": "str"
+        },
+        "username": {
+          "documentation": "The username of the registered downloading customer. Required.",
+          "type": "str"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Displays information about customer subscriptions including start and end dates, number of downloads remaining, and available image sizes. For Premier plans, also returns price per download.",
+        "get": "Displays all subscription plans for an authenticated downloading customer."
+      }
+    },
+    "resource": "/customers/<username>/subscriptions",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/customers/%3Cusername%3E/subscriptions"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "language": {
+          "documentation": "The language that the image details should be in. Accepted values are: 'cs' (Czech), 'da' (Danish), 'de' (German), 'en' (English), 'es' (Spanish), 'fi' (Finnish), 'fr' (French), 'hu' (Hungarian), 'it' (Italian), 'ja' (Japanese), 'ko' (Korean), 'nb' (Norwegian), 'nl' (Dutch), 'pl' (Polish), 'pt' (Portuguese), 'ru' (Russian), 'sv' (Swedish), 'th' (Thai), 'tr' (Turkish), 'zh' (Chinese).",
+          "type": "language",
+          "default": "en"
+        },
+        "image_id": {
+          "documentation": "The integer id of the image to display details for. Example: '15484942'. Required.",
+          "type": "int"
+        }
+      },
+      "example_url": "http://api.shutterstock.com/images/15484942",
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Displays details for a specific image.",
+        "get": "Gets data about the image with a provided image id."
+      }
+    },
+    "resource": "/images/<image_id>",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/images/%3Cimage_id%3E"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "parameters": {
+        "image_id": {
+          "documentation": "Images similar to this image id are shown. Accepted values are nonnegative integers.",
+          "type": "nonnegative integer"
+        },
+        "sort_method": {
+          "documentation": "How the results should be sorted. Accepted values are: 'newest', 'oldest', 'popular', 'random', 'relevance'.",
+          "type": "enum",
+          "default": "popular"
+        },
+        "page_number": {
+          "documentation": "Which page of results is wanted Accepted values are nonnegative integers.",
+          "type": "nonnegative integer"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Searches for images similar to a given image.",
+        "get": "Gets similar image results for provided image id."
+      }
+    },
+    "resource": "/images/<image_id>/similar",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/images/%3Cimage_id%3E/similar"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "show_modal": {
+          "documentation": "When true, a Content-Disposition header will be sent when the download URL is requested.  When false, no such header will be sent. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean",
+          "default": 1
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user. Required.",
+          "type": "str"
+        },
+        "auth_cookie_value": {
+          "documentation": "The value of a cookie which the client will need to send when requesting the download.shutterstock.com url returned by this route's response. Required when auth_cookie_value is present, optional otherwise.",
+          "type": "str"
+        },
+        "size": {
+          "documentation": "The size of the image to be downloaded. Required. Accepted values are: 'small', 'medium', 'huge', 'vector'.",
+          "type": "enum"
+        },
+        "format": {
+          "documentation": "The file format of the image to be downloaded. Required. Accepted values are: 'jpg', 'eps'.",
+          "type": "enum"
+        },
+        "image_id": {
+          "documentation": "The id of the image to download. Required. Accepted values are positive integers.",
+          "type": "positive integer"
+        },
+        "auth_cookie_name": {
+          "documentation": "The name of a cookie which the client will need to send when requesting the download.shutterstock.com url returned by this route's response. Required when auth_cookie_value is present, optional otherwise.",
+          "type": "str"
+        },
+        "metadata": {
+          "documentation": "Customer metadata for Premier account downloads. Required only for Premier-level image plans, ignored otherwise. Expects json representing a hash (aka associative array) with name/value pairs for enterprise downloads. Names by default are purchase_order, job, client, and other. By default, Premier accounts must specify a non-empty value for the purchase_order metadata, and all metadata fields values must be defined (even if their values are empty). Note that only the first 64 characters of each metadata value will be recorded, the remainder will be silently ignored. Also, some users may have the names of the metadata fields changed, and/or different fields required.  You can retrieve the metadata fields for your account by using the <a href=\"#customersusername\">/customers/&lt;username&gt;</a> endpoint.",
+          "type": "str"
+        },
+        "subscription_id": {
+          "documentation": "The id of the subscription to be used to download. The customer must be logged in, and the subscription id must be owned by the logged-in customer. Required. Accepted values are positive integers.",
+          "type": "positive integer"
+        },
+        "download_host": {
+          "documentation": "Hostname from which the download should occur.  Optional.",
+          "type": "str"
+        },
+        "editorial_acknowledgement": {
+          "documentation": "Indicates the end-user has agreed to editorial usage guidelines.  For editorial images, required to be 1.  Must be absent or 0 for non-editorial images. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "post"
+        }
+      ],
+      "description": {
+        "general": "Provides a URL to download an image and charges your account a license fee as needed.",
+        "post": "Allows client to download an image on behalf of an authenticated customer's account and charges the customer's account if necessary. Returns a temporary URL for the image to be downloaded, accessible only to the current client. Client must accept cookies for image to be downloaded."
+      }
+    },
+    "resource": "/subscriptions/<subscription_id>/images/<image_id>/sizes/<size>",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/subscriptions/%3Csubscription_id%3E/images/%3Cimage_id%3E/sizes/%3Csize%3E"
+  },
+  {
+    "info": {
+      "may_require_authorization": 1,
+      "parameters": {
+        "show_modal": {
+          "documentation": "When true, a Content-Disposition header will be sent when the download URL is requested.  When false, no such header will be sent. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean",
+          "default": 1
+        },
+        "auth_token": {
+          "documentation": "A token returned from /auth/customer to identify an authenticated user. Required.",
+          "type": "str"
+        },
+        "auth_cookie_value": {
+          "documentation": "The value of a cookie which the client will need to send when requesting the download.shutterstock.com url returned by this route's response. Required when auth_cookie_value is present, optional otherwise.",
+          "type": "str"
+        },
+        "size": {
+          "documentation": "The size of the video to be downloaded. The size to use is the internal_name key returned by the /videos/&lt;video_id&gt; resource. Required. Accepted values are: 'lowres', 'sd', 'hd', 'original'.",
+          "type": "enum"
+        },
+        "video_id": {
+          "documentation": "The id of the video to download. Required. Accepted values are positive integers.",
+          "type": "positive integer"
+        },
+        "auth_cookie_name": {
+          "documentation": "The name of a cookie which the client will need to send when requesting the download.shutterstock.com url returned by this route's response. Required when auth_cookie_value is present, optional otherwise.",
+          "type": "str"
+        },
+        "metadata": {
+          "documentation": "Customer metadata for enterprise downloads. Required only for enterprise subscriptions, ignored otherwise. Expects json representing a hash (aka associative array) with name/value pairs for enterprise downloads. Names by default are purchase_order, job, client, and other, and by default, enterprise subscriptions must specify a non-empty value for the purchase_order metadata, and all metadata fields values must be defined (even if their values are empty). Note that only the first 64 characters of each metadata value will be recorded, the remainder will be silently ignored. Also, some users may have the names of the metadata fields changed, and/or different fields required.",
+          "type": "str"
+        },
+        "subscription_id": {
+          "documentation": "The id of the subscription to be used to download. The customer must be logged in, and the subscription id must be owned by the logged-in customer. Required. Accepted values are nonnegative integers.",
+          "type": "nonnegative integer"
+        },
+        "download_host": {
+          "documentation": "Hostname from which the download should occur.  Optional.",
+          "type": "str"
+        },
+        "editorial_acknowledgement": {
+          "documentation": "Indicates the end-user has agreed to editorial usage guidelines.  For editorial videos, required to be 1.  Must be absent or 0 for non-editorial images. Accepted values are 1 for true and 0 for false.",
+          "type": "boolean"
+        }
+      },
+      "supported_methods": [
+        {
+          "requires_permission": 1,
+          "method": "post"
+        }
+      ],
+      "description": {
+        "general": "Provides a URL for a customer to download a video and charges their account as needed. If a customer has had multiple subscriptions with Shutterstock, some previously-downloaded videos may be available for redownload without charge. It is the client's responsibility to check for this and use the correct subscription id under which the video was originally purchased. Otherwise, the download will count against the subscription id provided.",
+        "post": "Allows client to download a video on behalf of an authenticated customer's account and charges the customer's account if necessary. Returns a temporary URL for the video to be downloaded, accessible only to the current client. Client must accept cookies for video to be downloaded."
+      }
+    },
+    "resource": "/subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>",
+    "order": 10,
+    "resource_url": "http://api.shutterstock.com/subscriptions/%3Csubscription_id%3E/videos/%3Cvideo_id%3E/sizes/%3Csize%3E"
+  },
+  {
+    "info": {
+      "may_require_authorization": 0,
+      "supported_methods": [
+        {
+          "requires_permission": 0,
+          "method": "get"
+        }
+      ],
+      "description": {
+        "general": "Displays all image categories and their category ids.",
+        "get": "Displays all image categories and their category ids."
+      }
+    },
+    "resource": "/categories",
+    "order": 20,
+    "resource_url": "http://api.shutterstock.com/categories"
+  }
+]

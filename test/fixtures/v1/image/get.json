@@ -1,0 +1,111 @@
+{
+  "illustration": 0,
+  "r_rated": "0",
+  "resource_url": "http://api.shutterstock.com/images/108559295",
+  "model_release": {
+    "translation_id": "N_A",
+    "code": "0"
+  },
+  "vector_type": null,
+  "keywords": [
+    "adorable",
+    "animal",
+    "ass",
+    "background",
+    "brown",
+    "cattle",
+    "creature",
+    "cut",
+    "cute",
+    "domestic",
+    "donkey",
+    "dun",
+    "ears",
+    "farm",
+    "foal",
+    "full",
+    "grey",
+    "head",
+    "headstrong",
+    "herbivorous",
+    "horizontal",
+    "isolated",
+    "life",
+    "livestock",
+    "mammal",
+    "mane",
+    "mule",
+    "mulish",
+    "nature",
+    "one",
+    "portrait",
+    "profile",
+    "shot",
+    "side",
+    "standing",
+    "stubborn",
+    "vertebrate",
+    "view",
+    "white",
+    "wild",
+    "young"
+  ],
+  "web_url": "http://www.shutterstock.com/pic.mhtml?id=108559295",
+  "added_date": "2012-07-25",
+  "photo_id": "108559295",
+  "enhanced_license_available": "1",
+  "categories": [
+    {
+      "category_id": "1",
+      "category": "Animals/Wildlife"
+    },
+    {
+      "category_id": "22",
+      "category": "Miscellaneous"
+    }
+  ],
+  "sizes": {
+    "small": {
+      "width": "500",
+      "file_size_kb": "74",
+      "height": "368",
+      "display_name": "Small"
+    },
+    "supersize": {
+      "file_size_kb": "6684"
+    },
+    "mosaic_250": {
+      "url": "http://thumb7.shutterstock.com/photos/mosaic_250/371512/108559295.jpg"
+    },
+    "preview": {
+      "url": "http://thumb7.shutterstock.com/photos/display_pic_with_logo/371512/108559295.jpg"
+    },
+    "thumb_large": {
+      "width": "150",
+      "url": "http://thumb7.shutterstock.com/photos/thumb_large/371512/108559295.jpg",
+      "height": "110"
+    },
+    "medium": {
+      "width": "1000",
+      "file_size_kb": "260",
+      "height": "736",
+      "display_name": "Medium"
+    },
+    "thumb_small": {
+      "width": "100",
+      "url": "http://thumb7.shutterstock.com/photos/thumb_small/371512/108559295.jpg",
+      "img": "http://thumb7.shutterstock.com/photos/thumb_small/371512/108559295.jpg",
+      "height": "74"
+    },
+    "huge": {
+      "width": "3449",
+      "file_size_kb": "1829",
+      "height": "2538",
+      "display_name": "Large"
+    }
+  },
+  "description": "Donkey isolated on white",
+  "is_vector": 0,
+  "submitter_id": "371512",
+  "submitter": "Coprid"
+}
