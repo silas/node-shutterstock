@@ -15,38 +15,40 @@ var shutterstock = require('../lib');
  * Config
  */
 
-var config = exports.config = {
-  api_username: '',
-  api_password: '',
-  auth_username: '',
-  auth_password: '',
-  client_id: '',
-  client_secret: '',
-};
-
-Object.keys(config).forEach(function(key) {
-  var envName = 'SHUTTERSTOCK_' + key.toUpperCase();
-  var defaultValue = config[key];
-  var value = process.env[envName];
-
-  if (value) {
-    if (typeof defaultValue === 'number') {
-      value = parseInt(value, 10);
-    }
-    config[key] = value;
-  } else if (!defaultValue) {
-    throw new Error(envName + ' required');
-  }
-});
-
-debug('config', config);
-
 exports.nock = { off: process.env.NOCK_OFF === 'true' };
 exports.nock.on = !exports.nock.off;
 exports.nock.rec = !!process.env.NOCK_REC;
 
 exports.nock.describe = exports.nock.on ? describe : describe.skip;
 exports.nock.it = exports.nock.on ? it : it.skip;
+
+var config = exports.config = {
+  api_username: 'api-username',
+  api_password: 'api-password',
+  auth_username: 'john',
+  auth_password: 'secret',
+  client_id: 'a134a44b2220a831d511',
+  client_secret: '0498a3442cf2ad2d11efbda32a32fa26a20d229c',
+};
+
+if (exports.nock.off) {
+  Object.keys(config).forEach(function(key) {
+    var envName = 'SHUTTERSTOCK_' + key.toUpperCase();
+    var defaultValue = config[key];
+    var value = process.env[envName];
+
+    if (value) {
+      if (typeof defaultValue === 'number') {
+        value = parseInt(value, 10);
+      }
+      config[key] = value;
+    } else if (!defaultValue) {
+      throw new Error(envName + ' required');
+    }
+  });
+
+  debug('config', config);
+}
 
 /**
  * Nock
