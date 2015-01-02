@@ -1,6 +1,6 @@
 # Shutterstock [![Build Status](https://secure.travis-ci.org/silas/node-shutterstock.png?branch=master)](http://travis-ci.org/silas/node-shutterstock)
 
-This is a Node.js [Shutterstock API][api] client.
+This is a Node.js [Shutterstock API][v2] client.
 
  * [Usage](#usage)
  * [Documentation](#documentation)
