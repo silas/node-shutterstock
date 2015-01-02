@@ -37,6 +37,8 @@ api.image.get('108559295', function(err, data) {
  * [shutterstock.v2](#v2)
    * [v2.image.get](#v2.image.get)
    * [v2.image.search](#v2.image.search)
+   * [v2.video.get](#v2.video.get)
+   * [v2.video.search](#v2.video.search)
  * [shutterstock.v1](#v1)
    * [v1.echo](#v1.echo)
    * [v1.image.search](#v1.image.search)
@@ -128,6 +130,50 @@ Usage
 
 ``` javascript
 v2.image.search('donkey', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.video.get"/>
+#### v2.video.get(options, callback)
+
+Get details for a specified video.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/video/get)
+
+ * id (String): video ID
+ * view (String, optional): render view
+
+Usage
+
+``` javascript
+v2.image.get('5869544', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.video.search"/>
+#### v2.video.search(options, callback)
+
+Search videos.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/video/search)
+
+ * query (String, optional): query string
+ * page (Number, default: 1): page to return
+ * per_page (Number, default: 20): number of results to return per page
+ * sort (String, default: popular): sort results
+
+And many more, see options for more details.
+
+Usage
+
+``` javascript
+v2.video.search('donkey', function(err, data) {
   if (err) throw err;
 
   console.log(data);

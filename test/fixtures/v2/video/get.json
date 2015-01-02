@@ -1,0 +1,124 @@
+{
+  "keywords": [
+    "beautiful",
+    "brook",
+    "cascade",
+    "chiang mai",
+    "doi inthanon",
+    "fall",
+    "famous",
+    "flow",
+    "flowing",
+    "forest",
+    "fresh",
+    "green",
+    "hardy",
+    "land",
+    "landscape",
+    "leaf",
+    "maekang",
+    "maeklang",
+    "mountain",
+    "national park",
+    "natural",
+    "natural lighting",
+    "nature",
+    "outdoor",
+    "park",
+    "portugal",
+    "river",
+    "rock",
+    "season",
+    "slow motion",
+    "spring",
+    "stone",
+    "stream",
+    "summer",
+    "thailand",
+    "travel",
+    "water",
+    "watercourse",
+    "waterfall",
+    "wild"
+  ],
+  "media_type": "video",
+  "id": "5869544",
+  "aspect": 1.778,
+  "duration": 24,
+  "categories": [
+    {
+      "id": "12",
+      "name": "Nature"
+    }
+  ],
+  "description": "Mae Klang Waterfall of inthanon national park, chiang mai, thailand (slow motion shot)",
+  "contributor": {
+    "id": "943678"
+  },
+  "is_adult": false,
+  "aspect_ratio": "16:9",
+  "added_date": "2014-03-16",
+  "assets": {
+    "thumb_webm": {
+      "url": "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/stock-footage-mae-klang-waterfall-of-inthanon-national-park-chiang-mai-thailand-slow-motion-shot.webm"
+    },
+    "thumb_mp4": {
+      "url": "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/stock-footage-mae-klang-waterfall-of-inthanon-national-park-chiang-mai-thailand-slow-motion-shot.mp4"
+    },
+    "preview_webm": {
+      "url": "http://ak3.picdn.net/shutterstock/videos/5869544/preview/stock-footage-mae-klang-waterfall-of-inthanon-national-park-chiang-mai-thailand-slow-motion-shot.webm"
+    },
+    "preview_mp4": {
+      "url": "http://ak3.picdn.net/shutterstock/videos/5869544/preview/stock-footage-mae-klang-waterfall-of-inthanon-national-park-chiang-mai-thailand-slow-motion-shot.mp4"
+    },
+    "thumb_jpgs": {
+      "urls": [
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/1.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/2.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/3.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/4.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/5.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/6.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/7.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/8.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/9.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/10.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/11.jpg",
+        "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/12.jpg"
+      ]
+    },
+    "thumb_jpg": {
+      "url": "http://ak3.picdn.net/shutterstock/videos/5869544/thumb/1.jpg"
+    },
+    "preview_jpg": {
+      "url": "http://ak3.picdn.net/shutterstock/videos/5869544/preview/stock-footage-mae-klang-waterfall-of-inthanon-national-park-chiang-mai-thailand-slow-motion-shot.jpg"
+    },
+    "hd": {
+      "width": 1920,
+      "file_size": 655958016,
+      "height": 1080,
+      "display_name": "Original HD",
+      "format": "jpeg",
+      "fps": 23.98,
+      "is_licensable": true
+    },
+    "web": {
+      "width": 426,
+      "file_size": 15313920,
+      "height": 240,
+      "display_name": "Low Resolution MPEG",
+      "format": "mov",
+      "fps": 23.98,
+      "is_licensable": true
+    },
+    "sd": {
+      "width": 852,
+      "file_size": 54574080,
+      "height": 480,
+      "display_name": "Standard Definition MPEG",
+      "format": "mov",
+      "fps": 23.98,
+      "is_licensable": true
+    }
+  }
+}
