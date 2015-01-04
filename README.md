@@ -81,6 +81,7 @@ Options
 
  * clientId (String): OAuth2 client ID
  * clientSecret (String): OAuth2 client secret
+ * accessToken (String, optional): OAuth2 access token
  * timeout (Number, default: 30000ms): number of milliseconds before request is aborted
 
 Usage
