@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "aspect": 1.3589,
+      "description": "Donkey isolated on white",
+      "media_type": "image",
+      "id": "108559295",
+      "contributor": {
+        "id": "371512"
+      },
+      "image_type": "photo",
+      "assets": {
+        "preview": {
+          "width": 450,
+          "url": "http://image.shutterstock.com/display_pic_with_logo/371512/108559295/stock-photo-donkey-isolated-on-white-108559295.jpg",
+          "height": 331
+        },
+        "small_thumb": {
+          "width": 100,
+          "url": "http://thumb7.shutterstock.com/thumb_small/371512/108559295/stock-photo-donkey-isolated-on-white-108559295.jpg",
+          "height": 74
+        },
+        "large_thumb": {
+          "width": 150,
+          "url": "http://thumb7.shutterstock.com/thumb_large/371512/108559295/stock-photo-donkey-isolated-on-white-108559295.jpg",
+          "height": 110
+        }
+      }
+    },
+    {
+      "aspect": 1.5,
+      "description": "Grey donkey in field",
+      "media_type": "image",
+      "id": "143051491",
+      "contributor": {
+        "id": "1150712"
+      },
+      "image_type": "photo",
+      "assets": {
+        "preview": {
+          "width": 450,
+          "url": "http://image.shutterstock.com/display_pic_with_logo/1150712/143051491/stock-photo-grey-donkey-in-field-143051491.jpg",
+          "height": 300
+        },
+        "small_thumb": {
+          "width": 100,
+          "url": "http://thumb7.shutterstock.com/thumb_small/1150712/143051491/stock-photo-grey-donkey-in-field-143051491.jpg",
+          "height": 67
+        },
+        "large_thumb": {
+          "width": 150,
+          "url": "http://thumb7.shutterstock.com/thumb_large/1150712/143051491/stock-photo-grey-donkey-in-field-143051491.jpg",
+          "height": 100
+        }
+      }
+    }
+  ]
+}

@@ -35,8 +35,10 @@ api.image.get('108559295', function(err, data) {
 ## Documentation
 
  * [shutterstock.v2](#v2)
+   * [v2.image.list](#v2.image.list)
    * [v2.image.get](#v2.image.get)
    * [v2.image.search](#v2.image.search)
+   * [v2.video.list](#v2.video.list)
    * [v2.video.get](#v2.video.get)
    * [v2.video.search](#v2.video.search)
  * [shutterstock.v1](#v1)
@@ -92,6 +94,26 @@ var v2 = shutterstock.v2({
 });
 ```
 
+<a name="v2.image.list"/>
+#### v2.image.list(options, callback)
+
+Get details for multiple images.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/list)
+
+ * id (String[]): image IDs
+ * view (String, optional): render view
+
+Usage
+
+``` javascript
+v2.image.list(['108559295', '143051491'], function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
 <a name="v2.image.get"/>
 #### v2.image.get(options, callback)
 
@@ -130,6 +152,26 @@ Usage
 
 ``` javascript
 v2.image.search('donkey', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.video.list"/>
+#### v2.video.list(options, callback)
+
+Get details for multiple videos.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/video/list)
+
+ * id (String[]): video IDs
+ * view (String, optional): render view
+
+Usage
+
+``` javascript
+v2.video.list(['108559295', '143051491'], function(err, data) {
   if (err) throw err;
 
   console.log(data);

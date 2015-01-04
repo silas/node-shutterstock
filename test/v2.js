@@ -4,8 +4,10 @@
  * Module dependencies.
  */
 
+var lodash = require('lodash');
 var fixtures = require('fixturefiles');
 var should = require('should');
+var querystring = require('querystring');
 
 var helper = require('./helper');
 
@@ -16,6 +18,56 @@ var helper = require('./helper');
 describe('v2', function() {
   before(helper.beforeV2);
   beforeEach(helper.beforeEach);
+
+  describe('image.list', function() {
+    it('should return list of images', function(done) {
+      var ids = ['108559295', '143051491'];
+
+      this.nock
+        .get('/v2/images?' + querystring.stringify({ id: ids }))
+        .reply(200, fixtures.v2.image.list);
+
+      this.api.image.list(ids, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.instanceof.Array;
+        data.data.should.have.length(2);
+
+        lodash.each(data.data, function(data) {
+          data.should.have.keys(
+            'id',
+            'aspect',
+            'assets',
+            'contributor',
+            'description',
+            'image_type',
+            'media_type'
+          );
+        });
+
+        done();
+      });
+    });
+
+    it('should return when images not found', function(done) {
+      var ids = ['1'];
+
+      this.nock
+        .get('/v2/images?' + querystring.stringify({ id: ids }))
+        .reply(200, { data: [] });
+
+      this.api.image.list(ids, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.empty;
+
+        done();
+      });
+    });
+  });
 
   describe('image.get', function() {
     it('should return image details', function(done) {
@@ -93,6 +145,57 @@ describe('v2', function() {
         data.should.have.property('per_page', 20);
         data.should.have.property('total_count');
         data.total_count.should.be.above(20);
+
+        done();
+      });
+    });
+  });
+
+  describe('video.list', function() {
+    it('should return list of videos', function(done) {
+      var ids = ['5869544', '3816467'];
+
+      this.nock
+        .get('/v2/videos?' + querystring.stringify({ id: ids }))
+        .reply(200, fixtures.v2.video.list);
+
+      this.api.video.list(ids, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.instanceof.Array;
+        data.data.should.have.length(2);
+
+        lodash.each(data.data, function(data) {
+          data.should.have.keys(
+            'media_type',
+            'id',
+            'aspect',
+            'duration',
+            'description',
+            'contributor',
+            'aspect_ratio',
+            'assets'
+          );
+        });
+
+        done();
+      });
+    });
+
+    it('should return when videos not found', function(done) {
+      var ids = ['1'];
+
+      this.nock
+        .get('/v2/videos?' + querystring.stringify({ id: ids }))
+        .reply(200, { data: [] });
+
+      this.api.video.list(ids, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.empty;
 
         done();
       });
