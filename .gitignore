@@ -5,5 +5,6 @@
 .rock.yml
 config
 coverage
+hack.js
 node_modules
 tmp
