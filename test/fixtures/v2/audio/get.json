@@ -1,0 +1,75 @@
+{
+  "vocal_description": "",
+  "keywords": [
+    "Hip-Hop/Rap",
+    "Urban"
+  ],
+  "artists": [
+    {
+      "name": "Eric Liniger"
+    }
+  ],
+  "instruments": [
+    "Drums",
+    "Percussion"
+  ],
+  "id": "113011",
+  "isrc": "",
+  "description": "MTV Mainstream Music  Modern Pop Music  Hip Hop   Electronic  and Urban R&B Elements MTV Hip Hop  advertising   car commercial  commercial film music hip hop        beats uplifting  fun  bounce  claps  808  bass  energetic positive  exercise  dance  wellness  thumping beats  new future  tv theme beats thumping beats   pop enthrallment",
+  "similar_artists": [
+    {
+      "name": "Electronic"
+    }
+  ],
+  "releases": [],
+  "is_instrumental": true,
+  "title": "MTV Hip Hop",
+  "source_genres": [],
+  "is_adult": false,
+  "lyrics": "",
+  "media_type": "audio",
+  "recording_version": "main",
+  "moods": [
+    "Aggressive",
+    "Angry",
+    "Bright",
+    "Confident",
+    "Dramatic",
+    "Epic",
+    "Fiery",
+    "Sad"
+  ],
+  "language": "en",
+  "assets": {
+    "clean_audio": {
+      "file_size": 15285754
+    },
+    "original_audio": {
+      "file_size": 10299398
+    },
+    "preview_mp3": {
+      "file_size": 1387704,
+      "url": "http://picdn.net/shutterstock/audio/113011/preview/mtv_hip_hop.mp3"
+    },
+    "preview_ogg": {
+      "file_size": 1311922,
+      "url": "http://picdn.net/shutterstock/audio/113011/preview/mtv_hip_hop.ogg"
+    },
+    "waveform": {
+      "file_size": 15768,
+      "url": "http://picdn.net/shutterstock/audio/113011/waveform/mtv_hip_hop.png"
+    }
+  },
+  "contributor": {
+    "id": "2"
+  },
+  "genre": "Hip-Hop/Rap",
+  "album": {
+    "id": "4206",
+    "title": "Future Music 101"
+  },
+  "published_time": "2014-04-29T04:27:59-04:00",
+  "updated_time": "2014-12-05T16:05:06-05:00",
+  "bpm": 95,
+  "added_date": "2014-04-24"
+}

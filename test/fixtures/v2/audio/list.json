@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "id": "15326",
+      "description": "MTV Mainstream Music  Modern Pop Music  Hip Hop   Electronic  and Urban R&B Elements The Drums  advertising  car commercial  club music commercial          beats uplifting  fun  bounce  claps  808  bass  energetic positive  exercise  dance  wellness  thumping beats  new future  hip hop thumping beats  beats sound track tv tv theme surprise",
+      "assets": {
+        "clean_audio": {
+          "file_size": 16021930
+        },
+        "original_audio": {
+          "file_size": 9210174
+        },
+        "preview_mp3": {
+          "file_size": 1454160,
+          "url": "http://picdn.net/shutterstock/audio/15326/preview/the_drums.mp3"
+        },
+        "preview_ogg": {
+          "file_size": 1292991,
+          "url": "http://picdn.net/shutterstock/audio/15326/preview/the_drums.ogg"
+        },
+        "waveform": {
+          "file_size": 16782,
+          "url": "http://picdn.net/shutterstock/audio/15326/waveform/the_drums.png"
+        }
+      },
+      "title": "The Drums",
+      "media_type": "audio",
+      "contributor": {
+        "id": "2"
+      },
+      "album": {
+        "id": "4206",
+        "title": "Future Music 101"
+      },
+      "published_time": "2014-04-29T04:26:33-04:00",
+      "added_date": "2014-04-29"
+    },
+    {
+      "id": "113011",
+      "description": "MTV Mainstream Music  Modern Pop Music  Hip Hop   Electronic  and Urban R&B Elements MTV Hip Hop  advertising   car commercial  commercial film music hip hop        beats uplifting  fun  bounce  claps  808  bass  energetic positive  exercise  dance  wellness  thumping beats  new future  tv theme beats thumping beats   pop enthrallment",
+      "assets": {
+        "clean_audio": {
+          "file_size": 15285754
+        },
+        "original_audio": {
+          "file_size": 10299398
+        },
+        "preview_mp3": {
+          "file_size": 1387704,
+          "url": "http://picdn.net/shutterstock/audio/113011/preview/mtv_hip_hop.mp3"
+        },
+        "preview_ogg": {
+          "file_size": 1311922,
+          "url": "http://picdn.net/shutterstock/audio/113011/preview/mtv_hip_hop.ogg"
+        },
+        "waveform": {
+          "file_size": 15768,
+          "url": "http://picdn.net/shutterstock/audio/113011/waveform/mtv_hip_hop.png"
+        }
+      },
+      "title": "MTV Hip Hop",
+      "media_type": "audio",
+      "contributor": {
+        "id": "2"
+      },
+      "album": {
+        "id": "4206",
+        "title": "Future Music 101"
+      },
+      "published_time": "2014-04-29T04:27:59-04:00",
+      "added_date": "2014-04-29"
+    }
+  ]
+}

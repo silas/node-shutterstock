@@ -4,7 +4,6 @@ This is a Node.js [Shutterstock API][v2] client.
 
  * [Usage](#usage)
  * [Documentation](#documentation)
- * [Todo](#todo)
  * [License](#license)
 
 ## Usage
@@ -35,6 +34,9 @@ api.image.get('108559295', function(err, data) {
 ## Documentation
 
  * [shutterstock.v2](#v2)
+   * [v2.audio.list](#v2.audio.list)
+   * [v2.audio.get](#v2.audio.get)
+   * [v2.audio.search](#v2.audio.search)
    * [v2.image.list](#v2.image.list)
    * [v2.image.get](#v2.image.get)
    * [v2.image.search](#v2.image.search)
@@ -95,6 +97,70 @@ var v2 = shutterstock.v2({
 });
 ```
 
+<a name="v2.audio.list"/>
+#### v2.audio.list(options, callback)
+
+Get details for multiple audio tracks.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/audio/list)
+
+ * id (String[]): track IDs
+ * view (String, optional): render view
+
+Usage
+
+``` javascript
+v2.audio.list(['113011', '15326'], function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.audio.get"/>
+#### v2.audio.get(options, callback)
+
+Get details for a specified track.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/audio/get)
+
+ * id (String): track ID
+ * view (String, optional): render view
+
+Usage
+
+``` javascript
+v2.audio.get('113011', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.audio.search"/>
+#### v2.audio.search(options, callback)
+
+Search tracks.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/audio/search)
+
+ * query (String, optional): query string
+ * page (Number, default: 1): page to return
+ * per_page (Number, default: 20): number of results to return per page
+ * sort (String, default: popular): sort results
+
+And many more, see official documentation for more details.
+
+Usage
+
+``` javascript
+v2.audio.search('beat', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
 <a name="v2.image.list"/>
 #### v2.image.list(options, callback)
 
@@ -147,7 +213,7 @@ Options - [Official Documentation](https://developers.shutterstock.com/api/v2/im
  * per_page (Number, default: 20): number of results to return per page
  * sort (String, default: popular): sort results
 
-And many more, see options for more details.
+And many more, see official documentation for more details.
 
 Usage
 
@@ -211,7 +277,7 @@ Options - [Official Documentation](https://developers.shutterstock.com/api/v2/vi
  * per_page (Number, default: 20): number of results to return per page
  * sort (String, default: popular): sort results
 
-And many more, see options for more details.
+And many more, see official documentation for more details.
 
 Usage
 
@@ -277,7 +343,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#imagessearch)
  * results_per_page (Number, default: 150): number of results to return per page
  * submitter_id (Number, optional): filter results by contributor ID
 
-And many more, see options for more details.
+And many more, see official documentation for more details.
 
 Usage
 
@@ -661,12 +727,6 @@ v1.video.get(6061547, function(err, data) {
   console.log(data);
 });
 ```
-
-## Todo
-
- * All of v2
- * `POST /subscriptions/<subscription_id>/images/<image_id>/sizes/<size>`
- * `POST /subscriptions/<subscription_id>/videos/<video_id>/sizes/<size>`
 
 ## License
 

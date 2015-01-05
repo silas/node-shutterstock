@@ -19,6 +19,138 @@ describe('v2', function() {
   before(helper.beforeV2);
   beforeEach(helper.beforeEach);
 
+  describe('audio.list', function() {
+    it('should return list of tracks', function(done) {
+      var ids = ['113011', '15326'];
+
+      this.nock
+        .get('/v2/audio?' + querystring.stringify({ id: ids }))
+        .reply(200, fixtures.v2.audio.list);
+
+      this.api.audio.list(ids, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.instanceof.Array;
+        data.data.should.have.length(2);
+
+        lodash.each(data.data, function(data) {
+          data.should.have.keys(
+            'id',
+            'added_date',
+            'album',
+            'assets',
+            'contributor',
+            'description',
+            'published_time',
+            'title',
+            'media_type'
+          );
+        });
+
+        done();
+      });
+    });
+
+    it('should return when audio not found', function(done) {
+      var ids = ['1'];
+
+      this.nock
+        .get('/v2/audio?' + querystring.stringify({ id: ids }))
+        .reply(200, { data: [] });
+
+      this.api.audio.list(ids, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.empty;
+
+        done();
+      });
+    });
+  });
+
+  describe('audio.get', function() {
+    it('should return audio details', function(done) {
+      var id = '113011';
+
+      this.nock
+        .get('/v2/audio/113011')
+        .reply(200, fixtures.v2.audio.get);
+
+      this.api.audio.get(id, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('id', id);
+        data.should.have.property('media_type', 'audio');
+        data.should.have.property('artists');
+        data.should.have.property('title', 'MTV Hip Hop');
+        data.should.have.property('contributor');
+        data.contributor.should.have.property('id', '2');
+        data.should.have.property('is_adult', false);
+        data.should.have.property('assets');
+
+        done();
+      });
+    });
+
+    it('should return audio not found', function(done) {
+      var id = 1;
+
+      this.nock
+        .get('/v2/audio/1')
+        .reply(404);
+
+      this.api.audio.get(id, function(err, data, res) {
+        should.exist(err);
+
+        err.message.should.equal('not found');
+        res.statusCode.should.equal(404);
+
+        should.not.exist(data);
+
+        done();
+      });
+    });
+  });
+
+  describe('audio.search', function() {
+    it('should return all tracks', function(done) {
+      this.nock
+        .get('/v2/audio/search')
+        .reply(200, fixtures.v2.audio.search);
+
+      this.api.audio.search(function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('page', 1);
+        data.should.have.property('per_page', 20);
+        data.should.have.property('total_count');
+        data.total_count.should.be.above(20);
+
+        done();
+      });
+    });
+
+    it('should return query tracks for beat', function(done) {
+      this.nock
+        .get('/v2/audio/search?query=beat')
+        .reply(200, fixtures.v2.audio.search);
+
+      this.api.audio.search('beat', function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('page', 1);
+        data.should.have.property('per_page', 20);
+        data.should.have.property('total_count');
+        data.total_count.should.be.above(20);
+
+        done();
+      });
+    });
+  });
+
   describe('image.list', function() {
     it('should return list of images', function(done) {
       var ids = ['108559295', '143051491'];
@@ -71,16 +203,16 @@ describe('v2', function() {
 
   describe('image.get', function() {
     it('should return image details', function(done) {
-      var imageId = '108559295';
+      var id = '108559295';
 
       this.nock
         .get('/v2/images/108559295')
         .reply(200, fixtures.v2.image.get);
 
-      this.api.image.get(imageId, function(err, data) {
+      this.api.image.get(id, function(err, data) {
         should.not.exist(err);
 
-        data.should.have.property('id', imageId);
+        data.should.have.property('id', id);
         data.should.have.property('keywords');
         data.should.have.property('media_type', 'image');
         data.should.have.property('categories');
@@ -96,13 +228,13 @@ describe('v2', function() {
     });
 
     it('should return image not found', function(done) {
-      var imageId = 1;
+      var id = 1;
 
       this.nock
         .get('/v2/images/1')
         .reply(404);
 
-      this.api.image.get(imageId, function(err, data, res) {
+      this.api.image.get(id, function(err, data, res) {
         should.exist(err);
 
         err.message.should.equal('not found');
@@ -204,16 +336,16 @@ describe('v2', function() {
 
   describe('video.get', function() {
     it('should return video details', function(done) {
-      var videoId = '5869544';
+      var id = '5869544';
 
       this.nock
         .get('/v2/videos/5869544')
         .reply(200, fixtures.v2.video.get);
 
-      this.api.video.get(videoId, function(err, data) {
+      this.api.video.get(id, function(err, data) {
         should.not.exist(err);
 
-        data.should.have.property('id', videoId);
+        data.should.have.property('id', id);
         data.should.have.property('keywords');
         data.should.have.property('media_type', 'video');
         data.should.have.property('categories');
@@ -229,13 +361,13 @@ describe('v2', function() {
     });
 
     it('should return video not found', function(done) {
-      var videoId = 1;
+      var id = 1;
 
       this.nock
         .get('/v2/videos/1')
         .reply(404);
 
-      this.api.video.get(videoId, function(err, data, res) {
+      this.api.video.get(id, function(err, data, res) {
         should.exist(err);
 
         err.message.should.equal('not found');
