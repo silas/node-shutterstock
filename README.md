@@ -39,6 +39,7 @@ api.image.get('108559295', function(err, data) {
    * [v2.audio.search](#v2.audio.search)
    * [v2.image.list](#v2.image.list)
    * [v2.image.get](#v2.image.get)
+   * [v2.image.recommendations](#v2.image.recommendations)
    * [v2.image.search](#v2.image.search)
    * [v2.video.list](#v2.video.list)
    * [v2.video.get](#v2.video.get)
@@ -197,6 +198,28 @@ Usage
 
 ``` javascript
 v2.image.get('108559295', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.image.recommendations"/>
+#### v2.image.recommendations(options, callback)
+
+Return recommendations for specified images.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/recommendations)
+
+ * id (String[]): image IDs
+ * max_items (Number, default: 20): number of results to return
+
+And more, see official documentation for more details.
+
+Usage
+
+``` javascript
+v2.image.recommendations(['108559295', '143051491'], function(err, data) {
   if (err) throw err;
 
   console.log(data);

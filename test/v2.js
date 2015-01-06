@@ -247,6 +247,29 @@ describe('v2', function() {
     });
   });
 
+  describe('image.recommendations', function() {
+    it('should return recommendations for images', function(done) {
+      var ids = ['108559295', '143051491'];
+
+      this.nock
+        .get('/v2/images/recommendations?' + querystring.stringify({ id: ids }))
+        .reply(200, fixtures.v2.image.recommendations);
+
+      this.api.image.recommendations(ids, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.instanceof.Array;
+
+        lodash.each(data.data, function(item) {
+          item.should.have.property('id');
+        });
+
+        done();
+      });
+    });
+  });
+
   describe('image.search', function() {
     it('should return all images', function(done) {
       this.nock
