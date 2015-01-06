@@ -49,6 +49,7 @@ api.image.get('108559295', function(err, data) {
    * [v1.image.get](#v1.image.get)
    * [v1.image.similar](#v1.image.similar)
    * [v1.image.categories](#v1.image.categories)
+   * [v1.image.download](#v1.image.download)
    * [v1.customer.auth](#v1.customer.auth)
    * [v1.customer.register](#v1.customer.register)
    * [v1.customer.get](#v1.customer.get)
@@ -64,6 +65,7 @@ api.image.get('108559295', function(err, data) {
    * [v1.lightbox.remove](#v1.lightbox.remove)
    * [v1.video.search](#v1.video.search)
    * [v1.video.get](#v1.video.get)
+   * [v1.video.download](#v1.video.download)
 
 <a name="callback"/>
 ### Callback
@@ -410,6 +412,38 @@ v1.image.categories(function(err, data) {
 });
 ```
 
+<a name="v1.image.download"/>
+#### v1.image.download(options, callback)
+
+License image.
+
+Options - [Official Documentation](http://api.shutterstock.com/#subscriptionssubscription_idimagesimage_idsizessize)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * subscription_id (Number): photo subscription ID
+ * image_id (Number): image ID
+ * size (String): image size
+ * format (String): image format
+
+And more, see official documentation for more details.
+
+Usage
+
+``` javascript
+var opts = {
+  image_id: 108559295,
+  subscription_id: 123,
+  size: 'huge',
+  format: 'jpg',
+};
+
+v1.image.download(opts, function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
 <a name="v1.customer.auth"/>
 #### v1.customer.auth(options, callback)
 
@@ -444,7 +478,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
 Usage
 
 ``` javascript
-v1.customer.get({ auth_token: token, username: 'john' }, function(err, data) {
+v1.customer.get({ username: 'john' }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -492,7 +526,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
 Usage
 
 ``` javascript
-v1.customer.images({ auth_token: token, username: 'john' }, function(err, data) {
+v1.customer.images({ username: 'john' }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -512,7 +546,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
 Usage
 
 ``` javascript
-v1.customer.subscriptions({ auth_token: token, username: 'john' }, function(err, data) {
+v1.customer.subscriptions({ username: 'john' }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -534,7 +568,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
 Usage
 
 ``` javascript
-v1.lightbox.list({ auth_token: token, username: 'john' }, function(err, data) {
+v1.lightbox.list({ username: 'john' }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -555,7 +589,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
 Usage
 
 ``` javascript
-v1.lightbox.get({ auth_token: token, lightbox_id: 123 }, function(err, data) {
+v1.lightbox.get({ lightbox_id: 123 }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -575,7 +609,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
 Usage
 
 ``` javascript
-v1.lightbox.publicUrl({ auth_token: token, lightbox_id: 123 }, function(err, data) {
+v1.lightbox.publicUrl({ lightbox_id: 123 }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -596,7 +630,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#customersuserna
 Usage
 
 ``` javascript
-v1.lightbox.create({ auth_token: token, username: 'john', lightbox_name: 'Animals' }, function(err, data) {
+v1.lightbox.create({ username: 'john', lightbox_name: 'Animals' }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -617,7 +651,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
 Usage
 
 ``` javascript
-v1.lightbox.update({ auth_token: token, lightbox_id: 123, lightbox_name: 'Animals' }, function(err, data) {
+v1.lightbox.update({ lightbox_id: 123, lightbox_name: 'Animals' }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -637,7 +671,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
 Usage
 
 ``` javascript
-v1.lightbox.destroy({ auth_token: token, lightbox_id: 123 }, function(err, data) {
+v1.lightbox.destroy({ lightbox_id: 123 }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -658,7 +692,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
 Usage
 
 ``` javascript
-v1.lightbox.add({ auth_token: token, lightbox_id: 123, image_id: 108559295 }, function(err, data) {
+v1.lightbox.add({ lightbox_id: 123, image_id: 108559295 }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -679,7 +713,7 @@ Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslight
 Usage
 
 ``` javascript
-v1.lightbox.remove({ auth_token: token, lightbox_id: 123, image_id: 108559295 }, function(err, data) {
+v1.lightbox.remove({ lightbox_id: 123, image_id: 108559295 }, function(err, data) {
   if (err) throw err;
 
   console.log(data);
@@ -722,6 +756,36 @@ Usage
 
 ``` javascript
 v1.video.get(6061547, function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v1.video.download"/>
+#### v1.video.download(options, callback)
+
+License video.
+
+Options - [Official Documentation](http://api.shutterstock.com/#subscriptionssubscription_idvideosvideo_idsizessize)
+
+ * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
+ * subscription_id (Number): footage subscription ID
+ * video_id (Number): video ID
+ * size (String): video size
+
+And more, see official documentation for more details.
+
+Usage
+
+``` javascript
+var opts = {
+  video_id: 5869544,
+  subscription_id: 123,
+  size: 'hd',
+};
+
+v1.video.download(opts, function(err, data) {
   if (err) throw err;
 
   console.log(data);

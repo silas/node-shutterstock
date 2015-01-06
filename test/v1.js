@@ -63,6 +63,38 @@ describe('v1', function() {
     });
   });
 
+  helper.nock.describe('image.download', function() {
+    it('should license image', function(done) {
+      var id = 108559295;
+
+      this.nock
+        .post('/subscriptions/123/images/108559295/sizes/huge.json', {
+          format: 'jpg',
+          auth_token: '123',
+        })
+        .reply(200, fixtures.v1.image.download);
+
+      var opts = {
+        image_id: id,
+        subscription_id: config.image_subscription_id,
+        size: 'huge',
+        format: 'jpg',
+      };
+
+      this.api.image.download(opts, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('photo_id', id);
+        data.should.have.property('thumb_large');
+        data.should.have.property('allotment_charge');
+        data.should.have.property('download');
+        data.download.should.have.property('url');
+
+        done();
+      });
+    });
+  });
+
   describe('image.search', function() {
     it('should return image search results', function(done) {
       this.nock
@@ -585,6 +617,34 @@ describe('v1', function() {
 
       self.api.lightbox.remove(params, function(err) {
         should.not.exist(err);
+
+        done();
+      });
+    });
+  });
+
+  helper.nock.describe('video.download', function() {
+    it('should license video', function(done) {
+      var id = 5869544;
+
+      this.nock
+        .post('/subscriptions/123/videos/5869544/sizes/hd.json', { auth_token: '123' })
+        .reply(200, fixtures.v1.video.download);
+
+      var opts = {
+        video_id: id,
+        subscription_id: config.video_subscription_id,
+        size: 'hd',
+      };
+
+      this.api.video.download(opts, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('video_id', id);
+        data.should.have.property('thumb_large');
+        data.should.have.property('allotment_charge');
+        data.should.have.property('download');
+        data.download.should.have.property('url');
 
         done();
       });

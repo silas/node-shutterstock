@@ -29,6 +29,8 @@ var config = exports.config = {
   auth_password: 'secret',
   client_id: 'a134a44b2220a831d511',
   client_secret: '0498a3442cf2ad2d11efbda32a32fa26a20d229c',
+  image_subscription_id: '123',
+  video_subscription_id: '123',
 };
 
 if (exports.nock.off) {
