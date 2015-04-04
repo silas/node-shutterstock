@@ -41,6 +41,7 @@ api.image.get('108559295', function(err, data) {
    * [v2.image.get](#v2.image.get)
    * [v2.image.recommendations](#v2.image.recommendations)
    * [v2.image.search](#v2.image.search)
+   * [v2.image.similar](#v2.image.similar)
    * [v2.video.list](#v2.video.list)
    * [v2.video.get](#v2.video.get)
    * [v2.video.search](#v2.video.search)
@@ -250,6 +251,28 @@ v2.image.search('donkey', function(err, data) {
 });
 ```
 
+<a name="v2.image.similar"/>
+#### v2.image.similar(options, callback)
+
+Search images.
+
+Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/similar)
+
+ * id (String, optional): image ID
+ * page (Number, default: 1): page to return
+ * per_page (Number, default: 20): number of results to return per page
+ * sort (String, default: popular): sort results
+
+Usage
+
+``` javascript
+v2.image.similar('108559295', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
 <a name="v2.video.list"/>
 #### v2.video.list(options, callback)
 
@@ -283,7 +306,7 @@ Options - [Official Documentation](https://developers.shutterstock.com/api/v2/vi
 Usage
 
 ``` javascript
-v2.image.get('5869544', function(err, data) {
+v2.video.get('5869544', function(err, data) {
   if (err) throw err;
 
   console.log(data);
