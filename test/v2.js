@@ -105,7 +105,7 @@ describe('v2', function() {
       this.api.audio.get(id, function(err, data, res) {
         should.exist(err);
 
-        err.message.should.equal('not found');
+        err.message.should.equal('Not Found');
         res.statusCode.should.equal(404);
 
         should.not.exist(data);
@@ -237,7 +237,7 @@ describe('v2', function() {
       this.api.image.get(id, function(err, data, res) {
         should.exist(err);
 
-        err.message.should.equal('not found');
+        err.message.should.equal('Not Found');
         res.statusCode.should.equal(404);
 
         should.not.exist(data);
@@ -412,7 +412,7 @@ describe('v2', function() {
       this.api.video.get(id, function(err, data, res) {
         should.exist(err);
 
-        err.message.should.equal('not found');
+        err.message.should.equal('Not Found');
         res.statusCode.should.equal(404);
 
         should.not.exist(data);
