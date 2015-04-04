@@ -310,7 +310,7 @@ describe('v2', function() {
     it('should return similar images', function(done) {
       this.nock
         .get('/v2/images/123/similar')
-        .reply(200, fixtures.v2.image.search);
+        .reply(200, fixtures.v2.image.similar);
 
       this.api.image.similar(123, function(err, data) {
         should.not.exist(err);
@@ -446,6 +446,25 @@ describe('v2', function() {
         .reply(200, fixtures.v2.video.search);
 
       this.api.video.search('donkey', function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('page', 1);
+        data.should.have.property('per_page', 20);
+        data.should.have.property('total_count');
+        data.total_count.should.be.above(20);
+
+        done();
+      });
+    });
+  });
+
+  describe('video.similar', function() {
+    it('should return similar videos', function(done) {
+      this.nock
+        .get('/v2/videos/4535879/similar')
+        .reply(200, fixtures.v2.video.similar);
+
+      this.api.video.similar(4535879, function(err, data) {
         should.not.exist(err);
 
         data.should.have.property('page', 1);

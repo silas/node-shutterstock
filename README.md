@@ -45,6 +45,7 @@ api.image.get('108559295', function(err, data) {
    * [v2.video.list](#v2.video.list)
    * [v2.video.get](#v2.video.get)
    * [v2.video.search](#v2.video.search)
+   * [v2.video.similar](#v2.video.similar)
  * [shutterstock.v1](#v1)
    * [v1.echo](#v1.echo)
    * [v1.image.search](#v1.image.search)
@@ -254,7 +255,7 @@ v2.image.search('donkey', function(err, data) {
 <a name="v2.image.similar"/>
 #### v2.image.similar(options, callback)
 
-Search images.
+Get similar images.
 
 Options - [Documentation](https://developers.shutterstock.com/api/v2/image/similar)
 
@@ -331,6 +332,28 @@ Usage
 
 ``` javascript
 v2.video.search('donkey', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.video.similar"/>
+#### v2.video.similar(options, callback)
+
+Get similar videos.
+
+Options - [Documentation](https://developers.shutterstock.com/api/v2/video/similar)
+
+ * id (String, optional): video ID
+ * page (Number, default: 1): page to return
+ * per_page (Number, default: 20): number of results to return per page
+ * sort (String, default: popular): sort results
+
+Usage
+
+``` javascript
+v2.video.similar('4535879', function(err, data) {
   if (err) throw err;
 
   console.log(data);
