@@ -106,7 +106,7 @@ var v2 = shutterstock.v2({
 
 Get details for multiple audio tracks.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/audio/list)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/audio/list)
 
  * id (String[]): track IDs
  * view (String, optional): render view
@@ -126,7 +126,7 @@ v2.audio.list(['113011', '15326'], function(err, data) {
 
 Get details for a specified track.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/audio/get)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/audio/get)
 
  * id (String): track ID
  * view (String, optional): render view
@@ -146,7 +146,7 @@ v2.audio.get('113011', function(err, data) {
 
 Search tracks.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/audio/search)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/audio/search)
 
  * query (String, optional): query string
  * page (Number, default: 1): page to return
@@ -170,7 +170,7 @@ v2.audio.search('beat', function(err, data) {
 
 Get details for multiple images.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/list)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/image/list)
 
  * id (String[]): image IDs
  * view (String, optional): render view
@@ -190,7 +190,7 @@ v2.image.list(['108559295', '143051491'], function(err, data) {
 
 Get details for a specified image.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/get)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/image/get)
 
  * id (String): image ID
  * view (String, optional): render view
@@ -210,7 +210,7 @@ v2.image.get('108559295', function(err, data) {
 
 Return recommendations for specified images.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/recommendations)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/image/recommendations)
 
  * id (String[]): image IDs
  * max_items (Number, default: 20): number of results to return
@@ -232,7 +232,7 @@ v2.image.recommendations(['108559295', '143051491'], function(err, data) {
 
 Search images.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/search)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/image/search)
 
  * query (String, optional): query string
  * page (Number, default: 1): page to return
@@ -256,7 +256,7 @@ v2.image.search('donkey', function(err, data) {
 
 Search images.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/image/similar)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/image/similar)
 
  * id (String, optional): image ID
  * page (Number, default: 1): page to return
@@ -278,7 +278,7 @@ v2.image.similar('108559295', function(err, data) {
 
 Get details for multiple videos.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/video/list)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/video/list)
 
  * id (String[]): video IDs
  * view (String, optional): render view
@@ -298,7 +298,7 @@ v2.video.list(['108559295', '143051491'], function(err, data) {
 
 Get details for a specified video.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/video/get)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/video/get)
 
  * id (String): video ID
  * view (String, optional): render view
@@ -318,7 +318,7 @@ v2.video.get('5869544', function(err, data) {
 
 Search videos.
 
-Options - [Official Documentation](https://developers.shutterstock.com/api/v2/video/search)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/video/search)
 
  * query (String, optional): query string
  * page (Number, default: 1): page to return
@@ -364,7 +364,7 @@ var v1 = shutterstock.v1({
 
 Echo back specified options, used to check API connection and credentials.
 
-Options - [Official Documentation](https://api.shutterstock.com/#testecho)
+Options - [Documentation](https://api.shutterstock.com/#testecho)
 
  * key (String): value
 
@@ -383,7 +383,7 @@ v1.image.echo({ hello: 'world' }, function(err, data) {
 
 Search images.
 
-Options - [Official Documentation](https://api.shutterstock.com/#imagessearch)
+Options - [Documentation](https://api.shutterstock.com/#imagessearch)
 
  * searchterm (String): search query
  * sort_method (String, default: popular): sort results
@@ -408,7 +408,7 @@ v1.image.search('donkey', function(err, data) {
 
 Get details for a specified image.
 
-Options - [Official Documentation](https://api.shutterstock.com/#imagesimage_id)
+Options - [Documentation](https://api.shutterstock.com/#imagesimage_id)
 
  * image_id (Number): image ID
 
@@ -427,7 +427,7 @@ v1.image.get(108559295, function(err, data) {
 
 Get images similar to a specified image.
 
-Options - [Official Documentation](https://api.shutterstock.com/#imagesimage_idsimilar)
+Options - [Documentation](https://api.shutterstock.com/#imagesimage_idsimilar)
 
  * image_id (Number): image ID
 
@@ -446,7 +446,7 @@ v1.image.similar(108559295, function(err, data) {
 
 Get all image categories.
 
-[Official Documentation](https://api.shutterstock.com/#categories)
+[Documentation](https://api.shutterstock.com/#categories)
 
 Usage
 
@@ -463,7 +463,7 @@ v1.image.categories(function(err, data) {
 
 License image.
 
-Options - [Official Documentation](http://api.shutterstock.com/#subscriptionssubscription_idimagesimage_idsizessize)
+Options - [Documentation](http://api.shutterstock.com/#subscriptionssubscription_idimagesimage_idsizessize)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * subscription_id (Number): photo subscription ID
@@ -495,7 +495,7 @@ v1.image.download(opts, function(err, data) {
 
 Authenticate as a user.
 
-Options - [Official Documentation](https://api.shutterstock.com/#authcustomer)
+Options - [Documentation](https://api.shutterstock.com/#authcustomer)
 
  * email (String): user's email, required if username not specified
  * username (String): user's username, required if email not specified
@@ -516,7 +516,7 @@ v1.customer.auth({ username: 'john', password: 'secret' }, function(err, data) {
 
 Get user information.
 
-Options - [Official Documentation](https://api.shutterstock.com/#customersusername)
+Options - [Documentation](https://api.shutterstock.com/#customersusername)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -536,7 +536,7 @@ v1.customer.get({ username: 'john' }, function(err, data) {
 
 Create new customer account.
 
-Options - [Official Documentation](https://api.shutterstock.com/#customersusername)
+Options - [Documentation](https://api.shutterstock.com/#customersusername)
 
  * email (String): new user's email address
  * username (String): new user's username
@@ -558,7 +558,7 @@ v1.customer.register({ email: 'john@example.org', username: 'john', password: 's
 Get user's image downloads and the subscriptions under which they
 were downloaded.
 
-Options - [Official Documentation](https://api.shutterstock.com/#customersusernameimagesdownloads)
+Options - [Documentation](https://api.shutterstock.com/#customersusernameimagesdownloads)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -584,7 +584,7 @@ v1.customer.images({ username: 'john' }, function(err, data) {
 
 Get customer subscriptions.
 
-Options - [Official Documentation](https://api.shutterstock.com/#customersusernamesubscriptions)
+Options - [Documentation](https://api.shutterstock.com/#customersusernamesubscriptions)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -604,7 +604,7 @@ v1.customer.subscriptions({ username: 'john' }, function(err, data) {
 
 Get customer lightboxes.
 
-Options - [Official Documentation](https://api.shutterstock.com/#customersusernamelightboxes)
+Options - [Documentation](https://api.shutterstock.com/#customersusernamelightboxes)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -626,7 +626,7 @@ v1.lightbox.list({ username: 'john' }, function(err, data) {
 
 Get contents of lightbox.
 
-Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
+Options - [Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -647,7 +647,7 @@ v1.lightbox.get({ lightbox_id: 123 }, function(err, data) {
 
 Return public URL for lightbox.
 
-Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_idpublic_url)
+Options - [Documentation](https://api.shutterstock.com/#lightboxeslightbox_idpublic_url)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -667,7 +667,7 @@ v1.lightbox.publicUrl({ lightbox_id: 123 }, function(err, data) {
 
 Create new lightbox.
 
-Options - [Official Documentation](https://api.shutterstock.com/#customersusernamelightboxes)
+Options - [Documentation](https://api.shutterstock.com/#customersusernamelightboxes)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * username (String): user's username
@@ -688,7 +688,7 @@ v1.lightbox.create({ username: 'john', lightbox_name: 'Animals' }, function(err,
 
 Update lightbox.
 
-Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
+Options - [Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -709,7 +709,7 @@ v1.lightbox.update({ lightbox_id: 123, lightbox_name: 'Animals' }, function(err,
 
 Delete lightbox.
 
-Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
+Options - [Documentation](https://api.shutterstock.com/#lightboxeslightbox_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -729,7 +729,7 @@ v1.lightbox.destroy({ lightbox_id: 123 }, function(err, data) {
 
 Add image to lightbox.
 
-Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
+Options - [Documentation](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -750,7 +750,7 @@ v1.lightbox.add({ lightbox_id: 123, image_id: 108559295 }, function(err, data) {
 
 Remove image from lightbox.
 
-Options - [Official Documentation](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
+Options - [Documentation](https://api.shutterstock.com/#lightboxeslightbox_idimagesimage_id)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * lightbox_id (Number): lightbox ID
@@ -771,7 +771,7 @@ v1.lightbox.remove({ lightbox_id: 123, image_id: 108559295 }, function(err, data
 
 Search videos.
 
-Options - [Official Documentation](https://api.shutterstock.com/#videossearch)
+Options - [Documentation](https://api.shutterstock.com/#videossearch)
 
  * searchterm (String): search query
  * sort_method (String, default: popular): sort results
@@ -794,7 +794,7 @@ v1.video.search('donkey', function(err, data) {
 
 Get details for a specified video.
 
-Options - [Official Documentation](https://api.shutterstock.com/#videosvideo_id)
+Options - [Documentation](https://api.shutterstock.com/#videosvideo_id)
 
  * video_id (Number): video ID
 
@@ -813,7 +813,7 @@ v1.video.get(6061547, function(err, data) {
 
 License video.
 
-Options - [Official Documentation](http://api.shutterstock.com/#subscriptionssubscription_idvideosvideo_idsizessize)
+Options - [Documentation](http://api.shutterstock.com/#subscriptionssubscription_idvideosvideo_idsizessize)
 
  * auth_token (String): authentication token, get from [customer.auth](#v1.customer.auth)
  * subscription_id (Number): footage subscription ID
