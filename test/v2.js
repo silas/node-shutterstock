@@ -100,7 +100,7 @@ describe('v2', function() {
 
       this.nock
         .get('/v2/audio/1')
-        .reply(404);
+        .reply(404, { message: 'Not Found' });
 
       this.api.audio.get(id, function(err, data, res) {
         should.exist(err);
@@ -232,7 +232,7 @@ describe('v2', function() {
 
       this.nock
         .get('/v2/images/1')
-        .reply(404);
+        .reply(404, { message: 'Not Found' });
 
       this.api.image.get(id, function(err, data, res) {
         should.exist(err);
@@ -407,7 +407,7 @@ describe('v2', function() {
 
       this.nock
         .get('/v2/videos/1')
-        .reply(404);
+        .reply(404, { message: 'Not Found' });
 
       this.api.video.get(id, function(err, data, res) {
         should.exist(err);
