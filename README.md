@@ -37,6 +37,7 @@ api.image.get('108559295', function(err, data) {
    * [v2.audio.list](#v2.audio.list)
    * [v2.audio.get](#v2.audio.get)
    * [v2.audio.search](#v2.audio.search)
+   * [v2.image.categories](#v2.image.categories)
    * [v2.image.list](#v2.image.list)
    * [v2.image.get](#v2.image.get)
    * [v2.image.recommendations](#v2.image.recommendations)
@@ -160,6 +161,23 @@ Usage
 
 ``` javascript
 v2.audio.search('beat', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.image.categories"/>
+#### v2.image.categories(callback)
+
+Get all image categories.
+
+[Documentation](https://developers.shutterstock.com/api/v2/image/categories)
+
+Usage
+
+``` javascript
+v2.image.categories(function(err, data) {
   if (err) throw err;
 
   console.log(data);
