@@ -31,7 +31,7 @@ describe('v2', function() {
         should.not.exist(err);
 
         data.should.have.property('data');
-        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.an.Array;
         data.data.should.have.length(2);
 
         lodash.each(data.data, function(data) {
@@ -63,7 +63,7 @@ describe('v2', function() {
         should.not.exist(err);
 
         data.should.have.property('data');
-        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.an.Array;
         data.data.should.be.empty;
 
         done();
@@ -151,6 +151,23 @@ describe('v2', function() {
     });
   });
 
+  describe('image.categories', function() {
+    it('should return image categories', function(done) {
+      this.nock
+        .get('/v2/images/categories')
+        .reply(200, fixtures.v2.image.categories);
+
+      this.api.image.categories(function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('data');
+        data.data.should.be.an.Array;
+
+        done();
+      });
+    });
+  });
+
   describe('image.list', function() {
     it('should return list of images', function(done) {
       var ids = ['108559295', '143051491'];
@@ -163,7 +180,7 @@ describe('v2', function() {
         should.not.exist(err);
 
         data.should.have.property('data');
-        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.an.Array;
         data.data.should.have.length(2);
 
         lodash.each(data.data, function(data) {
@@ -193,7 +210,7 @@ describe('v2', function() {
         should.not.exist(err);
 
         data.should.have.property('data');
-        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.an.Array;
         data.data.should.be.empty;
 
         done();
@@ -259,7 +276,7 @@ describe('v2', function() {
         should.not.exist(err);
 
         data.should.have.property('data');
-        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.an.Array;
 
         lodash.each(data.data, function(item) {
           item.should.have.property('id');
@@ -337,7 +354,7 @@ describe('v2', function() {
         should.not.exist(err);
 
         data.should.have.property('data');
-        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.an.Array;
         data.data.should.have.length(2);
 
         lodash.each(data.data, function(data) {
@@ -368,7 +385,7 @@ describe('v2', function() {
         should.not.exist(err);
 
         data.should.have.property('data');
-        data.data.should.be.an.instanceof.Array;
+        data.data.should.be.an.Array;
         data.data.should.be.empty;
 
         done();
