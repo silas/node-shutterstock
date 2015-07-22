@@ -151,6 +151,24 @@ describe('v2', function() {
     });
   });
 
+  describe('contributor.get', function() {
+    it('should return contributor information', function(done) {
+      var id = '164782';
+
+      this.nock
+        .get('/v2/contributors/164782')
+        .reply(200, fixtures.v2.contributor.get);
+
+      this.api.contributor.get(id, function(err, data) {
+        should.not.exist(err);
+
+        data.should.have.property('id', id);
+
+        done();
+      });
+    });
+  });
+
   describe('image.categories', function() {
     it('should return image categories', function(done) {
       this.nock
