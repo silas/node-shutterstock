@@ -37,6 +37,7 @@ api.image.get('108559295', function(err, data) {
    * [v2.audio.list](#v2.audio.list)
    * [v2.audio.get](#v2.audio.get)
    * [v2.audio.search](#v2.audio.search)
+   * [v2.contributor.get](#v2.contributor.get)
    * [v2.image.categories](#v2.image.categories)
    * [v2.image.list](#v2.image.list)
    * [v2.image.get](#v2.image.get)
@@ -161,6 +162,25 @@ Usage
 
 ``` javascript
 v2.audio.search('beat', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.contributor.get"/>
+#### v2.contributor.get(options, callback)
+
+Search tracks.
+
+Options - [Documentation](https://developers.shutterstock.com/api/v2/contributors/get)
+
+  * id (String): contributor ID
+
+Usage
+
+``` javascript
+v2.contributor.get('164782', function(err, data) {
   if (err) throw err;
 
   console.log(data);
