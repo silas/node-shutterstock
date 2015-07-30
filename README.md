@@ -38,6 +38,8 @@ api.image.get('108559295', function(err, data) {
    * [v2.audio.get](#v2.audio.get)
    * [v2.audio.search](#v2.audio.search)
    * [v2.contributor.get](#v2.contributor.get)
+   * [v2.contributor.listSets](#v2.contributor.listSets)
+   * [v2.contributor.getSetItems](#v2.contributor.getSetItems)
    * [v2.image.categories](#v2.image.categories)
    * [v2.image.list](#v2.image.list)
    * [v2.image.get](#v2.image.get)
@@ -171,7 +173,7 @@ v2.audio.search('beat', function(err, data) {
 <a name="v2.contributor.get"/>
 #### v2.contributor.get(options, callback)
 
-Search tracks.
+Get contributor informations.
 
 Options - [Documentation](https://developers.shutterstock.com/api/v2/contributors/get)
 
@@ -181,6 +183,45 @@ Usage
 
 ``` javascript
 v2.contributor.get('164782', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.contributor.listSets"/>
+#### v2.contributor.listSets(options, callback)
+
+List sets of contributor.
+
+Options - [Documentation](https://developers.shutterstock.com/api/v2/contributors/listSets)
+
+  * id (String): contributor ID
+
+Usage
+
+``` javascript
+v2.contributor.listSets('164782', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.contributor.getSetItems"/>
+#### v2.contributor.getSetItems(options, callback)
+
+Get items of contributor's set.
+
+Options - [Documentation](https://developers.shutterstock.com/api/v2/contributors/get)
+
+  * contributor_id (String): contributor ID
+  * id (String): Set ID
+
+Usage
+
+``` javascript
+v2.contributor.getSetItems({contributor_id: '164782', id: '536307'}, function(err, data) {
   if (err) throw err;
 
   console.log(data);
