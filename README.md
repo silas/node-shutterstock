@@ -213,7 +213,7 @@ v2.contributor.listSets('164782', function(err, data) {
 
 Get items of contributor's set.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/contributors/get)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/contributors/getSetItems)
 
   * contributor_id (String): contributor ID
   * id (String): Set ID
