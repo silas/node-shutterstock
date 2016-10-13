@@ -321,14 +321,12 @@ Download an image.
 Options - [Documentation](https://developers.shutterstock.com/api/v2/images/download)
 
  * id (String, optional): image ID
- * page (Number, default: 1): page to return
- * per_page (Number, default: 20): number of results to return per page
- * sort (String, default: popular): sort results
+ * size (String, optional): image size to download
 
 Usage
 
 ``` javascript
-v2.image.similar('108559295', function(err, data) {
+v2.image.download('108559295', function(err, data) {
   if (err) throw err;
 
   console.log(data);
