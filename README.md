@@ -44,6 +44,7 @@ api.image.get('108559295', function(err, data) {
    * [v2.image.recommendations](#v2.image.recommendations)
    * [v2.image.search](#v2.image.search)
    * [v2.image.similar](#v2.image.similar)
+   * [v2.image.download](#v2.image.download)
    * [v2.video.list](#v2.video.list)
    * [v2.video.get](#v2.video.get)
    * [v2.video.search](#v2.video.search)
@@ -192,7 +193,7 @@ v2.contributor.get('164782', function(err, data) {
 
 Get all image categories.
 
-[Documentation](https://developers.shutterstock.com/api/v2/image/categories)
+[Documentation](https://developers.shutterstock.com/api/v2/images/categories)
 
 Usage
 
@@ -209,7 +210,7 @@ v2.image.categories(function(err, data) {
 
 Get details for multiple images.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/image/list)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/images/list)
 
  * id (String[]): image IDs
  * view (String, optional): render view
@@ -229,7 +230,7 @@ v2.image.list(['108559295', '143051491'], function(err, data) {
 
 Get details for a specified image.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/image/get)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/images/get)
 
  * id (String): image ID
  * view (String, optional): render view
@@ -249,7 +250,7 @@ v2.image.get('108559295', function(err, data) {
 
 Return recommendations for specified images.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/image/recommendations)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/images/recommendations)
 
  * id (String[]): image IDs
  * max_items (Number, default: 20): number of results to return
@@ -271,7 +272,7 @@ v2.image.recommendations(['108559295', '143051491'], function(err, data) {
 
 Search images.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/image/search)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/images/search)
 
  * query (String, optional): query string
  * page (Number, default: 1): page to return
@@ -295,7 +296,29 @@ v2.image.search('donkey', function(err, data) {
 
 Get similar images.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/image/similar)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/images/similar)
+
+ * id (String, optional): image ID
+ * page (Number, default: 1): page to return
+ * per_page (Number, default: 20): number of results to return per page
+ * sort (String, default: popular): sort results
+
+Usage
+
+``` javascript
+v2.image.similar('108559295', function(err, data) {
+  if (err) throw err;
+
+  console.log(data);
+});
+```
+
+<a name="v2.image.download"/>
+#### v2.image.download(options, callback)
+
+Download an image.
+
+Options - [Documentation](https://developers.shutterstock.com/api/v2/images/download)
 
  * id (String, optional): image ID
  * page (Number, default: 1): page to return
@@ -317,7 +340,7 @@ v2.image.similar('108559295', function(err, data) {
 
 Get details for multiple videos.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/video/list)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/videos/list)
 
  * id (String[]): video IDs
  * view (String, optional): render view
@@ -337,7 +360,7 @@ v2.video.list(['108559295', '143051491'], function(err, data) {
 
 Get details for a specified video.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/video/get)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/videos/get)
 
  * id (String): video ID
  * view (String, optional): render view
@@ -357,7 +380,7 @@ v2.video.get('5869544', function(err, data) {
 
 Search videos.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/video/search)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/videos/search)
 
  * query (String, optional): query string
  * page (Number, default: 1): page to return
@@ -381,7 +404,7 @@ v2.video.search('donkey', function(err, data) {
 
 Get similar videos.
 
-Options - [Documentation](https://developers.shutterstock.com/api/v2/video/similar)
+Options - [Documentation](https://developers.shutterstock.com/api/v2/videos/similar)
 
  * id (String, optional): video ID
  * page (Number, default: 1): page to return
