@@ -8,3 +8,4 @@ coverage
 hack.js
 node_modules
 tmp
+.idea
